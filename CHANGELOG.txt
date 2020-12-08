@@ -1,4 +1,4 @@
-9.0.11.alpha.52 - 8th December 2020
+9.0.11.alpha.53 - 8th December 2020
 - Source code is now on GitHub for the time being due to CurseForge SVN migration to Overwolf.
 
 9.0.10 - 25th November 2020
