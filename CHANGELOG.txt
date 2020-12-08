@@ -1,8 +1,8 @@
-9.0.11.alpha.51 - 8th December 2020
+9.0.11.alpha.52 - 8th December 2020
 - Source code is now on GitHub for the time being due to CurseForge SVN migration to Overwolf.
 
 9.0.10 - 25th November 2020
-- If 'Remove map border' is enabled, the map window size toggle button and close button will no longer conflict with the HandyNotes Shadowlands map button.   
+- If 'Remove map border' is enabled, the map window size toggle button and close button will no longer conflict with the HandyNotes Shadowlands map button.
 
 9.0.08 - 18th November 2020
 - Updated for World of Warcraft 9.0.02.
