@@ -1,0 +1,31 @@
+9.0.11.alpha.51 - 8th December 2020
+- Source code is now on GitHub for the time being due to CurseForge SVN migration to Overwolf.
+
+9.0.10 - 25th November 2020
+- If 'Remove map border' is enabled, the map window size toggle button and close button will no longer conflict with the HandyNotes Shadowlands map button.   
+
+9.0.08 - 18th November 2020
+- Updated for World of Warcraft 9.0.02.
+- Updated minimap button code.
+
+9.0.07 - 14th November 2020
+- Fixed a situational issue with the Leatrix Maps minimap button which may have caused it to show or hide inconsistently.
+
+9.0.06 - 11th November 2020
+- Updated LibDBIcon.
+- Updated dropdown menu taint fixes.
+
+9.0.03 - 15th October 2020
+- Fixed an issue with 'Enhance dungeon icons' which prevented map pins from being placed over dungeon icons.
+
+9.0.02 - 15th October 2020
+- Fixed a Lua error with 'Enhance dungeon icons'.
+
+9.0.01 - 15th October 2020
+- Fixed compatibility issue with ElvUI and 'Remove map border'.
+- Removed 9.0 transitional code.
+
+9.0.00 - 12th October 2020
+- Updated for World of Warcraft patch 9.0 (Shadowlands).
+- This release will run on Battle for Azeroth too but you need to enable out of date addons.
+- Click here to return to the Leatrix Maps page.

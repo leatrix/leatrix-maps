@@ -1,0 +1,14 @@
+﻿## Interface: 90002
+
+## Title: Leatrix Maps
+## Notes: Enhancements for your maps.
+
+## Version: 9.0.11.alpha.51
+## Author: Leatrix
+## SavedVariables: LeaMapsDB
+
+Leatrix_Maps_Library.lua
+Leatrix_Maps_Locale.lua
+Leatrix_Maps.xml
+Leatrix_Maps_Reveal.lua
+Leatrix_Maps.lua
