@@ -1,5 +1,5 @@
-9.0.11.alpha.53 - 8th December 2020
-- Source code is now on GitHub for the time being due to CurseForge SVN migration to Overwolf.
+9.0.11 - 9th December 2020
+- Source code is now on GitHub (github.com/leatrix).
 
 9.0.10 - 25th November 2020
 - If 'Remove map border' is enabled, the map window size toggle button and close button will no longer conflict with the HandyNotes Shadowlands map button.
