@@ -1,3 +1,6 @@
+9.0.12.alpha.x - 7th January 2021
+- Fixed an issue with 'Remove map border' which caused the game to behave as if the map was still open after it had been closed with the close button.
+
 9.0.11 - 9th December 2020
 - Source code is now on GitHub (github.com/leatrix).
 

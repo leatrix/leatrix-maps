@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.11 (9th December 2020)
+	-- 	Leatrix Maps 9.0.12.alpha.1 (7th January 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.11"
+	LeaMapsLC["AddonVer"] = "9.0.12.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -643,10 +643,13 @@
 			WorldMapFrame.BorderFrame.InsetBorderTop:Hide()
 			WorldMapFrame.NavBar:Hide()
 			WorldMapFrame.TitleCanvasSpacerFrame:Hide()
-			WorldMapFrameCloseButton:Hide()
 			WorldMapFramePortrait:SetTexture("")
 			WorldMapFrameBg:Hide()
 			WorldMapFrameTitleText:Hide()
+
+			-- Reposition close button
+			WorldMapFrameCloseButton:ClearAllPoints()
+			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -84, -1)
 
 			-- Create border for world map frame
 			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND"); border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground"); border:SetPoint("TOPLEFT", -5, 5); border:SetPoint("BOTTOMRIGHT", 5, -5); border:SetVertexColor(0, 0, 0, 0.7)
@@ -724,16 +727,10 @@
 			QuestNPCModelBg:SetPoint("TOPLEFT", QuestModelScene, "TOPLEFT", 0, 16)
 			QuestNPCModelBg:SetHeight(246)
 
-			-- Add map close button
-			local closeBox = CreateFrame("Button", nil, WorldMapFrame, "UIPanelCloseButton") 
-			closeBox:SetSize(30, 30)
-			closeBox:SetFrameStrata("HIGH")
-			closeBox:SetScript("OnClick", function() 
-				WorldMapFrame:Hide()
-			end)
-
 			-- Add map maximise and minimise toggle button
 			local maxBtn = CreateFrame("BUTTON", nil, WorldMapFrame)
+			maxBtn:ClearAllPoints()
+			maxBtn:SetPoint("LEFT", WorldMapFrameCloseButton, "LEFT", -43, 0)
 			maxBtn:SetSize(30, 30)
 			maxBtn:SetFrameStrata("HIGH")
 			maxBtn:HookScript("OnClick", function(self, btn)
@@ -746,28 +743,20 @@
 				LeaMapsLC:SaveZoomLevel()
 			end)
 
-			-- Set button position from left of map
-			local buttonLeftMax, buttonLeftWin = 154, 560
+			-- Reposition close button if HandyNotes: Shadowlands is installed
 			if IsAddOnLoaded("HandyNotes") and IsAddOnLoaded("HandyNotes_Shadowlands") then
-				buttonLeftMax, buttonLeftWin = buttonLeftMax + 32, buttonLeftWin - 32
+				WorldMapFrameCloseButton:ClearAllPoints()
+				WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -118, -1)
 			end
 
-			-- Set close button and maximise minimise toggle button
+			-- Set maximise minimise toggle button texture
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 				if WorldMapFrame.isMaximized then
 					maxBtn:SetNormalTexture("Interface\\BUTTONS\\UI-Panel-SmallerButton-Up")
 					maxBtn:SetHighlightTexture("Interface\\BUTTONS\\UI-Panel-SmallerButton-Up")
-					maxBtn:ClearAllPoints()
-					maxBtn:SetPoint("CENTER", WorldMapFrame, "TOPRIGHT", -buttonLeftMax, -84)
-					closeBox:ClearAllPoints()
-					closeBox:SetPoint("CENTER", WorldMapFrame, "TOPRIGHT", -buttonLeftMax + 44, -84)
 				else
 					maxBtn:SetNormalTexture("Interface\\BUTTONS\\UI-Panel-BiggerButton-Up")
 					maxBtn:SetHighlightTexture("Interface\\BUTTONS\\UI-Panel-BiggerButton-Up")
-					maxBtn:ClearAllPoints()
-					maxBtn:SetPoint("CENTER", WorldMapFrame, "TOPLEFT", buttonLeftWin, -84)
-					closeBox:ClearAllPoints()
-					closeBox:SetPoint("CENTER", WorldMapFrame, "TOPLEFT", buttonLeftWin + 40, -84)
 				end
 			end)
 
