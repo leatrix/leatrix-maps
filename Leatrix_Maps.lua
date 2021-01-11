@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.12.alpha.2 (9th January 2021)
+	-- 	Leatrix Maps 9.0.12.alpha.3 (11th January 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.12.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.0.12.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -408,6 +408,7 @@
 		do
 
 			-- Set initial values
+			local lastZoomLevel = WorldMapFrame.ScrollContainer:GetCanvasScale()
 			local lastScale = WorldMapFrame.ScrollContainer.currentScale
 			local lastHorizontal = WorldMapFrame.ScrollContainer.targetScrollX
 			local lastVertical = WorldMapFrame.ScrollContainer.targetScrollY
@@ -416,6 +417,7 @@
 
 			-- Function to save zoom level
 			local function SaveZoomLevel()
+				lastZoomLevel = WorldMapFrame.ScrollContainer:GetCanvasScale()
 				lastScale = WorldMapFrame.ScrollContainer.currentScale
 				lastHorizontal = WorldMapFrame.ScrollContainer.targetScrollX
 				lastVertical = WorldMapFrame.ScrollContainer.targetScrollY
@@ -431,9 +433,14 @@
 			WorldMapFrame.ScrollContainer:HookScript("OnMouseWheel", SaveZoomLevel)
 
 			-- Function to set zoom level
-			local function SetZoomLevel()
+			local function SetZoomLevel(fullUpdate)
 				if LeaMapsLC["RememberZoom"] == "On" and WorldMapFrame:IsShown() then
+					WorldMapFrame:ResetZoom()
 					if lastMapID and lastScale and lastHorizontal and lastVertical and WorldMapFrame.mapID == lastMapID and WorldMapFrame.isMaximized == lastMapSize then
+						if fullUpdate then
+							-- Prevent pointer ring glitch with toggle quest log button
+							WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, 0.5, 0.5)
+						end
 						WorldMapFrame.ScrollContainer.currentScale = lastScale
 						WorldMapFrame.ScrollContainer.targetScale = lastScale
 						WorldMapFrame.ScrollContainer.currentScrollX = lastHorizontal

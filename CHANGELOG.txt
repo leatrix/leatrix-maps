@@ -1,4 +1,4 @@
-9.0.12.alpha.x - 9th January 2021
+9.0.12.alpha.x - 11th January 2021
 - Fixed an issue with 'Remember zoom level' which caused the player arrow ring animation to not show when opening the map.
 - Fixed an issue with 'Remove map border' which caused the game to behave as if the map was still open after it had been closed with the close button.
 
