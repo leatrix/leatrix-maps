@@ -1,4 +1,5 @@
-9.0.15.alpha.2 - 6th February 2021
+9.0.15.alpha.3 - 8th February 2021
+- Fixed a minor issue with 'Enhance dungeon icons' which caused the 'Castle Nathria' raid icon to be shown twice.  
 - Added German language translations.
 
 9.0.14 - 22nd January 2021
