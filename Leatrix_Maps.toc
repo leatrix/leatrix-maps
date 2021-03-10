@@ -1,9 +1,9 @@
-﻿## Interface: 90002
+﻿## Interface: 90005
 
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 9.0.18
+## Version: 9.0.19
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
