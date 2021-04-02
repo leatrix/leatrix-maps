@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.22 (1st April 2021)
+	-- 	Leatrix Maps 9.0.23.alpha.1 (2nd April 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.22"
+	LeaMapsLC["AddonVer"] = "9.0.23.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -21,7 +21,7 @@
 	-- Check Wow version is valid
 	do
 		local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-		if gametocversion and gametocversion < 19999 then
+		if gametocversion and gametocversion < 90000 then
 			-- Game client is Wow Classic
 			C_Timer.After(2, function()
 				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
