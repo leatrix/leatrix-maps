@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.23.alpha.1 (2nd April 2021)
+	-- 	Leatrix Maps 9.0.23 (8th April 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.23.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.0.23"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
