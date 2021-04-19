@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.24 (14th April 2021)
+	-- 	Leatrix Maps 9.0.25.alpha.1 (19th April 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.24"
+	LeaMapsLC["AddonVer"] = "9.0.25.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1486,6 +1486,11 @@
 			maintitle:SetFont(maintitle:GetFont(), 72)
 			maintitle:ClearAllPoints()
 			maintitle:SetPoint("TOP", 0, -72)
+
+			local expTitle = LeaMapsLC:MakeTx(interPanel, "Shadowlands", 0, 0)
+			expTitle:SetFont(expTitle:GetFont(), 32)
+			expTitle:ClearAllPoints()
+			expTitle:SetPoint("TOP", 0, -152)
 
 			local subTitle = LeaMapsLC:MakeTx(interPanel, "curseforge.com/wow/addons/leatrix-maps", 0, 0)
 			subTitle:SetFont(subTitle:GetFont(), 20)
