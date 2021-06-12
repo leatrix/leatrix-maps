@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.0.32 (9th June 2021)
+	-- 	Leatrix Maps 9.0.33.alpha.1 (12th June 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.0.32"
+	LeaMapsLC["AddonVer"] = "9.0.33.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -890,9 +890,9 @@
 				[23] =  --[[Eastern Plaguelands]] {{27.7, 11.6, L["Stratholme: Crusader's Square"], L["Dungeon"], 236, dnTex}, {43.5, 19.4, L["Stratholme: The Gauntlet"], L["Dungeon"], 236, dnTex},},
 				[30] =  --[[New Tinkertown]] {{30.2, 74.7, L["Gnomeregan"], L["Dungeon"], 231, dnTex},},
 				[32] =  --[[Searing Gorge]] {{34.9, 83.9, L["Blackrock Mountain"], L["Blackrock Caverns"] .. "," .. L["Blackrock Depths"] .. "|n" .. L["Blackrock Spire"] .. "," .. L["Blackwing Lair"] .. "," .. L["Molten Core"], 66, dnTex},},
-				[33] =  --[[Blackrock Mountain]] {{66.5, 60.7, L["Blackrock Caverns"], L["Dungeon"], 66, dnTex}, {64.3, 70.9, L["Blackwing Lair"], L["Raid"], 742, rdTex}, {65.9, 41.9, L["Blackrock Spire"], L["Dungeon"], 229, dnTex}, {80.3, 40.7, L["Lower Blackrock Spire"], L["Dungeon"], 229, dnTex}, {79.0, 33.7, L["Upper Blackrock Spire"], L["Dungeon"], 559, dnTex},},
-				[34] =  --[[Blackrock Mountain]] {{71.9, 53.5, L["Blackrock Caverns"], L["Dungeon"], 66, dnTex},},
-				[35] =  --[[Blackrock Mountain]] {{54.3, 83.4, L["Molten Core"], L["Raid"], 741, rdTex}, {39.0, 18.3, L["Blackrock Depths"], L["Dungeon"], 228, dnTex},},
+				[33] =  --[[Blackrock Mountain: Blackrock Spire]] {{66.5, 60.7, L["Blackrock Caverns"], L["Dungeon"], 66, dnTex}, {64.3, 70.9, L["Blackwing Lair"], L["Raid"], 742, rdTex}, {65.9, 41.9, L["Blackrock Spire"], L["Dungeon"], 229, dnTex}, {80.3, 40.7, L["Lower Blackrock Spire"], L["Dungeon"], 229, dnTex}, {79.0, 33.7, L["Upper Blackrock Spire"], L["Dungeon"], 559, dnTex},},
+				[34] =  --[[Blackrock Mountain: Blackrock Caverns]] {{71.9, 53.5, L["Blackrock Caverns"], L["Dungeon"], 66, dnTex},},
+				[35] =  --[[Blackrock Mountain: Blackrock Depths]] {{54.3, 83.4, L["Molten Core"], L["Raid"], 741, rdTex}, {39.0, 18.3, L["Blackrock Depths"], L["Dungeon"], 228, dnTex},},
 				[36] =  --[[Burning Steppes]] {{21.0, 37.9, L["Blackrock Mountain"], L["Blackrock Caverns"] .. "," .. L["Blackrock Depths"] .. "|n" .. L["Blackrock Spire"] .. "," .. L["Blackwing Lair"] .. "," .. L["Molten Core"], 66, dnTex}, {23.0, 26.3, L["Blackwing Descent"], L["Raid"], 73, rdTex},},
 				[37] =  --[[Elwynn Forest]] {{19.1, 36.9, L["The Stockade"], L["Dungeon"], 238, dnTex},},
 				[42] =  --[[Deadwind Pass]] {{46.9, 74.7, L["Karazhan"], L["Raid"], 745, rdTex}, {46.7, 70.2, L["Return to Karazhan"], L["Dungeon"], 860, dnTex},},
@@ -913,15 +913,16 @@
 				[63] =  --[[Ashenvale]] {{14.2, 13.9, L["Blackfathom Deeps"], L["Dungeon"], 227, dnTex},},
 				[64] =  --[[Thousand Needles]] {{41.5, 29.4, L["Razorfen Downs"], L["Dungeon"], 233, dnTex},},
 				[66] =  --[[Desolace]] {{29.1, 62.6, L["Maraudon"], L["Dungeon"], 232, dnTex},},
-				[67] =  --[[Maraudon]] {{78.2, 56.0, L["Maraudon: Foulspore Cavern"], L["Dungeon"], 232, dnTex},},
-				[68] =  --[[Maraudon]] {{44.4, 76.8, L["Maraudon: Earth Song Falls"], L["Dungeon"], 232, dnTex}, {52.0, 24.5, L["Maraudon: The Wicked Grotto"], L["Dungeon"], 232, dnTex},},
+				[67] =  --[[Maraudon: The Wicked Grotto]] {{78.2, 56.0, L["Maraudon: Foulspore Cavern"], L["Dungeon"], 232, dnTex},},
+				[68] =  --[[Maraudon: Foulspore Cavern]] {{44.4, 76.8, L["Maraudon: Earth Song Falls"], L["Dungeon"], 232, dnTex}, {52.0, 24.5, L["Maraudon: The Wicked Grotto"], L["Dungeon"], 232, dnTex},},
 				[69] =  --[[Feralas]] {{60.3, 31.3, L["Dire Maul: Capital Gardens"], L["Dungeon"], 230, dnTex}, {64.8, 30.2, L["Dire Maul: Warpwood Quarter"], L["Dungeon"], 230, dnTex}, {62.5, 24.9, L["Dire Maul: Gordok Commons"], L["Dungeon"], 230, dnTex},},
 				[70] =  --[[Dustwallow Marsh]] {{52.2, 75.7, L["Onyxia's Lair"], L["Raid"], 760, rdTex},},
 				[71] =  --[[Tanaris]] {{39.2, 21.3, L["Zul'Farrak"], L["Dungeon"], 241, dnTex}, {64.8, 50.0, L["Caverns of Time"], L["Black Morass"] .. ", " .. L["Culling of Stratholme"] .. ",|n" .. L["Dragon Soul"] .. ", " .. L["End Time"] .. ", " .. L["Hour of Twilight"] .. ",|n" .. L["Hyjal Summit"] .. ", " .. L["Old Hillsbrad Foothills"] .. ",|n" .. L["Well of Eternity"], 255, dnTex},},
-				[75] =  --[[Caverns of Time]] {{57.5, 82.6, L["The Culling of Stratholme"], L["Dungeon"], 279, dnTex}, {36.7, 83.0, L["The Black Morass"], L["Dungeon"], 255, dnTex}, {22.5, 64.4, L["Well of Eternity"], L["Dungeon"], 185, dnTex}, {26.9, 35.8, L["Old Hillsbrad Foothills"], L["Dungeon"], 251, dnTex}, {35.5, 15.6, L["Hyjal Summit"], L["Raid"], 750, rdTex}, {57.3, 29.6, L["End Time"], L["Dungeon"], 184, dnTex}, {61.6, 26.6, L["Dragon Soul"], L["Raid"], 187, rdTex}, {66.9, 29.4, L["Hour of Twilight"], L["Dungeon"], 186, dnTex},},
+				[74] = 	--[[Caverns of Time: The Spiral]] {{59.0, 26.8, L["Stormwind"], L["Portal"], 0, pATex}, {58.2, 26.7, L["Orgrimmar"], L["Portal"], 0, pHTex},},
+				[75] =  --[[Caverns of Time: Main Hub]] {{57.5, 82.6, L["The Culling of Stratholme"], L["Dungeon"], 279, dnTex}, {36.7, 83.0, L["The Black Morass"], L["Dungeon"], 255, dnTex}, {22.5, 64.4, L["Well of Eternity"], L["Dungeon"], 185, dnTex}, {26.9, 35.8, L["Old Hillsbrad Foothills"], L["Dungeon"], 251, dnTex}, {35.5, 15.6, L["Hyjal Summit"], L["Raid"], 750, rdTex}, {57.3, 29.6, L["End Time"], L["Dungeon"], 184, dnTex}, {61.6, 26.6, L["Dragon Soul"], L["Raid"], 187, rdTex}, {66.9, 29.4, L["Hour of Twilight"], L["Dungeon"], 186, dnTex},},
 				[81] =  --[[Silithus]] {{43.2, 44.5, L["Chamber of Heart"], L["Titan Translocator"], 0, pNTex}, {41.5, 44.9, L["Tiragarde Sound"], L["Portal"], 0, pATex}, {41.6, 45.2, L["Zuldazar"], L["Portal"], 0, pHTex},},
-				[85] =  --[[Orgrimmar]] {{55.2, 51.2, L["Ragefire Chasm"], L["Dungeon"], 226, dnTex}, {50.1, 37.8, L["Western Earthshrine"], L["Deepholm"] .. ", " .. L["Hyjal"] .. ", " .. L["Twilight Highlands"] .. ", " .. L["Uldum"] .. ", " .. L["Vashj'ir"], 0, pHTex, nil, nil, nil, nil}, {47.4, 39.3, L["Tol Barad"], L["Portal"], 0, pHTex, nil, nil, nil, nil}, {43.0, 65.0, L["Zeppelin to"] .." " .. L["Thunder Bluff"] .. ", " .. L["Mulgore"], "", 0, pHTex}, {50.7, 55.5, L["Undercity"], L["Portal"], 0, pHTex},},
-				[86] =  --[[Orgrimmar]] {{70.0, 49.2, L["Ragefire Chasm"], L["Dungeon"], 226, dnTex}, {50.1, 37.8, L["Western Earthshrine"], L["Deepholm"] .. ", " .. L["Hyjal"] .. ", " .. L["Twilight Highlands"] .. ", " .. L["Uldum"] .. ", " .. L["Vashj'ir"], 0, pHTex, nil, nil, nil, nil}, {47.4, 39.3, L["Tol Barad"], L["Portal"], 0, pHTex, nil, nil, nil, nil}, {43.0, 65.0, L["Zeppelin to"] .." " .. L["Thunder Bluff"] .. ", " .. L["Mulgore"], "", 0, pHTex}, {50.7, 55.5, L["Undercity"], L["Portal"], 0, pHTex},},
+				[85] =  --[[Orgrimmar: Main City]] {{55.2, 51.2, L["Ragefire Chasm"], L["Dungeon"], 226, dnTex}, {50.1, 37.8, L["Western Earthshrine"], L["Deepholm"] .. ", " .. L["Hyjal"] .. ", " .. L["Twilight Highlands"] .. ", " .. L["Uldum"] .. ", " .. L["Vashj'ir"], 0, pHTex, nil, nil, nil, nil}, {47.4, 39.3, L["Tol Barad"], L["Portal"], 0, pHTex, nil, nil, nil, nil}, {43.0, 65.0, L["Zeppelin to"] .." " .. L["Thunder Bluff"] .. ", " .. L["Mulgore"], "", 0, pHTex}, {50.7, 55.5, L["Undercity"], L["Portal"], 0, pHTex},},
+				[86] =  --[[Orgrimmar: The Cleft Of Shadow]] {{70.0, 49.2, L["Ragefire Chasm"], L["Dungeon"], 226, dnTex}, {50.1, 37.8, L["Western Earthshrine"], L["Deepholm"] .. ", " .. L["Hyjal"] .. ", " .. L["Twilight Highlands"] .. ", " .. L["Uldum"] .. ", " .. L["Vashj'ir"], 0, pHTex, nil, nil, nil, nil}, {47.4, 39.3, L["Tol Barad"], L["Portal"], 0, pHTex, nil, nil, nil, nil}, {43.0, 65.0, L["Zeppelin to"] .." " .. L["Thunder Bluff"] .. ", " .. L["Mulgore"], "", 0, pHTex}, {50.7, 55.5, L["Undercity"], L["Portal"], 0, pHTex},},
 				[88] =  --[[Thunder Bluff]] {{14.6, 26.4, L["Zeppelin to"] .. " " .. L["Orgrimmar"] .. ", " .. L["Durotar"], "", 0, pHTex},},
 				[89] =  --[[Darnassus]] {{44.1, 78.5, L["Temple of the Moon"], L["Exodar"] .. ", " .. L["Hellfire Peninsula"], 0, pATex},},
 				[97] =  --[[Azuremyst Isle]] {{20.4, 54.1, L["Darnassus"], L["Portal"], 0, pATex},},
@@ -1013,6 +1014,8 @@
 				[1161] =  --[[Boralus Harbor]] {{70.4, 17.7, L["Sanctum of the Sages"], L["Exodar"] .. ", " .. L["Ironforge"] .. ", " .. L["Nazjatar"] .. ", " .. L["Silithus"] .. ", " .. L["Stormwind"], 0, pATex},},
 				[1163] =  --[[Dazar'alor]] {{60.5, 70.3, L["Hall of Ancient Paths"], L["Nazjatar"] .. ", " .. L["Orgrimmar"] .. ", " .. L["Silithus"] .. ", " .. L["Silvermoon City"] .. ", " .. L["Thunder Bluff"], 0, pHTex},},
 				[1473] =  --[[Chamber of Heart]] {{50.1, 30.4, L["Silithus"], L["Titan Translocator"], 0, pNTex},},
+
+				-- Shadowlands
 				[1525] =  --[[Revendreth]] {{78.3, 49.1, L["Halls of Atonement"], L["Dungeon"], 1185, dnTex, nil, nil, nil, nil}, {50.9, 29.9, L["Sanguine Depths"], L["Dungeon"], 1189, dnTex, nil, nil, nil, nil}, --[[{46.2, 41.2, L["Castle Nathria"], L["Raid"], 1190, rdTex, nil, nil, nil, nil},]]},
 				[1533] =  --[[Bastion]] {{40.0, 55.3, L["The Necrotic Wake"], L["Dungeon"], 1182, dnTex, nil, nil, nil, nil}, {58.4, 28.7, L["Spires of Ascension"], L["Dungeon"], 1186, dnTex, nil, nil, nil, nil},},
 				[1536] =  --[[Maldraxxus]] {{59.2, 64.8, L["Plaguefall"], L["Dungeon"], 1183, dnTex, nil, nil, nil, nil}, {53.0, 53.0, L["Theater of Pain"], L["Dungeon"], 1187, dnTex, nil, nil, nil, nil},},
