@@ -1,4 +1,4 @@
-9.0.33.alpha.1 - 12th June 2021
+9.0.33 - 16th June 2021
 - Added Stormwind and Orgrimmar portal icons to Caverns of Time.
 
 9.0.19 - 10th March 2021
