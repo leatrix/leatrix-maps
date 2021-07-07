@@ -1,5 +1,5 @@
-9.1.01.alpha.1 - 1st July 2021
-- Added Korthia to 'Show unexplored aras'.
+9.1.01 - 7th July 2021
+- Added Korthia to 'Show unexplored areas'.
 
 9.1.00 - 30th June 2021
 - Updated for game version 9.1.
