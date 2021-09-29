@@ -1506,7 +1506,7 @@
 			expTitle:ClearAllPoints()
 			expTitle:SetPoint("TOP", 0, -152)
 
-			local subTitle = LeaMapsLC:MakeTx(interPanel, "curseforge.com/wow/addons/leatrix-maps", 0, 0)
+			local subTitle = LeaMapsLC:MakeTx(interPanel, "www.leatrix.com", 0, 0)
 			subTitle:SetFont(subTitle:GetFont(), 20)
 			subTitle:ClearAllPoints()
 			subTitle:SetPoint("BOTTOM", 0, 72)
