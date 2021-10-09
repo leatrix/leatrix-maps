@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.12 (29th September 2021)
+	-- 	Leatrix Maps 9.1.13.alpha.1 (9th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.12"
+	LeaMapsLC["AddonVer"] = "9.1.13.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -259,6 +259,60 @@
 					end
 				end
 			end)
+		end
+
+		----------------------------------------------------------------------
+		-- Center map on player (no reload required)
+		----------------------------------------------------------------------
+
+		do
+
+			local cTime = -1
+
+			-- Function to update map
+			local function cUpdate(self, elapsed)
+				if cTime > 2 or cTime == -1 then
+					if not IsMouseButtonDown("LeftButton") then
+						local position = C_Map.GetPlayerMapPosition(WorldMapFrame.mapID, "player")
+						if position then
+							local x, y = position.x, position.y
+							if x then
+								local minX, maxX, minY, maxY = WorldMapFrame.ScrollContainer:CalculateScrollExtentsAtScale(WorldMapFrame.ScrollContainer:GetCanvasScale())
+								local cx = Clamp(x, minX, maxX)
+								local cy = Clamp(y, minY, maxY)
+								WorldMapFrame.ScrollContainer:SetPanTarget(cx, cy)
+							end
+							cTime = 0
+						end
+					end
+				end
+				cTime = cTime + elapsed
+			end
+
+			-- Create frame for update
+			local cFrame = CreateFrame("FRAME", nil, WorldMapFrame)
+
+			-- Function to set update state
+			local function SetUpdateFunc()
+				cTime = -1
+				if LeaMapsLC["CenterMapOnPlayer"] == "On" then
+					cFrame:SetScript("OnUpdate", cUpdate)
+				else
+					cFrame:SetScript("OnUpdate", nil)
+				end
+			end
+
+			-- Set update state when option is clicked and on startup
+			LeaMapsCB["CenterMapOnPlayer"]:HookScript("OnClick", SetUpdateFunc)
+			SetUpdateFunc()
+
+			-- Update location immediately when map is shown
+			WorldMapFrame:HookScript("OnShow", function()
+				if LeaMapsLC["CenterMapOnPlayer"] == "On" then
+					cTime = -1
+				end
+			end)
+
 		end
 
 		----------------------------------------------------------------------
@@ -2182,6 +2236,7 @@
 				LeaMapsDB["MaxMapScale"] = 0.9
 				LeaMapsDB["StickyMapFrame"] = "Off"
 				LeaMapsDB["RememberZoom"] = "On"
+				LeaMapsDB["CenterMapOnPlayer"] = "On"
 				LeaMapsDB["NoMapFade"] = "On"
 				LeaMapsDB["NoMapEmote"] = "On"
 				LeaMapsDB["MapPosA"] = "TOPLEFT"
@@ -2275,6 +2330,7 @@
 			LeaMapsLC:LoadVarNum("MaxMapScale", 0.9, 0.5, 2)			-- Maximised map scale
 			LeaMapsLC:LoadVarChk("StickyMapFrame", "Off")				-- Sticky map frame
 			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
+			LeaMapsLC:LoadVarChk("CenterMapOnPlayer", "Off")			-- Center map on player
 			LeaMapsLC:LoadVarChk("NoMapFade", "On")						-- Disable map fade
 			LeaMapsLC:LoadVarChk("NoMapEmote", "On")					-- Disable map emote
 			LeaMapsLC:LoadVarAnc("MapPosA", "TOPLEFT")					-- Windowed map anchor
@@ -2332,6 +2388,7 @@
 			LeaMapsDB["MaxMapScale"] = LeaMapsLC["MaxMapScale"]
 			LeaMapsDB["StickyMapFrame"] = LeaMapsLC["StickyMapFrame"]
 			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
+			LeaMapsDB["CenterMapOnPlayer"] = LeaMapsLC["CenterMapOnPlayer"]
 			LeaMapsDB["NoMapFade"] = LeaMapsLC["NoMapFade"]
 			LeaMapsDB["NoMapEmote"] = LeaMapsLC["NoMapEmote"]
 			LeaMapsDB["MapPosA"] = LeaMapsLC["MapPosA"]
@@ -2465,8 +2522,9 @@
 	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
 	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -112, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
 	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -132, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 16, -152, false, "If checked, the map will not fade while your character is moving.")
-	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 16, -172, false, "If checked, your character will not perform the reading emote when you open the map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -152, false, "If checked, the map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
+	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 16, -172, false, "If checked, the map will not fade while your character is moving.")
+	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 16, -192, false, "If checked, your character will not perform the reading emote when you open the map.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown.")
