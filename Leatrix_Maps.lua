@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.15.alpha.3 (13th October 2021)
+	-- 	Leatrix Maps 9.1.15.alpha.4 (13th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.15.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.1.15.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -81,6 +81,14 @@
 			LeaMapsLC:MakeSL(battleFrame, "BattlePlayerArrowSize", "Player Arrow", "Drag to set the player arrow size.", 12, 24, 1, 36, -172, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattleMapSize", "Map Size", "Drag to set the battlefield map size.", 0.5, 3, 0.1, 36, -232, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattleMapOpacity", "Map Opacity", "Drag to set the battlefield map opacity.", 0.1, 1, 0.1, 206, -232, "%.0f")
+
+			-- Add preview texture
+			local prevIcon = battleFrame:CreateTexture(nil, "ARTWORK")
+			prevIcon:SetPoint("CENTER", battleFrame, "TOPLEFT", 400, -182)
+			prevIcon:SetTexture("Interface\\MINIMAP\\partyraidblipsv2")
+			prevIcon:SetTexCoord(0.015625, 0.3125, 0.03125, 0.59375)
+			prevIcon:SetSize(19, 18)
+			prevIcon:SetVertexColor(0.78, 0.61, 0.43, 1)
 
 			-- Hide battlefield tab button
 			hooksecurefunc(BattlefieldMapTab, "Show", function() BattlefieldMapTab:Hide() end)
@@ -287,6 +295,7 @@
 			local function SetIconSize()
 				LeaMapsCB["BattleGroupIconSize"].f:SetText(LeaMapsLC["BattleGroupIconSize"] .. " (" .. string.format("%.0f%%", LeaMapsLC["BattleGroupIconSize"] / 8 * 100) .. ")")
 				FixGroupPin()
+				prevIcon:SetSize(LeaMapsLC["BattleGroupIconSize"], LeaMapsLC["BattleGroupIconSize"])
 			end
 
 			-- Set group icons when option is changed and on startup
