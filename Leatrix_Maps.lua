@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.13 (13th October 2021)
+	-- 	Leatrix Maps 9.1.14 (13th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.13"
+	LeaMapsLC["AddonVer"] = "9.1.14"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -272,18 +272,17 @@
 			-- Function to update map
 			local function cUpdate(self, elapsed)
 				if cTime > 2 or cTime == -1 then
-					if not IsMouseButtonDown("LeftButton") then
-						local position = C_Map.GetPlayerMapPosition(WorldMapFrame.mapID, "player")
-						if position then
-							local x, y = position.x, position.y
-							if x then
-								local minX, maxX, minY, maxY = WorldMapFrame.ScrollContainer:CalculateScrollExtentsAtScale(WorldMapFrame.ScrollContainer:GetCanvasScale())
-								local cx = Clamp(x, minX, maxX)
-								local cy = Clamp(y, minY, maxY)
-								WorldMapFrame.ScrollContainer:SetPanTarget(cx, cy)
-							end
-							cTime = 0
+					if IsMouseButtonDown("LeftButton") and WorldMapFrame.ScrollContainer:IsMouseOver() then return end
+					local position = C_Map.GetPlayerMapPosition(WorldMapFrame.mapID, "player")
+					if position then
+						local x, y = position.x, position.y
+						if x then
+							local minX, maxX, minY, maxY = WorldMapFrame.ScrollContainer:CalculateScrollExtentsAtScale(WorldMapFrame.ScrollContainer:GetCanvasScale())
+							local cx = Clamp(x, minX, maxX)
+							local cy = Clamp(y, minY, maxY)
+							WorldMapFrame.ScrollContainer:SetPanTarget(cx, cy)
 						end
+						cTime = 0
 					end
 				end
 				cTime = cTime + elapsed
