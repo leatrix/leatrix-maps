@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.15.alpha.1 (13th October 2021)
+	-- 	Leatrix Maps 9.1.15.alpha.2 (13th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.15.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.1.15.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -68,14 +68,9 @@
 			LeaMapsLC:MakeTx(battleFrame, "Settings", 16, -72)
 			LeaMapsLC:MakeCB(battleFrame, "BattleCenterOnPlayer", "Center map on player", 16, -92, false, "If checked, the battlefield map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
 
-			LeaMapsLC:MakeTx(battleFrame, "Group Icons", 250, -72)
-			LeaMapsLC:MakeSL(battleFrame, "BattleGroupIconSize", "", "Drag to set the group icon size.", 8, 16, 1, 250, -92, "%.0f")
-
-			LeaMapsLC:MakeTx(battleFrame, "Player Arrow", 250, -132)
-			LeaMapsLC:MakeSL(battleFrame, "BattlePlayerArrowSize", "", "Drag to set the player arrow size.", 12, 24, 1, 250, -152, "%.0f")
-
-			LeaMapsLC:MakeTx(battleFrame, "Map Size", 250, -192)
-			LeaMapsLC:MakeSL(battleFrame, "BattleMapSize", "", "Drag to set the battlefield map size.", 0.5, 3, 0.1, 250, -212, "%.0f")
+			LeaMapsLC:MakeSL(battleFrame, "BattleGroupIconSize", "Group Icons", "Drag to set the group icon size.", 8, 16, 1, 36, -142, "%.0f")
+			LeaMapsLC:MakeSL(battleFrame, "BattlePlayerArrowSize", "Player Arrow", "Drag to set the player arrow size.", 12, 24, 1, 36, -202, "%.0f")
+			LeaMapsLC:MakeSL(battleFrame, "BattleMapSize", "Map Size", "Drag to set the battlefield map size.", 0.5, 3, 0.1, 206, -202, "%.0f")
 
 			----------------------------------------------------------------------
 			-- Center map on player
@@ -261,7 +256,6 @@
 
 			-- Reset button click
 			battleFrame.r:HookScript("OnClick", function()
-				LeaMapsLC["BattleCenterOnPlayer"] = "Off"
 				LeaMapsLC["BattleGroupIconSize"] = 8
 				LeaMapsLC["BattlePlayerArrowSize"] = 12
 				LeaMapsLC["BattleMapSize"] = 1
@@ -283,7 +277,6 @@
 			LeaMapsCB["EnhanceBattleMapBtn"]:HookScript("OnClick", function()
 				if IsShiftKeyDown() and IsControlKeyDown() then
 					-- Preset profile
-					LeaMapsLC["BattleCenterOnPlayer"] = "On"
 					LeaMapsLC["BattleGroupIconSize"] = 8
 					LeaMapsLC["BattlePlayerArrowSize"] = 12
 					LeaMapsLC["BattleMapSize"] = 1

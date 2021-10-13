@@ -1,4 +1,4 @@
-9.1.15.alpha.1 - 13th October 2021
+9.1.15.alpha.2 - 13th October 2021
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
 
 9.1.14 - 13th October 2021
