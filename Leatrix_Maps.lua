@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.15.alpha.7 (16th October 2021)
+	-- 	Leatrix Maps 9.1.15.alpha.8 (16th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.15.alpha.7"
+	LeaMapsLC["AddonVer"] = "9.1.15.alpha.8"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -28,6 +28,8 @@
 			end)
 			return
 		end
+		-- Patch 9.1.5
+		if gametocversion == 90105 then LeaMapsLC.patch915 = true end
 	end
 
 	----------------------------------------------------------------------
@@ -344,10 +346,17 @@
 
 			-- Function to set player arrow size
 			local function SetPlayerArrow()
-				for pin in BattlefieldMapFrame:EnumerateAllPins() do
-					if pin.UpdateAppearanceData then
-						BattlefieldMapFrame.groupMembersDataProvider:SetUnitPinSize("player", LeaMapsLC["BattlePlayerArrowSize"])
-						pin:SynchronizePinSizes()
+				if LeaMapsLC.patch915 then
+					-- Patch 9.1.5
+					BattlefieldMapFrame.groupMembersDataProvider:SetUnitPinSize("player", LeaMapsLC["BattlePlayerArrowSize"])
+					BattlefieldMapFrame.groupMembersDataProvider.pin:SynchronizePinSizes()
+				else
+					-- Patch 9.1.0
+					for pin in BattlefieldMapFrame:EnumerateAllPins() do
+						if pin.UpdateAppearanceData then
+							BattlefieldMapFrame.groupMembersDataProvider:SetUnitPinSize("player", LeaMapsLC["BattlePlayerArrowSize"])
+							pin:SynchronizePinSizes()
+						end
 					end
 				end
 			end
@@ -362,20 +371,38 @@
 
 			-- Function to set group icons
 			local function FixGroupPin()
-				for pin in BattlefieldMapFrame:EnumerateAllPins() do
-					if pin.UpdateAppearanceData then
+				if LeaMapsLC.patch915 then
 
-						-- Icons should be under the player arrow
-						pin:SetAppearanceField("party", "sublevel", 0)
-						pin:SetAppearanceField("raid", "sublevel", 0)
+					-- Patch 9.1.5
 
-						-- Icon size
-						local bfUnitPinSizes = pin.dataProvider:GetUnitPinSizesTable()
-						bfUnitPinSizes.party = LeaMapsLC["BattleGroupIconSize"]
-						bfUnitPinSizes.raid = LeaMapsLC["BattleGroupIconSize"]
-						pin:SynchronizePinSizes()
+					-- Icons should be under the player arrow
+					BattlefieldMapFrame.groupMembersDataProvider.pin.SetAppearanceField("party", "sublevel", 0)
+					BattlefieldMapFrame.groupMembersDataProvider.pin.SetAppearanceField("raid", "sublevel", 0)
 
+					-- Icon size
+					BattlefieldMapFrame.groupMembersDataProvider:SetUnitPinSize("party", LeaMapsLC["BattleGroupIconSize"])
+					BattlefieldMapFrame.groupMembersDataProvider:SetUnitPinSize("raid", LeaMapsLC["BattleGroupIconSize"])
+					BattlefieldMapFrame.groupMembersDataProvider.pin:SynchronizePinSizes()
+
+				else
+
+					-- Patch 9.1.0
+					for pin in BattlefieldMapFrame:EnumerateAllPins() do
+						if pin.UpdateAppearanceData then
+
+							-- Icons should be under the player arrow
+							pin:SetAppearanceField("party", "sublevel", 0)
+							pin:SetAppearanceField("raid", "sublevel", 0)
+
+							-- Icon size
+							local bfUnitPinSizes = pin.dataProvider:GetUnitPinSizesTable()
+							bfUnitPinSizes.party = LeaMapsLC["BattleGroupIconSize"]
+							bfUnitPinSizes.raid = LeaMapsLC["BattleGroupIconSize"]
+							pin:SynchronizePinSizes()
+
+						end
 					end
+
 				end
 			end
 

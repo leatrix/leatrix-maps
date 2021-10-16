@@ -1,9 +1,10 @@
-9.1.15.alpha.7 - 16th October 2021
+9.1.15.alpha.8 - 16th October 2021
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
 - Moving the battlefield map and setting the opacity is now configured using 'Unlock battlefield map' in the configuration panel (mirroring BCC).
 - If 'Unlock battlefield map' is enabled, you can drag the bottom-right corner of the battlefield map to resize it (this is in addition to the 'Map Size' slider).
 - The 'Show unexplored areas' option will now reveal unexplored areas on the battlefield map as well as the world map.
 - The 'Group Icons' slider in the 'Enhance battlefield map' configuration panel now has a preview icon.
+- Updated for game version 9.1.5.
 
 9.1.14 - 13th October 2021
 - Added a new option 'Center map on player'.  If enabled, the map will remain centered on you as long as you are not dragging the map or in a dungeon.  No reload required so you can enable it as and when you wish.
