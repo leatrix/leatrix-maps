@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.15.alpha.8 (16th October 2021)
+	-- 	Leatrix Maps 9.1.15.alpha.9 (16th October 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.15.alpha.8"
+	LeaMapsLC["AddonVer"] = "9.1.15.alpha.9"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -81,7 +81,7 @@
 
 			LeaMapsLC:MakeSL(battleFrame, "BattleGroupIconSize", "Group Icons", "Drag to set the group icon size.", 8, 16, 1, 206, -172, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattlePlayerArrowSize", "Player Arrow", "Drag to set the player arrow size.", 12, 24, 1, 36, -172, "%.0f")
-			LeaMapsLC:MakeSL(battleFrame, "BattleMapWidth", "Map Size", "Drag to set the battlefield map size.|n|nIf the map is unlocked, you can also resize the battlefield map by dragging the bottom-right corner.", 150, 900, 1, 36, -232, "%.0f")
+			LeaMapsLC:MakeSL(battleFrame, "BattleMapSize", "Map Size", "Drag to set the battlefield map size.|n|nIf the map is unlocked, you can also resize the battlefield map by dragging the bottom-right corner.", 150, 900, 1, 36, -232, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattleMapOpacity", "Map Opacity", "Drag to set the battlefield map opacity.", 0.1, 1, 0.1, 206, -232, "%.0f")
 
 			-- Add preview texture
@@ -198,8 +198,8 @@
 						BattlefieldMapFrame:SetHeight(BattlefieldMapFrame:GetWidth() / 1.5)
 						if mapTime > 0.5 or mapTime == -1 then
 							BattlefieldMapFrame:OnFrameSizeChanged()
-							LeaMapsLC["BattleMapWidth"] = BattlefieldMapFrame:GetWidth()
-							LeaMapsCB["BattleMapWidth"]:Hide(); LeaMapsCB["BattleMapWidth"]:Show()
+							LeaMapsLC["BattleMapSize"] = BattlefieldMapFrame:GetWidth()
+							LeaMapsCB["BattleMapSize"]:Hide(); LeaMapsCB["BattleMapSize"]:Show()
 							mapTime = 0
 						end
 						mapTime = mapTime + elapsed
@@ -211,9 +211,9 @@
 					BattlefieldMapFrame:StopMovingOrSizing()
 					BattlefieldMapFrame:SetHeight(BattlefieldMapFrame:GetWidth() / 1.5)
 					BattlefieldMapFrame:OnFrameSizeChanged()
-					LeaMapsLC["BattleMapWidth"] = BattlefieldMapFrame:GetWidth()
+					LeaMapsLC["BattleMapSize"] = BattlefieldMapFrame:GetWidth()
 					LeaMapsLC["BattleMapA"], void, LeaMapsLC["BattleMapR"], LeaMapsLC["BattleMapX"], LeaMapsLC["BattleMapY"] = BattlefieldMapFrame:GetPoint()
-					LeaMapsCB["BattleMapWidth"]:Hide(); LeaMapsCB["BattleMapWidth"]:Show()
+					LeaMapsCB["BattleMapSize"]:Hide(); LeaMapsCB["BattleMapSize"]:Show()
 				end)
 
 				-- Function to set scale handle
@@ -223,8 +223,8 @@
 					else
 						scaleHandle:Hide(); scaleMouse:Hide()
 					end
-					BattlefieldMapFrame:SetWidth(LeaMapsLC["BattleMapWidth"])
-					BattlefieldMapFrame:SetHeight(LeaMapsLC["BattleMapWidth"] / 1.5)
+					BattlefieldMapFrame:SetWidth(LeaMapsLC["BattleMapSize"])
+					BattlefieldMapFrame:SetHeight(LeaMapsLC["BattleMapSize"] / 1.5)
 					BattlefieldMapFrame:OnFrameSizeChanged()
 				end
 
@@ -234,7 +234,7 @@
 
 				-- Hook reset button click
 				battleFrame.r:HookScript("OnClick", function()
-					LeaMapsLC["BattleMapWidth"] = 300
+					LeaMapsLC["BattleMapSize"] = 300
 					SetScaleHandle()
 					battleFrame:Hide(); battleFrame:Show()
 				end)
@@ -243,16 +243,16 @@
 				LeaMapsCB["EnhanceBattleMapBtn"]:HookScript("OnClick", function()
 					if IsShiftKeyDown() and IsControlKeyDown() then
 						-- Preset profile
-						LeaMapsLC["BattleMapWidth"] = 300
+						LeaMapsLC["BattleMapSize"] = 300
 						SetScaleHandle()
 						if battleFrame:IsShown() then battleFrame:Hide(); battleFrame:Show(); end
 					end
 				end)
 
 				-- Set map size and show width percentage when slider changes
-				LeaMapsCB["BattleMapWidth"]:HookScript("OnValueChanged", function()
+				LeaMapsCB["BattleMapSize"]:HookScript("OnValueChanged", function()
 					SetScaleHandle()
-					LeaMapsCB["BattleMapWidth"].f:SetFormattedText("%.0f%%", LeaMapsLC["BattleMapWidth"] / 300 * 100)
+					LeaMapsCB["BattleMapSize"].f:SetFormattedText("%.0f%%", LeaMapsLC["BattleMapSize"] / 300 * 100)
 				end)
 			end
 
@@ -430,7 +430,7 @@
 			-- Reset button click
 			battleFrame.r:HookScript("OnClick", function()
 				LeaMapsLC["UnlockBattlefield"] = "On"
-				LeaMapsLC["BattleMapWidth"] = 300
+				LeaMapsLC["BattleMapSize"] = 300
 				LeaMapsLC["BattleGroupIconSize"] = 8
 				LeaMapsLC["BattlePlayerArrowSize"] = 12
 				LeaMapsLC["BattleMapOpacity"] = 1
@@ -449,7 +449,7 @@
 				if IsShiftKeyDown() and IsControlKeyDown() then
 					-- Preset profile
 					LeaMapsLC["UnlockBattlefield"] = "On"
-					LeaMapsLC["BattleMapWidth"] = 300
+					LeaMapsLC["BattleMapSize"] = 300
 					LeaMapsLC["BattleGroupIconSize"] = 8
 					LeaMapsLC["BattlePlayerArrowSize"] = 12
 					LeaMapsLC["BattleMapOpacity"] = 1
@@ -2599,7 +2599,7 @@
 				-- More
 				LeaMapsDB["EnhanceBattleMap"] = "On"
 				LeaMapsDB["UnlockBattlefield"] = "On"
-				LeaMapsDB["BattleMapWidth"] = 300
+				LeaMapsDB["BattleMapSize"] = 300
 				LeaMapsDB["BattleCenterOnPlayer"] = "On"
 				LeaMapsDB["BattleGroupIconSize"] = 8
 				LeaMapsDB["BattlePlayerArrowSize"] = 12
@@ -2701,7 +2701,7 @@
 			-- More
 			LeaMapsLC:LoadVarChk("EnhanceBattleMap", "Off")				-- Enhance battlefield map
 			LeaMapsLC:LoadVarChk("UnlockBattlefield", "On")				-- Unlock battlefield map
-			LeaMapsLC:LoadVarNum("BattleMapWidth", 300, 150, 900)		-- Resize battlefield map
+			LeaMapsLC:LoadVarNum("BattleMapSize", 300, 150, 900)		-- Resize battlefield map
 			LeaMapsLC:LoadVarChk("BattleCenterOnPlayer", "Off")			-- Center map on player
 			LeaMapsLC:LoadVarNum("BattleGroupIconSize", 8, 8, 16)		-- Battlefield group icon size
 			LeaMapsLC:LoadVarNum("BattlePlayerArrowSize", 12, 12, 24)	-- Battlefield player arrow size
@@ -2767,7 +2767,7 @@
 			-- More
 			LeaMapsDB["EnhanceBattleMap"] = LeaMapsLC["EnhanceBattleMap"]
 			LeaMapsDB["UnlockBattlefield"] = LeaMapsLC["UnlockBattlefield"]
-			LeaMapsDB["BattleMapWidth"] = LeaMapsLC["BattleMapWidth"]
+			LeaMapsDB["BattleMapSize"] = LeaMapsLC["BattleMapSize"]
 			LeaMapsDB["BattleCenterOnPlayer"] = LeaMapsLC["BattleCenterOnPlayer"]
 			LeaMapsDB["BattleGroupIconSize"] = LeaMapsLC["BattleGroupIconSize"]
 			LeaMapsDB["BattlePlayerArrowSize"] = LeaMapsLC["BattlePlayerArrowSize"]
