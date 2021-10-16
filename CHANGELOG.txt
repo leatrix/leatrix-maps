@@ -1,7 +1,7 @@
-9.1.15.alpha.6 - 15th October 2021
+9.1.15.alpha.7 - 16th October 2021
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
 - Moving the battlefield map and setting the opacity is now configured using 'Unlock battlefield map' in the configuration panel (mirroring BCC).
-- Resizing the battlefield map is now done by dragging the bottom-right corner of the battlefield map (requires 'Unlock battlefield map' to be enabled).  You can drag anywhere in the corner arch of the map.  This allows you to resize the battlefield map without needing to open the configuration panel.  You can set the size from 50% to 300%.  The 'Map size' slider in the configuration panel has been removed.
+- If 'Unlock battlefield map' is enabled, you can drag the bottom-right corner of the battlefield map to resize it (this is in addition to the 'Map Size' slider).
 - The 'Show unexplored areas' option will now reveal unexplored areas on the battlefield map as well as the world map.
 - The 'Group Icons' slider in the 'Enhance battlefield map' configuration panel now has a preview icon.
 
