@@ -1,4 +1,4 @@
-9.1.15.alpha.9 - 16th October 2021
+9.1.15.alpha.10 - 17th October 2021
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
 - Moving the battlefield map and setting the opacity is now configured using 'Unlock battlefield map' in the configuration panel (mirroring BCC).
 - If 'Unlock battlefield map' is enabled, you can drag the bottom-right corner of the battlefield map to resize it (this is in addition to the 'Map Size' slider).
