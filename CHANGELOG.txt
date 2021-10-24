@@ -1,3 +1,6 @@
+9.1.18.alpha.1 - 24th October 2021
+- Fixed a few locale issues with invalid translations.
+
 9.1.16 - 21st October 2021
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
 - Moving the battlefield map and setting the opacity is now configured using 'Unlock battlefield map' in the configuration panel (mirroring BCC).
