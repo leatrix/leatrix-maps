@@ -1,4 +1,4 @@
-9.1.18.alpha.1 - 24th October 2021
+9.1.18 - 28th October 2021
 - Fixed a few locale issues with invalid translations.
 
 9.1.16 - 21st October 2021
