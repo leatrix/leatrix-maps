@@ -1,3 +1,6 @@
+9.1.20 - 29th October 2021
+- Replaced packager to fix issue with CurseForge app.
+
 9.1.18 - 28th October 2021
 - Fixed a few locale issues with invalid translations.
 
