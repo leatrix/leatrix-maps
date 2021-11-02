@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.20 (29th October 2021)
+	-- 	Leatrix Maps 9.1.21.alpha.1 (2nd November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.20"
+	LeaMapsLC["AddonVer"] = "9.1.21.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2877,13 +2877,15 @@
 	CloseB:SetPoint("TOPRIGHT", 0, 0)
 
 	-- Add content
-	LeaMapsLC:MakeTx(PageF, "Mechanics", 16, -72)
+	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
 	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
-	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -112, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
-	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -132, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -152, false, "If checked, the map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
-	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 16, -172, false, "If checked, the map will not fade while your character is moving.")
-	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 16, -192, false, "If checked, your character will not perform the reading emote when you open the map.")
+
+	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -132)
+	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -152, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -172, false, "If checked, the map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
+
+	LeaMapsLC:MakeTx(PageF, "System", 16, -212)
+	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -232, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
@@ -2893,7 +2895,9 @@
 
 	LeaMapsLC:MakeTx(PageF, "More", 225, -192)
 	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -212, true, "If checked, you will be able to customise the battlefield map.")
-	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -232, false, "If checked, the minimap button will be shown.")
+	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 225, -232, false, "If checked, the map will not fade while your character is moving.")
+	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -252, false, "If checked, your character will not perform the reading emote when you open the map.")
+	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
 
  	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
  	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
