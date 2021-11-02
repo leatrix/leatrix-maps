@@ -1,7 +1,9 @@
-9.1.21.alpha.4 - 2nd November 2021
-- Added new option called 'Increase zoom level'.  If enabled, you will be able to zoom further into the world map (up to 600% increased zoom).  You can set the maximum zoom level in the configuration panel.
-- If 'Enhance battlefield map' is enabled, you can set the maximum zoom level for the battlefield map in the configuration panel.
-- Changes to configuration panel layout.
+9.1.21.alpha.6 - 2nd November 2021
+- Recoded parts of the addon to address taint issues.
+- The 'Unlock map frame' option no longer lets you change the scale of the map.
+- The 'Remember the zoom level' option has been removed.
+- Changing the battlefield map size (part of 'Enhance battlefield map') now requires a UI reload.  Moving the map size slider will cause a confirmation button to show up.  Clicking it will reload your UI with your new battlefield map size.  The sizing handle on the battlefield map has been removed.
+= The 'Enhance dungeon icons' dungeon buttons are no longer clickable.
 
 9.1.20 - 29th October 2021
 - Replaced packager to fix issue with CurseForge app.
