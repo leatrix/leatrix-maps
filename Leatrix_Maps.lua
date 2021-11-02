@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.21.alpha.2 (2nd November 2021)
+	-- 	Leatrix Maps 9.1.21.alpha.3 (2nd November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.21.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.1.21.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -764,6 +764,10 @@
 
 			-- Function to set maximum zoom level
 			local function SetZoomFunc()
+				if not WorldMapFrame.mapID then
+					local mapID = C_Map.GetBestMapForUnit("player")
+					if mapID and mapID > 0 then WorldMapFrame:SetMapID(mapID) else WorldMapFrame:SetMapID(1) end
+				end
 				WorldMapFrame.ScrollContainer:CreateZoomLevels()
 				if WorldMapFrame:IsShown() then
 					WorldMapFrame.ScrollContainer:SetZoomTarget(WorldMapFrame.ScrollContainer:GetScaleForMaxZoom())
@@ -3025,8 +3029,8 @@
 
 	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -132)
 	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -152, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -172, false, "If checked, the map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
-	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -192, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -172, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -192, false, "If checked, the map will stay centered on your location as long as you are not dragging the map or in a dungeon.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 16, -232)
 	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
