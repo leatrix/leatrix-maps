@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.21.alpha.3 (2nd November 2021)
+	-- 	Leatrix Maps 9.1.21.alpha.4 (2nd November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.21.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.1.21.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -827,7 +827,11 @@
 					end
 					for zoomLevelIndex = 0, numZoomLevels - 1 do
 						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)		
-						table.insert(self.zoomLevels, {scale = currentScale * self.baseScale, layerIndex = layerIndex})
+						local desiredScale = currentScale * self.baseScale
+						if desiredScale == 0 then
+							desiredScale = 1
+						end
+						table.insert(self.zoomLevels, {scale = desiredScale, layerIndex = layerIndex})
 					end
 				end
 			end)

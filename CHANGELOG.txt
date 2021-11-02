@@ -1,4 +1,4 @@
-9.1.21.alpha.3 - 2nd November 2021
+9.1.21.alpha.4 - 2nd November 2021
 - Added new option called 'Increase zoom level'.  If enabled, you will be able to zoom further into the world map (up to 600% increased zoom).  You can set the maximum zoom level in the configuration panel.
 - If 'Enhance battlefield map' is enabled, you can set the maximum zoom level for the battlefield map in the configuration panel.
 - Changes to configuration panel layout.
