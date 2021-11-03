@@ -1,9 +1,9 @@
-﻿## Interface: 90100
+﻿## Interface: 90105
 
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 9.1.21.alpha.6
+## Version: 9.1.21
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
