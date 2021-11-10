@@ -1,3 +1,6 @@
+9.1.22 - 10th November 2021
+- Maintenance update.
+
 9.1.21 - 3rd November 2021
 - Added new option called 'Increase zoom level'.  If enabled, you will be able to zoom further into the world map (up to 600% increased zoom).  You can set the maximum zoom level in the configuration panel.
 - If 'Enhance battlefield map' is enabled, you can set the maximum zoom level for the battlefield map in the configuration panel.
