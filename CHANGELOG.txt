@@ -1,4 +1,4 @@
-9.1.23.alpha.1 - 10th November 2021
+9.1.23 - 17th November 2021
 - Added 'Tazavesh' and 'Castle Nathria' dungeon icons.
 
 9.1.21 - 3rd November 2021
