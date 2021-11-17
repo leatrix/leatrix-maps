@@ -1,5 +1,8 @@
+9.1.24.alpha.1 - 17th November 2021
+- Added 'Sanctum of Domination' ('The Maw') raid icon.
+
 9.1.23 - 17th November 2021
-- Added 'Tazavesh' and 'Castle Nathria' dungeon icons.
+- Added 'Tazavesh, the Veiled Market' ('Tazavesh, the Veiled Market') dungeon icon and 'Castle Nathria' ('Revendreth') raid icon.
 
 9.1.21 - 3rd November 2021
 - Added new option called 'Increase zoom level'.  If enabled, you will be able to zoom further into the world map (up to 600% increased zoom).  You can set the maximum zoom level in the configuration panel.

@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.23 (17th November 2021)
+	-- 	Leatrix Maps 9.1.24.alpha.1 (17th November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.23"
+	LeaMapsLC["AddonVer"] = "9.1.24.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1422,6 +1422,9 @@
 				[1536] =  --[[Maldraxxus]] {{59.2, 64.8, L["Plaguefall"], L["Dungeon"], 1183, dnTex, nil, nil, nil, nil}, {53.0, 53.0, L["Theater of Pain"], L["Dungeon"], 1187, dnTex, nil, nil, nil, nil},},
 				[1565] =  --[[Ardenweald]] {{68.7, 66.1, L["De Other Side"], L["Dungeon"], 1188, dnTex, nil, nil, nil, nil}, {35.4, 53.9, L["Mists of Tirna Scithe"], L["Dungeon"], 1184, dnTex, nil, nil, nil, nil},},
 				[2016] =  --[[Tazavesh, the Veiled Market]] {{88.9, 44.2, L["Tazavesh, the Veiled Market"], L["Dungeon"], 1194, dnTex},},
+				[1543] =  --[[The Maw]] {{69.7, 32.1, L["Sanctum of Domination"], L["Raid"], 1193, rdTex},},
+
+				-- /ltp pos for code then /ltp showinst on Encounter Journal for dungeon ID.
 
 			}
 
