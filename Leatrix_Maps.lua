@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.22 (10th November 2021)
+	-- 	Leatrix Maps 9.1.23.alpha.1 (17th November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.22"
+	LeaMapsLC["AddonVer"] = "9.1.23.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1417,10 +1417,11 @@
 				[1473] =  --[[Chamber of Heart]] {{50.1, 30.4, L["Silithus"], L["Titan Translocator"], 0, pNTex},},
 
 				-- Shadowlands
-				[1525] =  --[[Revendreth]] {{78.3, 49.1, L["Halls of Atonement"], L["Dungeon"], 1185, dnTex, nil, nil, nil, nil}, {50.9, 29.9, L["Sanguine Depths"], L["Dungeon"], 1189, dnTex, nil, nil, nil, nil}, --[[{46.2, 41.2, L["Castle Nathria"], L["Raid"], 1190, rdTex, nil, nil, nil, nil},]]},
+				[1525] =  --[[Revendreth]] {{78.3, 49.1, L["Halls of Atonement"], L["Dungeon"], 1185, dnTex, nil, nil, nil, nil}, {50.9, 29.9, L["Sanguine Depths"], L["Dungeon"], 1189, dnTex, nil, nil, nil, nil}, {46.2, 41.2, L["Castle Nathria"], L["Raid"], 1190, rdTex, nil, nil, nil, nil},},
 				[1533] =  --[[Bastion]] {{40.0, 55.3, L["The Necrotic Wake"], L["Dungeon"], 1182, dnTex, nil, nil, nil, nil}, {58.4, 28.7, L["Spires of Ascension"], L["Dungeon"], 1186, dnTex, nil, nil, nil, nil},},
 				[1536] =  --[[Maldraxxus]] {{59.2, 64.8, L["Plaguefall"], L["Dungeon"], 1183, dnTex, nil, nil, nil, nil}, {53.0, 53.0, L["Theater of Pain"], L["Dungeon"], 1187, dnTex, nil, nil, nil, nil},},
 				[1565] =  --[[Ardenweald]] {{68.7, 66.1, L["De Other Side"], L["Dungeon"], 1188, dnTex, nil, nil, nil, nil}, {35.4, 53.9, L["Mists of Tirna Scithe"], L["Dungeon"], 1184, dnTex, nil, nil, nil, nil},},
+				[2016] =  --[[Tazavesh, the Veiled Market]] {{88.9, 44.2, L["Tazavesh, the Veiled Market"], L["Dungeon"], 1194, dnTex},},
 
 			}
 
