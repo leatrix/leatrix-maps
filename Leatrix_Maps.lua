@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.24.alpha.3 (19th November 2021)
+	-- 	Leatrix Maps 9.1.24.alpha.4 (20th November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.24.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.1.24.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -838,17 +838,18 @@
 				if LeaMapsLC["RememberZoom"] == "On" and WorldMapFrame:IsShown() then
 					WorldMapFrame:ResetZoom()
 					if lastMapID and lastScale and lastHorizontal and lastVertical and WorldMapFrame.mapID == lastMapID and WorldMapFrame.isMaximized == lastMapSize then
-						if fullUpdate then
+						-- if fullUpdate then
 							-- Prevent pointer ring glitch with toggle quest log button
-							WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, 0.5, 0.5)
-						end
+							-- WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, 0.5, 0.5)
+						-- end
 						WorldMapFrame.ScrollContainer.currentScale = lastScale
 						WorldMapFrame.ScrollContainer.targetScale = lastScale
 						WorldMapFrame.ScrollContainer.currentScrollX = lastHorizontal
 						WorldMapFrame.ScrollContainer.targetScrollX = lastHorizontal
 						WorldMapFrame.ScrollContainer.currentScrollY = lastVertical
 						WorldMapFrame.ScrollContainer.targetScrollY = lastVertical
-						WorldMapFrame:OnMapChanged()
+						WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, lastHorizontal, lastVertical)
+						-- WorldMapFrame:OnMapChanged()
 					end
 				end
 			end
