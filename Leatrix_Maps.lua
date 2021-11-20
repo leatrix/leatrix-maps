@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.24.alpha.5 (20th November 2021)
+	-- 	Leatrix Maps 9.1.24.alpha.6 (20th November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.24.alpha.5"
+	LeaMapsLC["AddonVer"] = "9.1.24.alpha.6"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -366,14 +366,6 @@
 						if battleFrame:IsShown() then battleFrame:Hide(); battleFrame:Show(); end
 					end
 				end)
-
-				-- Update location immediately when map is shown
-				BattlefieldMapFrame:HookScript("OnShow", function()
-					if LeaMapsLC["BattleCenterOnPlayer"] == "On" then
-						cTime = -1
-					end
-				end)
-
 
 				-- Update location immediately or after a very short delay
 				local function SetCenterNow() if LeaMapsLC["BattleCenterOnPlayer"] == "On" then cTime = -1 end	end

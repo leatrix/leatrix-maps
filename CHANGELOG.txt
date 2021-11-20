@@ -1,4 +1,4 @@
-9.1.24.alpha.5 - 20th November 2021
+9.1.24.alpha.6 - 20th November 2021
 - Added 'Sanctum of Domination' ('The Maw') raid icon.
 - Added 'Oribos' ('Korthia') portal icon.
 - If 'Center map on player' is enabled (either world map or battlefield map), the map will center more quickly after zooming, panning, etc.  You can now hold shift while panning to temporarily prevent the map from centering.
