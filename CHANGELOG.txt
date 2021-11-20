@@ -1,8 +1,8 @@
-9.1.24.alpha.4 - 20th November 2021
+9.1.24.alpha.5 - 20th November 2021
 - Added 'Sanctum of Domination' ('The Maw') raid icon.
 - Added 'Oribos' ('Korthia') portal icon.
+- If 'Center map on player' is enabled (either world map or battlefield map), the map will center more quickly after zooming, panning, etc.  You can now hold shift while panning to temporarily prevent the map from centering.
 - Fixed an issue with 'Remember zoom level' which caused the zoom level to malfunction in Torghast.
-- Fixed a minor issue with 'Center map on player' (both world map and battlefield map) which sometimes caused a delay after opening the map before the map was centered.
 
 9.1.23 - 17th November 2021
 - Added 'Tazavesh, the Veiled Market' ('Tazavesh, the Veiled Market') dungeon icon and 'Castle Nathria' ('Revendreth') raid icon.
