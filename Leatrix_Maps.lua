@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.24.alpha.6 (20th November 2021)
+	-- 	Leatrix Maps 9.1.24.alpha.7 (21st November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.24.alpha.6"
+	LeaMapsLC["AddonVer"] = "9.1.24.alpha.7"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -36,6 +36,9 @@
 
 	-- Main function
 	function LeaMapsLC:MainFunc()
+
+		-- This is used so that remember zoom level and center map on player work together for stubborn maps
+		LeaMapsLC.ShouldZoomInstantly = 0
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
@@ -539,7 +542,17 @@
 							local minX, maxX, minY, maxY = WorldMapFrame.ScrollContainer:CalculateScrollExtentsAtScale(WorldMapFrame.ScrollContainer:GetCanvasScale())
 							local cx = Clamp(x, minX, maxX)
 							local cy = Clamp(y, minY, maxY)
-							WorldMapFrame.ScrollContainer:SetPanTarget(cx, cy)
+							-- This is set in center map on player
+							if LeaMapsLC.ShouldZoomInstantly == 1 then
+								WorldMapFrame.ScrollContainer.currentScrollX = cx
+								WorldMapFrame.ScrollContainer.targetScrollX = cx
+								WorldMapFrame.ScrollContainer.currentScrollY = cy
+								WorldMapFrame.ScrollContainer.targetScrollY = cy
+								WorldMapFrame.ScrollContainer:InstantPanAndZoom(WorldMapFrame.ScrollContainer:GetCanvasScale(), cx, cy)
+							else
+								WorldMapFrame.ScrollContainer:SetPanTarget(cx, cy)
+							end
+							LeaMapsLC.ShouldZoomInstantly = 0
 						end
 						cTime = 0
 					end
@@ -854,6 +867,12 @@
 						WorldMapFrame.ScrollContainer.targetScrollY = lastVertical
 						WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, lastHorizontal, lastVertical)
 						WorldMapFrame:OnMapChanged()
+						-- This is used by center map on player
+						if WorldMapFrame:ShouldZoomInstantly() then
+							LeaMapsLC.ShouldZoomInstantly = 1
+						else
+							LeaMapsLC.ShouldZoomInstantly = 0
+						end
 					end
 				end
 			end
