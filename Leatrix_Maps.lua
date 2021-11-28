@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.24 (24th November 2021)
+	-- 	Leatrix Maps 9.1.25.alpha.1 (28th November 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.24"
+	LeaMapsLC["AddonVer"] = "9.1.25.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1933,7 +1933,7 @@
 			local miniButton = LibStub("LibDataBroker-1.1"):NewDataObject("Leatrix_Maps", {
 				type = "data source",
 				text = "Leatrix Maps",
-				icon = "Interface\\Worldmap\\UI-World-Icon",
+				icon = "Interface\\HELPFRAME\\HelpIcon-AccountSecurity",
 				OnClick = function(self, btn)
 					MiniBtnClickFunc(btn)
 				end,

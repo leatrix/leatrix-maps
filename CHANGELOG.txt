@@ -1,3 +1,6 @@
+9.1.25.alpha.1 - 28th November 2021
+- Updated the minimap icon.
+
 9.1.24 - 24th November 2021
 - Added 'Sanctum of Domination' ('The Maw') raid icon.
 - Added 'Oribos' ('Korthia') portal icon.
