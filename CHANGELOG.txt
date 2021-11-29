@@ -1,4 +1,5 @@
-9.1.25.alpha.1 - 28th November 2021
+9.1.25.alpha.2 - 29th November 2021
+- Player arrow and group icon maximum size (for battlefield map) and battlefield maximum size increased to 400%.
 - Updated the minimap icon.
 
 9.1.24 - 24th November 2021
