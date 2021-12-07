@@ -1,3 +1,6 @@
+9.1.26.alpha.1 - 7th December 2021
+- Added map reveal data for Zereth Mortis (PTR).
+
 9.1.25 - 1st December 2021
 - Player arrow and group icon maximum size (for battlefield map) and battlefield maximum size increased to 400%.
 - Updated the minimap icon.
