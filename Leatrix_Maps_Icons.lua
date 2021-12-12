@@ -584,7 +584,31 @@
 			{"Raid", 56.3, 36.9, L["The Emerald Nightmare"], L["Raid"], 768},
 		},
 
-		-- Battle For Azeroth
+		[761] =  --[[Dungeon: Court of Stars]] {
+
+			{"Arrow", 42.5, 76.8, L["Step 1"], L["Start here."], 5.5}, 
+			{"Arrow", 42.4, 65.2, L["Step 2"], L["Enter this building and go upstairs."], 0.1}, 
+			{"Arrow", 41.3, 53.0, L["Step 3"], L["Click the Arcane Beacon then go across the bridge to the left."], 0.7}, 
+			{"Arrow", 36.2, 47.1, L["Step 4"], L["Kill the Construct then turn left before the bridge."], 1.1}, 
+			{"Arrow", 32.0, 41.2, L["Step 5"], L["Go over this bridge."], 5.9}, 
+			{"Arrow", 33.5, 30.8, L["Step 6"], L["Pull Patrol Captain Gerdo here and kill."], 6.1}, 
+			{"Arrow", 38.5, 24.5, L["Step 7"], L["Go up these steps."], 4.5}, 
+			{"Arrow", 42.6, 26.7, L["Step 8"], L["Enter this building and go up the stairs."], 4.5}, 
+			{"Arrow", 46.4, 34.9, L["Step 9"], L["Enter this building and go down the stairs."], 2.7}, 
+			{"Arrow", 48.4, 39.7, L["Step 10"], L["Look at the map.  Find and kill 3 Enforcers (yellow dots).|nAfter each Enforcer, wait and kill the Covenant.|n|nThen kill Talixae Flamewreath."], 5.9}, 
+			{"Arrow", 60.4, 61.6, L["Step 11"], L["After killing Talixae, talk to Ly'leth Lunastre to get a disguise."], 4.0}, 
+			{"Arrow", 64.0, 67.0, L["Step 12"], L["Enter this building and talk to Chatty Rumormongers to get a description of the spy."], 4.0}, 
+		},
+
+		[763] =  --[[Dungeon: Court of Stars (The Balconies)]] {
+			{"Arrow", 27.1, 77.8, L["Step 13"], L["Once identified, kill Gerenth the Vile here and pick up the Arcane Keys."], 2.3}, 
+			{"Arrow", 60.0, 69.3, L["Step 14"], L["Unlock the Skyward Terrace doors using the Arcane Keys.|nFinally, kill Advisor Melandrus."], 4.0}, 
+		},
+
+		----------------------------------------------------------------------
+		--	Battle For Azeroth
+		----------------------------------------------------------------------
+
 		[896] =  --[[Drustvar]] {
 			{"Dungeon", 33.7, 12.6, L["Waycrest Manor"], L["Dungeon"], 1021},
 		},

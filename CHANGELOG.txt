@@ -1,5 +1,5 @@
-9.1.29.alpha.2 - 12th December 2021
-- Added Oribos portals to Stormwind and Orgrimmar.
+9.1.29.alpha.3 - 12th December 2021
+- For 'Enhance dungeon icons', added Oribos portals to Stormwind and Orgrimmar.  Added map arrows for 'Court of Stars' dungeon map.
 
 9.1.28 - 8th December 2021
 - Added map reveal data for Zereth Mortis (PTR).

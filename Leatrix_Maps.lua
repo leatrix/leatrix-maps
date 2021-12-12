@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.29.alpha.2 (12th December 2021)
+	-- 	Leatrix Maps 9.1.29.alpha.3 (12th December 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.29.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.1.29.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1346,6 +1346,9 @@
 							elseif pinInfo[1] == "PortalA" and playerFaction == "Alliance" then myPOI["atlasName"] = "TaxiNode_Continent_Alliance"
 							elseif pinInfo[1] == "PortalN" then myPOI["atlasName"] = "TaxiNode_Continent_Neutral"
 							elseif pinInfo[1] == "Chest" then myPOI["atlasName"] = "ChallengeMode-icon-chest"
+
+							-- Arrows
+							elseif pinInfo[1] == "Arrow" then myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
 							end
 
 							-- Quest requirements for portals
@@ -1366,7 +1369,13 @@
 
 							-- Acquire the pin if it has a texture
 							if myPOI["atlasName"] then
-								self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
+								local pin = self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
+								pin.Texture:SetRotation(0)
+								pin.HighlightTexture:SetRotation(0)
+								if pinInfo[1] == "Arrow" then
+									pin.Texture:SetRotation(pinInfo[6])
+									pin.HighlightTexture:SetRotation(pinInfo[6])
+								end
 							end
 
 						end
