@@ -3,7 +3,7 @@
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 9.1.29.alpha.1
+## Version: 9.1.29.alpha.2
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
@@ -12,5 +12,6 @@
 Leatrix_Maps_Library.lua
 Leatrix_Maps_Locale.lua
 Leatrix_Maps.xml
+Leatrix_Maps_Icons.lua
 Leatrix_Maps_Reveal.lua
 Leatrix_Maps.lua
