@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.29.alpha.3 (12th December 2021)
+	-- 	Leatrix Maps 9.1.29.alpha.4 (14th December 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.29.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.1.29.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1331,35 +1331,63 @@
 
 							local myPOI = {}
 
-							-- Neural dungeons and raids
-							if pinInfo[1] == "Dungeon" then myPOI["atlasName"] = "Dungeon"
-							elseif pinInfo[1] == "Raid" then myPOI["atlasName"] = "Raid"
+							-- Dungeon - Horde
+							if pinInfo[1] == "DungeonH" and playerFaction == "Horde" then
+								myPOI["atlasName"] = "Dungeon"
+								myPOI["journalID"] = pinInfo[6]
 
-							-- Faction specific dungeons and raids
-							elseif pinInfo[1] == "DungeonH" and playerFaction == "Horde" then myPOI["atlasName"] = "Dungeon"
-							elseif pinInfo[1] == "RaidH" and playerFaction == "Horde" then myPOI["atlasName"] = "Raid"
-							elseif pinInfo[1] == "DungeonA" and playerFaction == "Alliance" then myPOI["atlasName"] = "Dungeon"
-							elseif pinInfo[1] == "RaidA" and playerFaction == "Alliance" then myPOI["atlasName"] = "Raid"
+							-- Dungeon - Alliance
+							elseif pinInfo[1] == "DungeonA" and playerFaction == "Alliance" then
+								myPOI["atlasName"] = "Dungeon"
+								myPOI["journalID"] = pinInfo[6]
 
-							-- Portals
-							elseif pinInfo[1] == "PortalH" and playerFaction == "Horde" then myPOI["atlasName"] = "TaxiNode_Continent_Horde"
-							elseif pinInfo[1] == "PortalA" and playerFaction == "Alliance" then myPOI["atlasName"] = "TaxiNode_Continent_Alliance"
-							elseif pinInfo[1] == "PortalN" then myPOI["atlasName"] = "TaxiNode_Continent_Neutral"
-							elseif pinInfo[1] == "Chest" then myPOI["atlasName"] = "ChallengeMode-icon-chest"
+							-- Dungeon - Neutral
+							elseif pinInfo[1] == "Dungeon" then
+								myPOI["atlasName"] = "Dungeon"
+								myPOI["journalID"] = pinInfo[6]
 
-							-- Arrows
-							elseif pinInfo[1] == "Arrow" then myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
-							end
+							-- Raid - Horde
+							elseif pinInfo[1] == "RaidH" and playerFaction == "Horde" then
+								myPOI["atlasName"] = "Raid"
+								myPOI["journalID"] = pinInfo[6]
 
-							-- Quest requirements for portals
-							if pinInfo[1] == "PortalH" or pinInfo[1] == "PortalA" or pinInfo[1] == "PortalN" then
+							-- Raid - Alliance
+							elseif pinInfo[1] == "RaidA" and playerFaction == "Alliance" then
+								myPOI["atlasName"] = "Raid"
+								myPOI["journalID"] = pinInfo[6]
+
+							-- Raid - Neutral
+							elseif pinInfo[1] == "Raid" then
+								myPOI["atlasName"] = "Raid"
+								myPOI["journalID"] = pinInfo[6]
+
+							-- Portal - Horde
+							elseif pinInfo[1] == "PortalH" and playerFaction == "Horde" then
+								myPOI["atlasName"] = "TaxiNode_Continent_Horde"
 								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
 								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
-							end
 
-							-- Optional fields
-							if pinInfo[6] then
-								myPOI["journalID"] = pinInfo[6]
+							-- Portal - Alliance
+							elseif pinInfo[1] == "PortalA" and playerFaction == "Alliance" then
+								myPOI["atlasName"] = "TaxiNode_Continent_Alliance"
+								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
+								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
+
+							-- Portal - Neutral
+							elseif pinInfo[1] == "PortalN" then
+								myPOI["atlasName"] = "TaxiNode_Continent_Neutral"
+								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
+								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
+
+							-- Chest
+							elseif pinInfo[1] == "Chest" then
+								myPOI["atlasName"] = "ChallengeMode-icon-chest"
+
+							-- Arrow
+							elseif pinInfo[1] == "Arrow" then
+								myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
+								myPOI["journalID"] = pinInfo[7]
+
 							end
 
 							-- Mandatory fields
@@ -1392,7 +1420,7 @@
 				self.journalID = myInfo.journalID
 			end
 
-			function LeaMapsGlobalPinMixin:OnMouseDown(btn)
+			function LeaMapsGlobalPinMixin:OnMouseUp(btn)
 				if IsControlKeyDown() and btn == "LeftButton" then return end -- Do nothing if placing map pin
 				if LeaMapsLC["UnlockMap"] == "On" or not WorldMapFrame:IsMaximized() then
 					if not LeaMapsLC:PlayerInCombat() and self.journalID and self.journalID ~= 0 then
