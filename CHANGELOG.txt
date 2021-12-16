@@ -1,4 +1,4 @@
-9.1.29.alpha.4 - 14th December 2021
+9.1.31 - 16th December 2021
 - For 'Enhance dungeon icons', added Oribos portals to Stormwind and Orgrimmar.  Added map arrows for 'Court of Stars' dungeon map.
 
 9.1.28 - 8th December 2021
