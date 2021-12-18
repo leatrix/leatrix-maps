@@ -601,8 +601,9 @@
 		},
 
 		[763] =  --[[Dungeon: Court of Stars (The Balconies)]] {
-			{"Arrow", 27.1, 77.8, L["Step 13"], L["Once identified, kill Gerenth the Vile here and pick up the Arcane Keys."], 2.3}, 
-			{"Arrow", 60.0, 69.3, L["Step 14"], L["Unlock the Skyward Terrace doors using the Arcane Keys.|nFinally, kill Advisor Melandrus."], 4.0}, 
+			{"Arrow", 27.1, 77.8, L["Step 13 (1)"], L["Once identified, kill the spy either here or at the opposite side.|nThen pick up the Arcane Keys."], 2.3}, 
+			{"Arrow", 66.7, 18.7, L["Step 13 (2)"], L["Once identified, kill the spy either here or at the opposite side.|nThen pick up the Arcane Keys."], 5.5}, 
+			{"Arrow", 60.0, 69.3, L["Step 14"], L["Unlock the Skyward Terrace doors using the Arcane Keys.|nKill Advisor Melandrus."], 4.0}, 
 		},
 
 		----------------------------------------------------------------------
