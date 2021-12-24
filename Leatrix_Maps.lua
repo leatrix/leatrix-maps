@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.1.32 (22nd December 2021)
+	-- 	Leatrix Maps 9.1.33.alpha.1 (24th December 2021)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.1.32"
+	LeaMapsLC["AddonVer"] = "9.1.33.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1388,6 +1388,10 @@
 								myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
 								myPOI["journalID"] = pinInfo[7]
 
+							-- Taxi - Neutral (as used in Korthia for Flayedwing Transporter)
+							elseif pinInfo[1] == "TaxiN" then
+								myPOI["atlasName"] = "warfront-neutralhero-gold"
+
 							end
 
 							-- Mandatory fields
@@ -1403,6 +1407,10 @@
 								if pinInfo[1] == "Arrow" then
 									pin.Texture:SetRotation(pinInfo[6])
 									pin.HighlightTexture:SetRotation(pinInfo[6])
+								elseif pinInfo[1] == "TaxiN" then
+									pin:SetSize(28, 28)
+									pin.Texture:SetSize(28, 28)
+									pin.HighlightTexture:SetSize(28, 28)
 								end
 							end
 

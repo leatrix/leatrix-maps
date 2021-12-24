@@ -719,6 +719,8 @@
 
 		[1961] =  --[[Korthia]] {
 			{"PortalN", 64.5, 24.1, L["Oribos"], L["Portal"]},
+			{"TaxiN", 49.3, 63.9, L["Flayedwing Transporter"], L["Taxi to Scholar's Den"]},
+			{"TaxiN", 60.8, 28.5, L["Flayedwing Transporter"], L["Taxi to Vault of Secrets"]},
 		},
 
 	}

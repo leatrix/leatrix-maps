@@ -1,5 +1,5 @@
-9.1.32 - 22nd December 2021
-- Maintenance update.
+9.1.33.alpha.1 - 24th December 2021
+- For 'Enhance dungeon icons', the Flayedwing Transporter will now be shown on the Korthia map.
 
 9.1.31 - 16th December 2021
 - For 'Enhance dungeon icons', added Oribos portals to Stormwind and Orgrimmar.  Added map arrows for 'Court of Stars' dungeon map.
