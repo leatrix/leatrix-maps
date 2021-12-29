@@ -1,5 +1,5 @@
-9.1.33.alpha.2 - 29th December 2021
-- Added map reveal data for The Maw (post intro).  Many thanks to zeenk for reporting that it was missing.
+9.1.36 - 29th December 2021
+- Added additional map reveal data for The Maw.  Many thanks to zeenk for reporting that it was missing.
 - For 'Enhance dungeon icons', the Flayedwing Transporter will now be shown on the Korthia map.
 
 9.1.31 - 16th December 2021
