@@ -1,5 +1,5 @@
-9.1.38 - 13th January 2022
-- Maintenance update.
+9.1.39.alpha.1 - 15th January 2022
+- Added raid icon for Sepulcher of the First Ones (PTR).
 
 9.1.36 - 29th December 2021
 - Added additional map reveal data for The Maw.  Many thanks to zeenk for reporting that it was missing.

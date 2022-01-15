@@ -723,6 +723,10 @@
 			{"TaxiN", 60.8, 28.5, L["Flayedwing Transporter"], L["Taxi to Vault of Secrets"]},
 		},
 
+		[1970] =  --[[Zereth Mortis]] {
+			{"Raid", 80.5, 53.4, L["Sepulcher of the First Ones"], L["Raid"], 1195},
+		},
+
 	}
 
 	-- Function to check if dungeon is on a specific map ID (used for moving dungeons such as Ny'alotha)
