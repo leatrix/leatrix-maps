@@ -1586,6 +1586,10 @@
 				local TILE_SIZE_WIDTH = layerInfo.tileWidth
 				local TILE_SIZE_HEIGHT = layerInfo.tileHeight
 
+				-- Get the map type (needed to make sure only zone maps are tinted)
+				local mapType = C_Map.GetMapInfo(mapID).mapType
+				if not mapType then mapType = 0 end
+
 				-- Show textures if they are in database and have not been explored
 				for key, files in pairs(LeaMapsZone) do
 					if not TileExists[key] then
@@ -1632,7 +1636,7 @@
 								if fullUpdate then
 									pin.textureLoadGroup:AddTexture(texture)
 								end
-								if LeaMapsLC["RevTint"] == "On" then
+								if LeaMapsLC["RevTint"] == "On" and mapType == 3 then
 									texture:SetVertexColor(LeaMapsLC["tintRed"], LeaMapsLC["tintGreen"], LeaMapsLC["tintBlue"], LeaMapsLC["tintAlpha"])
 								end
 								tinsert(bfoverlayTextures, texture)
