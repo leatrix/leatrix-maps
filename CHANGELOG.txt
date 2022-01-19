@@ -1,6 +1,6 @@
-9.1.39.alpha.3 - 17th January 2022
+9.1.39 - 19th January 2022
 - The 'Show unexplored areas' option now applies to Torghast too.
-- Added raid icon for Sepulcher of the First Ones (PTR).
+- Added a raid icon for Sepulcher of the First Ones (PTR).
 
 9.1.36 - 29th December 2021
 - Added additional map reveal data for The Maw.  Many thanks to zeenk for reporting that it was missing.
