@@ -1,3 +1,6 @@
+9.1.40 - 26th January 2022
+- Maintenance update.
+
 9.1.39 - 19th January 2022
 - The 'Show unexplored areas' option now applies to Torghast too.
 - Added a raid icon for Sepulcher of the First Ones (PTR).
