@@ -1,4 +1,4 @@
-9.1.40 - 26th January 2022
+9.1.43 - 3rd February 2022
 - Maintenance update.
 
 9.1.39 - 19th January 2022
