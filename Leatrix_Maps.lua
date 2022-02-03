@@ -534,7 +534,7 @@
 			-- Function to update map
 			local function cUpdate(self, elapsed)
 				if cTime > 2 or cTime == -1 then
-					if WorldMapFrame.ScrollContainer:IsPanning() or IsShiftKeyDown() then return end
+					if WorldMapFrame.ScrollContainer:IsPanning() or IsShiftKeyDown() or GetUnitSpeed("player") == 0 then return end
 					local position = C_Map.GetPlayerMapPosition(WorldMapFrame.mapID, "player")
 					if position then
 						local x, y = position.x, position.y
