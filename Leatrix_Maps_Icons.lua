@@ -725,6 +725,7 @@
 
 		[1970] =  --[[Zereth Mortis]] {
 			{"Raid", 80.5, 53.4, L["Sepulcher of the First Ones"], L["Raid"], 1195},
+			{"TaxiN", 34.9, 45.7, L["Exile's Hollow"], L["Sanctuary"]},
 			{"TaxiN", 61.9, 58.9, L["Synthesis Forge"], L["Protoform Synthesis"]},
 		},
 
