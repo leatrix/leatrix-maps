@@ -1,5 +1,5 @@
-9.2.02 - 9th March 2022
-- Maintenance update.
+9.2.03.alpha.1 - 16th March 2022
+- Added an icon for 'Synthesis Forge' to Zereth Mortis map.
 
 9.2.00 - 23rd February 2022
 - Updated for game version 9.2.0.
