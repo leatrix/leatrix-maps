@@ -1,5 +1,5 @@
-9.2.03.alpha.1 - 16th March 2022
-- Added icons for 'Synthesis Forge' and 'Exile's Hollow' to Zereth Mortis map.
+9.2.03.alpha.2 - 18th March 2022
+- Added icons for 'Synthesis Forge', 'Protoform Repository' and 'Exile's Hollow' to Zereth Mortis map.
 
 9.2.00 - 23rd February 2022
 - Updated for game version 9.2.0.
