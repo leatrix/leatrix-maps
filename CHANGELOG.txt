@@ -1,4 +1,4 @@
-9.2.04.alpha.1 - 30th March 2022
+9.2.04 - 30th March 2022
 - For developers, you can now configure Leatrix Maps from your own addon or script using the following as a guide:
 
 -- Ensure Leatrix Maps does not replace LeaMapsDB on next reload
