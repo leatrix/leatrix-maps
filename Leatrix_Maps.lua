@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.03 (23rd March 2022)
+	-- 	Leatrix Maps 9.2.04.alpha.1 (30th March 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.03"
+	LeaMapsLC["AddonVer"] = "9.2.04.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2534,6 +2534,11 @@
 				wipe(LeaMapsDB)
 				LeaMapsLC["NoSaveSettings"] = true
 				ReloadUI()
+			elseif str == "nosave" then
+				-- Prevent Leatrix Maps from overwriting LeaMapsDB at next logout
+				LeaMapsLC.EventFrame:UnregisterEvent("PLAYER_LOGOUT")
+				LeaMapsLC:Print("Leatrix Maps will not overwrite LeaMapsDB at next logout.")
+				return
 			elseif str == "debug" then
 				-- Toggle debug mode
 				if LeaMapsLC["DebugMode"] then
@@ -2696,6 +2701,7 @@
 
 	-- Create event frame
 	local eFrame = CreateFrame("FRAME")
+	LeaMapsLC.EventFrame = eFrame -- Used with nosave command
 	eFrame:RegisterEvent("ADDON_LOADED")
 	eFrame:RegisterEvent("PLAYER_LOGIN")
 	eFrame:RegisterEvent("PLAYER_LOGOUT")
