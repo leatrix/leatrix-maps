@@ -1,3 +1,6 @@
+9.2.05 - 6th April 2022
+- Maintenance update.
+
 9.2.04 - 30th March 2022
 - For developers, you can now configure Leatrix Maps from your own addon or script using the following as a guide:
 
