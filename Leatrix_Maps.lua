@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.06.alpha.1 (8th April 2022)
+	-- 	Leatrix Maps 9.2.06.alpha.2 (8th April 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.06.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.2.06.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -57,8 +57,10 @@
 		local playerFaction = UnitFactionGroup("player")
 
 		-- Remove blackout frame
-		WorldMapFrame.BlackoutFrame:SetAlpha(0)
-		WorldMapFrame.BlackoutFrame:EnableMouse(false)
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapFrame.BlackoutFrame:SetAlpha(0)
+			WorldMapFrame.BlackoutFrame:EnableMouse(false)
+		end
 
 		-- Hide the world map tutorial button
 		WorldMapFrame.BorderFrame.Tutorial:HookScript("OnShow", WorldMapFrame.BorderFrame.Tutorial.Hide)
@@ -914,7 +916,7 @@
 		-- Unlock map frame (must be before Remove map border)
 		----------------------------------------------------------------------
 
-		if LeaMapsLC["UnlockMap"] == "On" then
+		if LeaMapsLC["UnlockMap"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			-- Create configuration panel
 			local scaleFrame = LeaMapsLC:CreatePanel("Unlock map frame", "scaleFrame")
@@ -1074,20 +1076,24 @@
 
 		else
 
-			-- Unlock map is disabled so set maximised world map position and scale on startup and when map size is toggled
-			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if WorldMapFrame:IsMaximized() then
-					WorldMapFrame:ClearAllPoints()
-					if LeaMapsLC["NoMapBorder"] == "On" then
-						WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 34)
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
+
+				-- Unlock map is disabled so set maximised world map position and scale on startup and when map size is toggled
+				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
+					if WorldMapFrame:IsMaximized() then
+						WorldMapFrame:ClearAllPoints()
+						if LeaMapsLC["NoMapBorder"] == "On" then
+							WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 34)
+						else
+							WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+						end
+						WorldMapFrame:SetScale(0.9)
 					else
-						WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+						WorldMapFrame:SetScale(1.0)
 					end
-					WorldMapFrame:SetScale(0.9)
-				else
-					WorldMapFrame:SetScale(1.0)
-				end
-			end)
+				end)
+
+			end
 
 		end
 
@@ -1095,7 +1101,7 @@
 		-- Remove map border (must be after Unlock map and Remember zoom)
 		----------------------------------------------------------------------
 
-		if LeaMapsLC["NoMapBorder"] == "On" then
+		if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			-- Hide border frame elements
 			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:Hide()
@@ -1884,6 +1890,16 @@
 
 			-- ShowMemoryUsage(LeaMapsLC["PageF"], "TOPLEFT", 16, -282)
 
+			----------------------------------------------------------------------
+			-- Use default map
+			----------------------------------------------------------------------
+
+			if LeaMapsLC["UseDefaultMap"] == "On" then
+				-- Lock some incompatible options
+				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
+				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
+			end
+
 		end
 
 		----------------------------------------------------------------------
@@ -2280,6 +2296,7 @@
 	function LeaMapsLC:ReloadCheck()
 		if	(LeaMapsLC["NoMapBorder"] ~= LeaMapsDB["NoMapBorder"])				-- Remove map border
 		or	(LeaMapsLC["UnlockMap"] ~= LeaMapsDB["UnlockMap"])					-- Unlock map
+		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
 		or	(LeaMapsLC["ShowIcons"] ~= LeaMapsDB["ShowIcons"])					-- Show dungeons and raids
 		or	(LeaMapsLC["HideTownCity"] ~= LeaMapsDB["HideTownCity"])			-- Hide town and city icons
@@ -2618,6 +2635,7 @@
 				LeaMapsDB["EnableMovement"] = "On"
 				LeaMapsDB["MapScale"] = 1.0
 				LeaMapsDB["MaxMapScale"] = 0.9
+				LeaMapsDB["UseDefaultMap"] = "Off"
 				LeaMapsDB["StickyMapFrame"] = "Off"
 				LeaMapsDB["RememberZoom"] = "On"
 				LeaMapsDB["IncreaseZoom"] = "On"
@@ -2723,6 +2741,7 @@
 			LeaMapsLC:LoadVarChk("EnableMovement", "On")				-- Enable frame movement
 			LeaMapsLC:LoadVarNum("MapScale", 1.0, 0.5, 2)				-- Map scale
 			LeaMapsLC:LoadVarNum("MaxMapScale", 0.9, 0.5, 2)			-- Maximised map scale
+			LeaMapsLC:LoadVarChk("UseDefaultMap", "Off")				-- Use default map
 			LeaMapsLC:LoadVarChk("StickyMapFrame", "Off")				-- Sticky map frame
 			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
 			LeaMapsLC:LoadVarChk("IncreaseZoom", "Off")					-- Increase zoom level
@@ -2792,6 +2811,7 @@
 			LeaMapsDB["EnableMovement"] = LeaMapsLC["EnableMovement"]
 			LeaMapsDB["MapScale"] = LeaMapsLC["MapScale"]
 			LeaMapsDB["MaxMapScale"] = LeaMapsLC["MaxMapScale"]
+			LeaMapsDB["UseDefaultMap"] = LeaMapsLC["UseDefaultMap"]
 			LeaMapsDB["StickyMapFrame"] = LeaMapsLC["StickyMapFrame"]
 			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
 			LeaMapsDB["IncreaseZoom"] = LeaMapsLC["IncreaseZoom"]
@@ -2945,6 +2965,7 @@
 
 	LeaMapsLC:MakeTx(PageF, "System", 16, -232)
 	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
+	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -272, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")

@@ -1,5 +1,5 @@
-9.2.06.alpha.1 - 8th April 2022
-- Maintenance update.
+9.2.06.alpha.2 - 8th April 2022
+- Added a new setting 'Use default map'.  If enabled, the full-screen map will be used for the maximised map.
 
 9.2.04 - 30th March 2022
 - For developers, you can now configure Leatrix Maps from your own addon or script using the following as a guide:
