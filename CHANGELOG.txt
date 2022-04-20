@@ -1,3 +1,6 @@
+9.2.07 - 20th April 2022
+- Maintenance update.
+
 9.2.06 - 13th April 2022
 - Added a new setting 'Use default map'.  If enabled, the full-screen map will be used for the maximised map.
 
