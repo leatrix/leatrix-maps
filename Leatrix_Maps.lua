@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.08 (27th April 2022)
+	-- 	Leatrix Maps 9.2.09.alpha.1 (28th April 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.08"
+	LeaMapsLC["AddonVer"] = "9.2.09.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -67,10 +67,12 @@
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
 
 		-- Replace function to account for frame scale (needs to be here because map is scaled regardless of unlock map frame)
-		WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
-			local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
-			local s = WorldMapFrame:GetScale()
-			return x/s, y/s
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
+				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
+				local s = WorldMapFrame:GetScale()
+				return x/s, y/s
+			end
 		end
 
 		----------------------------------------------------------------------
