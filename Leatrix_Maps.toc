@@ -3,13 +3,11 @@
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 9.2.09
+## Version: 9.2.10.alpha.1
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
 ## X-Curse-Project-ID: 298842
-
-## OptionalDeps: NDui
 
 Leatrix_Maps_Library.lua
 Leatrix_Maps_Locale.lua

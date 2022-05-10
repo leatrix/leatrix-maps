@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.09 (5th May 2022)
+	-- 	Leatrix Maps 9.2.10.alpha.1 (10th May 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.09"
+	LeaMapsLC["AddonVer"] = "9.2.10.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -28,14 +28,6 @@
 			end)
 			return
 		end
-	end
-
-	-- Check for incompatible addons
-	if IsAddOnLoaded("NDui") then
-		C_Timer.After(5, function()
-			print("Leatrix Maps is not compatible with NDui.  To use Leatrix Maps, you need to uninstall NDui.")
-		end)
-		return
 	end
 
 	----------------------------------------------------------------------
