@@ -2,12 +2,11 @@
 -- L00: Leatrix Maps Library
 ----------------------------------------------------------------------
 
-	-- LibDBIcon 9.0.0 by funkehdude
-	-- 11: LibStub: (?s)-- LibStubStart\R?\K.*?(?=-- LibStubEnd)
-	-- 12: LibCallbackHandler: (?s)-- CallbackStart\R?\K.*?(?=-- CallbackEnd)
-	-- 13: LibDataBroker: (?s)-- DataBrokerStart\R?\K.*?(?=-- DataBrokerEnd)
-	-- 14: LibDBIcon: (?s)-- LibDBIconStart\R?\K.*?(?=-- LibDBIconEnd)
-	-- 15: Dropdown menu taint fixes
+-- 11: LibStub: (?s)-- LibStubStart\R?\K.*?(?=-- LibStubEnd)
+-- 12: LibCallbackHandler: (?s)-- CallbackStart\R?\K.*?(?=-- CallbackEnd)
+-- 13: LibDataBroker: (?s)-- DataBrokerStart\R?\K.*?(?=-- DataBrokerEnd)
+-- 14: LibDBIcon: (?s)-- LibDBIconStart\R?\K.*?(?=-- LibDBIconEnd)
+-- 15: Dropdown menu taint fixes
 
 ----------------------------------------------------------------------
 -- L11: LibDBIcon: LibStub
