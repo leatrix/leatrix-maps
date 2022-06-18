@@ -31,7 +31,6 @@
 	end
 
 	-- Set bindings translations
-	_G.BINDING_HEADER_LEATRIX_MAPS_GLOBAL_HEADING_FEATURES = L["Features"]
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
 
 	----------------------------------------------------------------------
