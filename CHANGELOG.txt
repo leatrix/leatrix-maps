@@ -1,5 +1,5 @@
-9.2.15 - 15th June 2022
-- Maintenance update.
+9.2.16.alpha.1 - 18th June 2022
+- In the game key bindings menu, you can now set a keybind to toggle Leatrix Maps.
 
 9.2.13 - 1st June 2022
 - Updated for game version 9.2.5.

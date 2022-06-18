@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.15 (15th June 2022)
+	-- 	Leatrix Maps 9.2.16.alpha.1 (18th June 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.15"
+	LeaMapsLC["AddonVer"] = "9.2.16.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -29,6 +29,10 @@
 			return
 		end
 	end
+
+	-- Set bindings translations
+	_G.BINDING_HEADER_LEATRIX_MAPS_GLOBAL_HEADING_FEATURES = L["Features"]
+	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
 
 	----------------------------------------------------------------------
 	-- L00: Leatrix Maps
