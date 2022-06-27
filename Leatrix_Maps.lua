@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.16 (22nd June 2022)
+	-- 	Leatrix Maps 9.2.17.alpha.1 (27th June 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.16"
+	LeaMapsLC["AddonVer"] = "9.2.17.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -131,7 +131,7 @@
 					BattlefieldMapFrame:StartMoving()
 				end
 			end)
-			eFrame:SetScript("OnMouseUp", function() 
+			eFrame:SetScript("OnMouseUp", function()
 				-- Save frame positions
 				BattlefieldMapFrame:StopMovingOrSizing()
 				LeaMapsLC["BattleMapA"], void, LeaMapsLC["BattleMapR"], LeaMapsLC["BattleMapX"], LeaMapsLC["BattleMapY"] = BattlefieldMapFrame:GetPoint()
@@ -207,7 +207,7 @@
 						zoomDeltaPerStep = 1
 					end
 					for zoomLevelIndex = 0, numZoomLevels - 1 do
-						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)		
+						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)
 						table.insert(self.zoomLevels, {scale = currentScale * self.baseScale, layerIndex = layerIndex})
 					end
 				end
@@ -519,7 +519,7 @@
 						if mType then
 							if mType == 1 or mType == 2 then
 								-- Map type is world or continent
-								if self.Texture and self.Texture:GetTexture() == 136441 then 
+								if self.Texture and self.Texture:GetTexture() == 136441 then
 									local a, b, c, d, e, f, g, h = self.Texture:GetTexCoord()
 									if a == 0.35546875 and b == 0.001953125 and c == 0.35546875 and d == 0.03515625 and e == 0.421875 and f == 0.001953125 and g == 0.421875 and h == 0.03515625 then
 										-- Hide home icons
@@ -637,7 +637,7 @@
 			cCursor:SetParent(cFrame)
 			cCursor:ClearAllPoints()
 			cCursor:SetPoint("BOTTOMLEFT", 152, 1)
-			cCursor.x = cCursor:CreateFontString(nil, "ARTWORK", "GameFontNormal") 
+			cCursor.x = cCursor:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 			cCursor.x:SetJustifyH"LEFT"
 			cCursor.x:SetAllPoints()
 			cCursor.x:SetText(L["Cursor"] .. ": 88.8, 88.8")
@@ -649,7 +649,7 @@
 			cPlayer:SetParent(cFrame)
 			cPlayer:ClearAllPoints()
 			cPlayer:SetPoint("BOTTOMRIGHT", -132, 1)
-			cPlayer.x = cPlayer:CreateFontString(nil, "ARTWORK", "GameFontNormal") 
+			cPlayer.x = cPlayer:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 			cPlayer.x:SetJustifyH"LEFT"
 			cPlayer.x:SetAllPoints()
 			cPlayer.x:SetText(L["Player"] .. ": 88.8, 88.8")
@@ -832,7 +832,7 @@
 						zoomDeltaPerStep = 1
 					end
 					for zoomLevelIndex = 0, numZoomLevels - 1 do
-						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)		
+						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)
 						local desiredScale = currentScale * self.baseScale
 						if desiredScale == 0 then
 							desiredScale = 1
@@ -1943,7 +1943,7 @@
 		----------------------------------------------------------------------
 
 		-- Prevent tracked objectives, quest map button and boss buttons from being clicked during combat
-		do 
+		do
 
 			-- Quests
 			local questHeaderClick = QUEST_TRACKER_MODULE.OnBlockHeaderClick
@@ -2011,7 +2011,7 @@
 	function LeaMapsLC:CreateBar(name, parent, width, height, anchor, r, g, b, alp, tex)
 		local ft = parent:CreateTexture(nil, "BORDER")
 		ft:SetTexture(tex)
-		ft:SetSize(width, height)  
+		ft:SetSize(width, height)
 		ft:SetPoint(anchor)
 		ft:SetVertexColor(r ,g, b, alp)
 		if name == "MainTexture" then
@@ -2045,7 +2045,7 @@
 		Side.t:SetColorTexture(0.05, 0.05, 0.05, 0.9)
 
 		-- Add a close Button
-		Side.c = CreateFrame("Button", nil, Side, "UIPanelCloseButton") 
+		Side.c = CreateFrame("Button", nil, Side, "UIPanelCloseButton")
 		Side.c:SetSize(30, 30)
 		Side.c:SetPoint("TOPRIGHT", 0, 0)
 		Side.c:SetScript("OnClick", function() Side:Hide() end)
@@ -2109,7 +2109,7 @@
 		Side.v:SetPoint('RIGHT', Side, -32, 0)
 		Side.v:SetJustifyH('LEFT'); Side.v:SetJustifyV('TOP')
 		Side.v:SetText(L["Configuration Panel"])
-	
+
 		-- Prevent options panel from showing while side panel is showing
 		LeaMapsLC["PageF"]:HookScript("OnShow", function()
 			if Side:IsShown() then LeaMapsLC["PageF"]:Hide(); end
@@ -2532,7 +2532,7 @@
 	stopRelBtn:Hide(); stopRelBtn:Show()
 
 	-- Add close Button
-	local stopFrameClose = CreateFrame("Button", nil, stopFrame, "UIPanelCloseButton") 
+	local stopFrameClose = CreateFrame("Button", nil, stopFrame, "UIPanelCloseButton")
 	stopFrameClose:SetSize(30, 30)
 	stopFrameClose:SetPoint("TOPRIGHT", 0, 0)
 
@@ -2709,7 +2709,7 @@
 
 	-- Add slash commands
 	_G.SLASH_Leatrix_Maps1 = "/ltm"
-	_G.SLASH_Leatrix_Maps2 = "/leamaps" 
+	_G.SLASH_Leatrix_Maps2 = "/leamaps"
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
 		SlashFunc(self)
@@ -2947,7 +2947,7 @@
 	reloadb.f:Hide()
 
 	-- Add close Button
-	local CloseB = CreateFrame("Button", nil, PageF, "UIPanelCloseButton") 
+	local CloseB = CreateFrame("Button", nil, PageF, "UIPanelCloseButton")
 	CloseB:SetSize(30, 30)
 	CloseB:SetPoint("TOPRIGHT", 0, 0)
 
@@ -2976,8 +2976,8 @@
 	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -252, false, "If checked, your character will not perform the reading emote when you open the map.")
 	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
 
- 	LeaMapsLC:CfgBtn("IncreaseZoomBtn", LeaMapsCB["IncreaseZoom"])
- 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
- 	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
- 	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
- 	LeaMapsLC:CfgBtn("EnhanceBattleMapBtn", LeaMapsCB["EnhanceBattleMap"])
+	LeaMapsLC:CfgBtn("IncreaseZoomBtn", LeaMapsCB["IncreaseZoom"])
+	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
+	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
+	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
+	LeaMapsLC:CfgBtn("EnhanceBattleMapBtn", LeaMapsCB["EnhanceBattleMap"])
