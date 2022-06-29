@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.17 (29th June 2022)
+	-- 	Leatrix Maps 9.2.18.alpha.1 (29th June 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.17"
+	LeaMapsLC["AddonVer"] = "9.2.18.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1070,6 +1070,25 @@
 					LeaMapsLC["PageF"]:Hide()
 				end
 			end)
+
+			-- Function to set World Quest Tracker map window centralised to disabled
+			local function FixWorldQuestTrackerFunc()
+				if WQTrackerDB and WQTrackerDB.profiles and WQTrackerDB.profiles.Default and WQTrackerDB.profiles.Default.map_frame_anchor and WQTrackerDB.profiles.Default.map_frame_anchor == "center" then
+					WQTrackerDB.profiles.Default.map_frame_anchor = "left"
+				end
+			end
+			if IsAddOnLoaded("WorldQuestTracker") then
+				FixWorldQuestTrackerFunc()
+			else
+				local waitFrame = CreateFrame("FRAME")
+				waitFrame:RegisterEvent("ADDON_LOADED")
+				waitFrame:SetScript("OnEvent", function(self, event, arg1)
+					if arg1 == "WorldQuestTracker" then
+						FixWorldQuestTrackerFunc()
+						waitFrame:UnregisterAllEvents()
+					end
+				end)
+			end
 
 		else
 
