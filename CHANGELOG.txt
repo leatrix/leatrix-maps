@@ -1,4 +1,4 @@
-9.2.18.alpha.1 - 29th June 2022
+9.2.18.alpha.2 - 1st July 2022
 - Fixed a compatibility issue with World Quest Tracker addon and the 'Unlock map frame' setting in Leatrix Maps.
 
 9.2.16 - 22nd June 2022

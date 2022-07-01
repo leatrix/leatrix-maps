@@ -889,7 +889,7 @@ LeaLibDBIcon()
 -- L15: Dropdown menu taint fixes
 ----------------------------------------------------------------------
 
-do
+if ThisBlockIsCommentedOut then
 
 	-- UIDropDownMenu displayMode taints dropdown initialization
 	-- https://www.townlong-yak.com/bugs/Kjq4hm-DisplayModeTaint
