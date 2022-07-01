@@ -1962,7 +1962,7 @@
 		----------------------------------------------------------------------
 
 		-- Prevent tracked objectives, quest map button and boss buttons from being clicked during combat
-		do
+		if ThisBlockIsCommentedOut then
 
 			-- Quests
 			local questHeaderClick = QUEST_TRACKER_MODULE.OnBlockHeaderClick
