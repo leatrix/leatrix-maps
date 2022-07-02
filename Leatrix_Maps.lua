@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.18.alpha.3 (2nd July 2022)
+	-- 	Leatrix Maps 9.2.18.alpha.4 (2nd July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.18.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.2.18.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -44,9 +44,7 @@
 		-- To replicate: Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
 		-- (such as Zereth Mortis), shift-click on the world boss icon to toggle quest tracking off and on, click 
 		-- the objective tracker icon for the world quest, click back, click dungeons and click start group.
-		-- Additionally, prior to doing the above, first click vault icon in Oribos.
 		-- Primary cause is Increase zoom level for both world map and battlefield map.
-		-- Additionally, report option in dungeon listing.
 		C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
 			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
 				local typeStr
@@ -119,6 +117,7 @@
 			LeaMapsLC:MakeSL(battleFrame, "BattlePlayerArrowSize", "Player Arrow", "Drag to set the player arrow size.", 12, 48, 1, 36, -172, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattleMapSize", "Map Size", "Drag to set the battlefield map size.|n|nIf the map is unlocked, you can also resize the battlefield map by dragging the bottom-right corner.", 150, 1200, 1, 36, -232, "%.0f")
 			LeaMapsLC:MakeSL(battleFrame, "BattleMapOpacity", "Map Opacity", "Drag to set the battlefield map opacity.", 0.1, 1, 0.1, 206, -232, "%.0f")
+			LeaMapsLC:MakeSL(battleFrame, "BattleMaxZoom", "Max Zoom", "Drag to set the maximum zoom level.|n|nOpen the battlefield map to see the maximum zoom level change as you drag the slider.", 1, 6, 0.1, 36, -292, "%.0f")
 
 			-- Add preview texture
 			local prevIcon = battleFrame:CreateTexture(nil, "ARTWORK")
@@ -187,6 +186,57 @@
 			end)
 			battleFrame:HookScript("OnHide", function()
 				if not LeaMapsLC.BFMapWasShown then RunScript('BattlefieldMapFrame:Hide()') end
+			end)
+
+			----------------------------------------------------------------------
+			-- Battlefield map maximum zoom
+			----------------------------------------------------------------------
+
+			-- Function to set maximum zoom level
+			local function SetZoomFunc()
+				BattlefieldMapFrame.ScrollContainer:CreateZoomLevels()
+				BattlefieldMapFrame.ScrollContainer:SetZoomTarget(BattlefieldMapFrame.ScrollContainer:GetScaleForMaxZoom())
+				LeaMapsCB["BattleMaxZoom"].f:SetFormattedText("%.0f%%", LeaMapsLC["BattleMaxZoom"] / 1 * 100)
+			end
+
+			-- Set zoom level when options are changed
+			LeaMapsCB["BattleMaxZoom"]:HookScript("OnValueChanged", SetZoomFunc)
+			battleFrame.r:HookScript("OnClick", function()
+				LeaMapsLC["BattleMaxZoom"] = 1
+			end)
+			LeaMapsCB["EnhanceBattleMapBtn"]:HookScript("OnClick", function()
+				if not BattlefieldMapFrame:IsShown() then BattlefieldMapFrame:Show() end
+				if IsShiftKeyDown() and IsControlKeyDown() then
+					LeaMapsLC["BattleMaxZoom"] = 2
+				end
+			end)
+
+			-- Set zoom level
+			hooksecurefunc(BattlefieldMapFrame.ScrollContainer, "CreateZoomLevels", function(self)
+				if LeaMapsLC["BattleMaxZoom"] == 1 then return end
+				local layers = C_Map.GetMapArtLayers(self.mapID)
+				local widthScale = self:GetWidth() / layers[1].layerWidth
+				local heightScale = self:GetHeight() / layers[1].layerHeight
+				self.baseScale = math.min(widthScale, heightScale)
+				local currentScale = 0
+				local MIN_SCALE_DELTA = 0.01
+				self.zoomLevels = {}
+				for layerIndex, layerInfo in ipairs(layers) do
+					layerInfo.maxScale = layerInfo.maxScale * LeaMapsLC["BattleMaxZoom"]
+					local zoomDeltaPerStep, numZoomLevels
+					local zoomDelta = layerInfo.maxScale - layerInfo.minScale
+					if zoomDelta > 0 then
+						numZoomLevels = 2 + layerInfo.additionalZoomSteps * LeaMapsLC["BattleMaxZoom"]
+						zoomDeltaPerStep = zoomDelta / (numZoomLevels - 1)
+					else
+						numZoomLevels = 1
+						zoomDeltaPerStep = 1
+					end
+					for zoomLevelIndex = 0, numZoomLevels - 1 do
+						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)
+						table.insert(self.zoomLevels, {scale = currentScale * self.baseScale, layerIndex = layerIndex})
+					end
+				end
 			end)
 
 			----------------------------------------------------------------------
@@ -725,6 +775,96 @@
 				else
 					cPanel:Show()
 					LeaMapsLC["PageF"]:Hide()
+				end
+			end)
+
+		end
+
+		----------------------------------------------------------------------
+		-- Increase zoom level (no reload required)
+		----------------------------------------------------------------------
+
+		do
+
+			-- Create configuraton panel
+			local IncreaseZoomFrame = LeaMapsLC:CreatePanel("Increase zoom level", "IncreaseZoomFrame")
+
+			-- Add controls
+			LeaMapsLC:MakeTx(IncreaseZoomFrame, "Settings", 16, -72)
+			LeaMapsLC:MakeWD(IncreaseZoomFrame, "Set the maximum zoom scale.", 16, -92)
+			LeaMapsLC:MakeSL(IncreaseZoomFrame, "IncreaseZoomMax", "Maximum", "Drag to set the maximum zoom level.|n|nOpen the map to see the maximum zoom level change as you drag the slider.", 1, 6, 0.1, 36, -142, "%.1f")
+
+			-- Function to set maximum zoom level
+			local function SetZoomFunc()
+				if not WorldMapFrame.mapID then
+					local mapID = C_Map.GetBestMapForUnit("player")
+					if mapID and mapID > 0 then WorldMapFrame:SetMapID(mapID) else WorldMapFrame:SetMapID(1) end
+				end
+				WorldMapFrame.ScrollContainer:CreateZoomLevels()
+				if WorldMapFrame:IsShown() then
+					WorldMapFrame.ScrollContainer:SetZoomTarget(WorldMapFrame.ScrollContainer:GetScaleForMaxZoom())
+				end
+				LeaMapsCB["IncreaseZoomMax"].f:SetFormattedText("%.0f%%", LeaMapsLC["IncreaseZoomMax"] / 1 * 100)
+			end
+
+			-- Set zoom level when options are changed
+			LeaMapsCB["IncreaseZoomMax"]:HookScript("OnValueChanged", SetZoomFunc)
+			LeaMapsCB["IncreaseZoom"]:HookScript("OnClick", SetZoomFunc)
+
+			-- Back to Main Menu button click
+			IncreaseZoomFrame.b:HookScript("OnClick", function()
+				IncreaseZoomFrame:Hide()
+				LeaMapsLC["PageF"]:Show()
+			end)
+
+			-- Reset button click
+			IncreaseZoomFrame.r:HookScript("OnClick", function()
+				LeaMapsLC["IncreaseZoomMax"] = 2
+				SetZoomFunc()
+				IncreaseZoomFrame:Hide(); IncreaseZoomFrame:Show()
+			end)
+
+			-- Show configuration panel when configuration button is clicked
+			LeaMapsCB["IncreaseZoomBtn"]:HookScript("OnClick", function()
+				if IsShiftKeyDown() and IsControlKeyDown() then
+					-- Preset profile
+					LeaMapsLC["IncreaseZoomMax"] = 2
+					SetZoomFunc()
+				else
+					IncreaseZoomFrame:Show()
+					LeaMapsLC["PageF"]:Hide()
+				end
+			end)
+
+			-- Set zoom level
+			hooksecurefunc(WorldMapFrame.ScrollContainer, "CreateZoomLevels", function(self)
+				if LeaMapsLC["IncreaseZoom"] == "Off" then return end
+				local layers = C_Map.GetMapArtLayers(self.mapID)
+				local widthScale = self:GetWidth() / layers[1].layerWidth
+				local heightScale = self:GetHeight() / layers[1].layerHeight
+				self.baseScale = math.min(widthScale, heightScale)
+				local currentScale = 0
+				local MIN_SCALE_DELTA = 0.01
+				self.zoomLevels = {}
+				for layerIndex, layerInfo in ipairs(layers) do
+					layerInfo.maxScale = layerInfo.maxScale * LeaMapsLC["IncreaseZoomMax"]
+					local zoomDeltaPerStep, numZoomLevels
+					local zoomDelta = layerInfo.maxScale - layerInfo.minScale
+					if zoomDelta > 0 then
+						numZoomLevels = 2 + layerInfo.additionalZoomSteps * LeaMapsLC["IncreaseZoomMax"]
+						zoomDeltaPerStep = zoomDelta / (numZoomLevels - 1)
+					else
+						numZoomLevels = 1
+						zoomDeltaPerStep = 1
+					end
+					for zoomLevelIndex = 0, numZoomLevels - 1 do
+						currentScale = math.max(layerInfo.minScale + zoomDeltaPerStep * zoomLevelIndex, currentScale + MIN_SCALE_DELTA)
+						local desiredScale = currentScale * self.baseScale
+						if desiredScale == 0 then
+							desiredScale = 1
+						end
+						table.insert(self.zoomLevels, {scale = desiredScale, layerIndex = layerIndex})
+					end
 				end
 			end)
 
@@ -2152,6 +2292,7 @@
 
 	-- Set lock state for configuration buttons
 	function LeaMapsLC:SetDim()
+		LeaMapsLC:LockOption("IncreaseZoom", "IncreaseZoomBtn", false) 			-- Increase zoom level
 		LeaMapsLC:LockOption("RevealMap", "RevTintBtn", true)					-- Shiw unexplored areas
 		LeaMapsLC:LockOption("UnlockMap", "UnlockMapBtn", true)					-- Unlock map frame
 		LeaMapsLC:LockOption("ShowCoords", "ShowCoordsBtn", false)				-- Show coordinates
@@ -2539,6 +2680,7 @@
 				LeaMapsDB["UseDefaultMap"] = "Off"
 				LeaMapsDB["StickyMapFrame"] = "Off"
 				LeaMapsDB["RememberZoom"] = "On"
+				LeaMapsDB["IncreaseZoom"] = "On"
 				LeaMapsDB["CenterMapOnPlayer"] = "On"
 				LeaMapsDB["NoMapFade"] = "On"
 				LeaMapsDB["NoMapEmote"] = "On"
@@ -2572,6 +2714,7 @@
 				LeaMapsDB["BattleGroupIconSize"] = 8
 				LeaMapsDB["BattlePlayerArrowSize"] = 12
 				LeaMapsDB["BattleMapOpacity"] = 1
+				LeaMapsDB["BattleMaxZoom"] = 2
 				LeaMapsDB["BattleMapA"] = "BOTTOMRIGHT"
 				LeaMapsDB["BattleMapR"] = "BOTTOMRIGHT"
 				LeaMapsDB["BattleMapX"] = -47
@@ -2643,6 +2786,8 @@
 			LeaMapsLC:LoadVarChk("UseDefaultMap", "Off")				-- Use default map
 			LeaMapsLC:LoadVarChk("StickyMapFrame", "Off")				-- Sticky map frame
 			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
+			LeaMapsLC:LoadVarChk("IncreaseZoom", "Off")					-- Increase zoom level
+			LeaMapsLC:LoadVarNum("IncreaseZoomMax", 2, 1, 6)			-- Increase zoom level maximum
 			LeaMapsLC:LoadVarChk("CenterMapOnPlayer", "Off")			-- Center map on player
 			LeaMapsLC:LoadVarChk("NoMapFade", "On")						-- Disable map fade
 			LeaMapsLC:LoadVarChk("NoMapEmote", "On")					-- Disable map emote
@@ -2676,6 +2821,7 @@
 			LeaMapsLC:LoadVarNum("BattleGroupIconSize", 8, 8, 32)		-- Battlefield group icon size
 			LeaMapsLC:LoadVarNum("BattlePlayerArrowSize", 12, 12, 48)	-- Battlefield player arrow size
 			LeaMapsLC:LoadVarNum("BattleMapOpacity", 1, 0.1, 1)			-- Battlefield map opacity
+			LeaMapsLC:LoadVarNum("BattleMaxZoom", 1, 1, 6)				-- Battlefield map zoom
 			LeaMapsLC:LoadVarAnc("BattleMapA", "BOTTOMRIGHT")			-- Battlefield map anchor
 			LeaMapsLC:LoadVarAnc("BattleMapR", "BOTTOMRIGHT")			-- Battlefield map relative
 			LeaMapsLC:LoadVarNum("BattleMapX", -47, -5000, 5000)		-- Battlefield map X axis
@@ -2710,6 +2856,8 @@
 			LeaMapsDB["UseDefaultMap"] = LeaMapsLC["UseDefaultMap"]
 			LeaMapsDB["StickyMapFrame"] = LeaMapsLC["StickyMapFrame"]
 			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
+			LeaMapsDB["IncreaseZoom"] = LeaMapsLC["IncreaseZoom"]
+			LeaMapsDB["IncreaseZoomMax"] = LeaMapsLC["IncreaseZoomMax"]
 			LeaMapsDB["CenterMapOnPlayer"] = LeaMapsLC["CenterMapOnPlayer"]
 			LeaMapsDB["NoMapFade"] = LeaMapsLC["NoMapFade"]
 			LeaMapsDB["NoMapEmote"] = LeaMapsLC["NoMapEmote"]
@@ -2743,6 +2891,7 @@
 			LeaMapsDB["BattleGroupIconSize"] = LeaMapsLC["BattleGroupIconSize"]
 			LeaMapsDB["BattlePlayerArrowSize"] = LeaMapsLC["BattlePlayerArrowSize"]
 			LeaMapsDB["BattleMapOpacity"] = LeaMapsLC["BattleMapOpacity"]
+			LeaMapsDB["BattleMaxZoom"] = LeaMapsLC["BattleMaxZoom"]
 			LeaMapsDB["BattleMapA"] = LeaMapsLC["BattleMapA"]
 			LeaMapsDB["BattleMapR"] = LeaMapsLC["BattleMapR"]
 			LeaMapsDB["BattleMapX"] = LeaMapsLC["BattleMapX"]
@@ -2853,11 +3002,12 @@
 
 	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -132)
 	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -152, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -172, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
+	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -172, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -192, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
-	LeaMapsLC:MakeTx(PageF, "System", 16, -212)
-	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -232, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
-	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -252, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
+	LeaMapsLC:MakeTx(PageF, "System", 16, -232)
+	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
+	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -272, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
@@ -2871,6 +3021,7 @@
 	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -252, false, "If checked, your character will not perform the reading emote when you open the map.")
 	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
 
+	LeaMapsLC:CfgBtn("IncreaseZoomBtn", LeaMapsCB["IncreaseZoom"])
 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
 	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
 	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
