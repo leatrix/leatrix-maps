@@ -40,34 +40,27 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		do
-
-			-- Replace C_LFGList.GetPlaystyleString and C_LFGList.SetEntryTitle to prevent premade dungeon taint (occurs when you have a keystone in your bag)
-			local function GetPlaystyleString(playstyle, activityInfo)
-				if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
-					local typeStr
-					if activityInfo.isMythicPlusActivity then
-						typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
-					elseif activityInfo.isRatedPvpActivity then
-						typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
-					elseif activityInfo.isCurrentRaidActivity then
-						typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
-					elseif activityInfo.isMythicActivity then
-						typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
-					end
-					return typeStr and _G[typeStr .. tostring(playstyle)] or nil
-				else
-					return nil
+		-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+		C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
+			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
+				local typeStr
+				if activityInfo.isMythicPlusActivity then
+					typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
+				elseif activityInfo.isRatedPvpActivity then
+					typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
+				elseif activityInfo.isCurrentRaidActivity then
+					typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
+				elseif activityInfo.isMythicActivity then
+					typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
 				end
+				return typeStr and _G[typeStr .. tostring(playstyle)] or nil
+			else
+				return nil
 			end
-
-			C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
-				return GetPlaystyleString(playstyle, activityInfo)
-			end
-
-			C_LFGList.SetEntryTitle = function(selectedActivity, selectedGroup, selectedPlaystyle) end
-
 		end
+
+		-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+		C_LFGList.SetEntryTitle = function() end
 
 		-- This is used so that remember zoom level and center map on player work together for stubborn maps
 		LeaMapsLC.ShouldZoomInstantly = 0
