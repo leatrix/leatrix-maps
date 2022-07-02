@@ -40,33 +40,50 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		-- Replace C_LFGList.GetPlaystyleString and C_LFGList.SetEntryTitle to address taint when opening
-		-- the dungeon section with a keystone in your bag
-		local function GetPlaystyleString(playstyle,activityInfo)
-			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
-				local typeStr
-				if activityInfo.isMythicPlusActivity then
-					typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
-				elseif activityInfo.isRatedPvpActivity then
-					typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
-				elseif activityInfo.isCurrentRaidActivity then
-					typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
-				elseif activityInfo.isMythicActivity then
-					typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+		do
+
+			-- Replace C_LFGList.GetPlaystyleString to prevent premade dungeon taint (occurs when you have a keystone in your bag)
+			local function GetPlaystyleString(playstyle,activityInfo)
+				if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
+					local typeStr
+					if activityInfo.isMythicPlusActivity then
+						typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
+					elseif activityInfo.isRatedPvpActivity then
+						typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
+					elseif activityInfo.isCurrentRaidActivity then
+						typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
+					elseif activityInfo.isMythicActivity then
+						typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+					end
+					return typeStr and _G[typeStr .. tostring(playstyle)] or nil
+				else
+					return nil
 				end
-				return typeStr and _G[typeStr .. tostring(playstyle)] or nil
-			else
-				return nil
 			end
-		end
 
-		C_LFGList.GetPlaystyleString = function(playstyle,activityInfo)
-			return GetPlaystyleString(playstyle, activityInfo)
-		end
+			C_LFGList.GetPlaystyleString = function(playstyle,activityInfo)
+				return GetPlaystyleString(playstyle, activityInfo)
+			end
 
-		function C_LFGList.SetEntryTitle(selectedActivity, selectedGroup, selectedPlaystyle)
-			-- local keystone = C_LFGList.GetKeystoneForActivity(selectedActivity)
-			-- LFGListFrame.EntryCreation.Name:SetText("+" .. keystone)
+			-- Store entry title and set it to default when frame is hidden
+			local myTitleText = LFGListFrame.EntryCreation.NameLabel:GetText()
+			LFGListFrame.EntryCreation:HookScript("OnHide", function()
+				LFGListFrame.EntryCreation.NameLabel:SetText(myTitleText)
+			end)
+
+			-- Replace SetEntryTitle to prevent taint
+			function C_LFGList.SetEntryTitle(selectedActivity, selectedGroup, selectedPlaystyle)
+				local keystone = C_LFGList.GetKeystoneForActivity(selectedActivity)
+				if keystone then
+					-- Add keystone level to entry title
+					LFGListFrame.EntryCreation.NameLabel:SetText(myTitleText .. " (" .. L["key is"] .. " +" .. keystone .. ")")
+				elseif not keystone then
+					-- Set entry title to default
+					LFGListFrame.EntryCreation.NameLabel:SetText(myTitleText)
+				end
+				LFGListFrame.EntryCreation.Name:SetFocus()
+			end
+
 		end
 
 		-- This is used so that remember zoom level and center map on player work together for stubborn maps
