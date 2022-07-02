@@ -41,6 +41,10 @@
 	function LeaMapsLC:MainFunc()
 
 		-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+		-- To replicate: Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
+		-- (such as Zereth Mortis), shift-click on the world boss icon to toggle quest tracking off and on, click 
+		-- the objective tracker icon for the world quest, click back, click dungeons and click start group.
+		-- Primary cause is Increase zoom level for both world map and battlefield map.
 		C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
 			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
 				local typeStr
