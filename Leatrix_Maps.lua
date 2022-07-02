@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.18.alpha.2 (1st July 2022)
+	-- 	Leatrix Maps 9.2.18.alpha.2 (2nd July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -39,6 +39,35 @@
 
 	-- Main function
 	function LeaMapsLC:MainFunc()
+
+		-- Replace C_LFGList.GetPlaystyleString and C_LFGList.SetEntryTitle to address taint when opening
+		-- the dungeon section with a keystone in your bag
+		local function GetPlaystyleString(playstyle,activityInfo)
+			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
+				local typeStr
+				if activityInfo.isMythicPlusActivity then
+					typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
+				elseif activityInfo.isRatedPvpActivity then
+					typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
+				elseif activityInfo.isCurrentRaidActivity then
+					typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
+				elseif activityInfo.isMythicActivity then
+					typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+				end
+				return typeStr and _G[typeStr .. tostring(playstyle)] or nil
+			else
+				return nil
+			end
+		end
+
+		C_LFGList.GetPlaystyleString = function(playstyle,activityInfo)
+			return GetPlaystyleString(playstyle, activityInfo)
+		end
+
+		function C_LFGList.SetEntryTitle(selectedActivity, selectedGroup, selectedPlaystyle)
+			-- local keystone = C_LFGList.GetKeystoneForActivity(selectedActivity)
+			-- LFGListFrame.EntryCreation.Name:SetText("+" .. keystone)
+		end
 
 		-- This is used so that remember zoom level and center map on player work together for stubborn maps
 		LeaMapsLC.ShouldZoomInstantly = 0
@@ -1962,7 +1991,7 @@
 		----------------------------------------------------------------------
 
 		-- Prevent tracked objectives, quest map button and boss buttons from being clicked during combat
-		if ThisBlockIsCommentedOut then
+		do
 
 			-- Quests
 			local questHeaderClick = QUEST_TRACKER_MODULE.OnBlockHeaderClick

@@ -1,4 +1,5 @@
 9.2.18.alpha.2 - 1st July 2022
+- Fixed an issue with the game code which caused the premade group finder to show an error when opening the Dungeons section with a keystone in your bag.  As a result of this fix, the dungeon title will no longer be prefilled with the keystone level.
 - Fixed a compatibility issue with World Quest Tracker addon and the 'Unlock map frame' setting in Leatrix Maps.
 
 9.2.16 - 22nd June 2022
