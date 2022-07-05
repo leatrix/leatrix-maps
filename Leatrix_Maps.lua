@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.18.alpha.4 (2nd July 2022)
+	-- 	Leatrix Maps 9.2.18.alpha.4 (5th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -1170,7 +1170,7 @@
 
 			-- Reposition close button
 			WorldMapFrameCloseButton:ClearAllPoints()
-			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -84, -1)
+			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", 2, -41)
 
 			-- Create border for world map frame
 			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND"); border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground"); border:SetPoint("TOPLEFT", -5, 5); border:SetPoint("BOTTOMRIGHT", 5, -5); border:SetVertexColor(0, 0, 0, 0.7)
@@ -1251,7 +1251,7 @@
 			-- Add map maximise and minimise toggle button
 			local maxBtn = CreateFrame("BUTTON", nil, WorldMapFrame)
 			maxBtn:ClearAllPoints()
-			maxBtn:SetPoint("LEFT", WorldMapFrameCloseButton, "LEFT", -43, 0)
+			maxBtn:SetPoint("BOTTOM", WorldMapFrameCloseButton, "BOTTOM", 0, -34)
 			maxBtn:SetSize(30, 30)
 			maxBtn:SetFrameStrata("HIGH")
 			maxBtn:HookScript("OnClick", function(self, btn)
@@ -1263,12 +1263,6 @@
 				WorldMapFrame:OnMapChanged()
 				LeaMapsLC:SaveZoomLevel()
 			end)
-
-			-- Reposition close button if HandyNotes: Shadowlands is installed
-			if IsAddOnLoaded("HandyNotes") and IsAddOnLoaded("HandyNotes_Shadowlands") then
-				WorldMapFrameCloseButton:ClearAllPoints()
-				WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -118, -1)
-			end
 
 			-- Set maximise minimise toggle button texture
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
