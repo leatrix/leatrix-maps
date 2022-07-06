@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.18.alpha.4 (5th July 2022)
+	-- 	Leatrix Maps 9.2.18 (6th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.18.alpha.4"
+	LeaMapsLC["AddonVer"] = "9.2.18"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -42,8 +42,8 @@
 
 		-- Group finder taint:
 		-- Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
-		-- (such as Zereth Mortis), shift-click on the world boss icon to toggle quest tracking off and on, click 
-		-- the objective tracker icon for the world quest to open group finder, click back, click dungeons and 
+		-- (such as Zereth Mortis), shift-click on the world boss icon to toggle quest tracking off and on, click
+		-- the objective tracker icon for the world quest to open group finder, click back, click dungeons and
 		-- click start group.
 
 		-- Report player taint:
