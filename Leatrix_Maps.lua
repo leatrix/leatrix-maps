@@ -1157,17 +1157,13 @@
 
 		else
 
-			if LeaMapsLC["UseDefaultMap"] == "Off" then
+			if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
-				-- Unlock map is disabled so set maximised world map position on startup and when map size is toggled
+				-- Unlock map is disabled and remove map border is enabled so lower maximised map position on startup and when map size is toggled
 				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 					if WorldMapFrame:IsMaximized() then
 						WorldMapFrame:ClearAllPoints()
-						if LeaMapsLC["NoMapBorder"] == "On" then
-							WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 34)
-						else
-							WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-						end
+						WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 34)
 					end
 				end)
 

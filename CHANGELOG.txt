@@ -1,4 +1,5 @@
 9.2.20.alpha.1 - 16th July 2022
+- If 'Unlock map frame' is disabled, the maximised map will no longer be scaled.
 - The premade group finder fix added in 9.2.18 will no longer be applied if your game account does not have Two-Factor Authentication (2FA) enabled.  Instead, if you use premade group finder to make a Mythic+ dungeon group for your own key and your game account does not have Two-Factor Authentication (2FA) enabled, you may sometimes see a stop error when the game tries to set the activity title to your key level.  Click the reload button to clear the error.  Enable Two-Factor-Authentication (2FA) on your game account to avoid seeing this error.  If you don't have Two-Factor-Authentication (2FA) enabled on your game account, an advisory alert button will be shown in the configuration panel.
 
 9.2.18 - 6th July 2022
