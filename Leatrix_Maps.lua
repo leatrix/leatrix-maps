@@ -54,7 +54,7 @@
 		-- This is mitigated below by locking the checkbox in editing mode.
 
 		-- Taints:
-		-- WorldMapFrame.ScrollContainer.GetCursorPosition (used by Unlock map frame but also without it)
+		-- Unlock map frame (WorldMapFrame.ScrollContainer.GetCursorPosition)
 		-- Remember zoom level (globals)
 		-- Increase zoom level (globals)
 		-- Center map on player (globals)
@@ -127,15 +127,6 @@
 		-- Hide the world map tutorial button
 		WorldMapFrame.BorderFrame.Tutorial:HookScript("OnShow", WorldMapFrame.BorderFrame.Tutorial.Hide)
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
-
-		-- Replace function to account for frame scale (needs to be here because map is scaled regardless of unlock map frame)
-		if LeaMapsLC["UseDefaultMap"] == "Off" then
-			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
-				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
-				local s = WorldMapFrame:GetScale()
-				return x/s, y/s
-			end
-		end
 
 		----------------------------------------------------------------------
 		-- Enhance battlefield map
@@ -982,6 +973,13 @@
 
 		if LeaMapsLC["UnlockMap"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
+			-- Replace function to account for frame scale
+			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
+				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
+				local s = WorldMapFrame:GetScale()
+				return x/s, y/s
+			end
+
 			-- Create configuration panel
 			local scaleFrame = LeaMapsLC:CreatePanel("Unlock map frame", "scaleFrame")
 
@@ -1161,7 +1159,7 @@
 
 			if LeaMapsLC["UseDefaultMap"] == "Off" then
 
-				-- Unlock map is disabled so set maximised world map position and scale on startup and when map size is toggled
+				-- Unlock map is disabled so set maximised world map position on startup and when map size is toggled
 				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 					if WorldMapFrame:IsMaximized() then
 						WorldMapFrame:ClearAllPoints()
@@ -1170,9 +1168,6 @@
 						else
 							WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 						end
-						WorldMapFrame:SetScale(0.9)
-					else
-						WorldMapFrame:SetScale(1.0)
 					end
 				end)
 
