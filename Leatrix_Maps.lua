@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.19 (14th July 2022)
+	-- 	Leatrix Maps 9.2.20.alpha.1 (16th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.19"
+	LeaMapsLC["AddonVer"] = "9.2.20.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -56,27 +56,41 @@
 		-- Center map on player (globals)
 		-- The equivalent settings in Enhance battlefield map
 
-		-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
-		C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
-			if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
-				local typeStr
-				if activityInfo.isMythicPlusActivity then
-					typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
-				elseif activityInfo.isRatedPvpActivity then
-					typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
-				elseif activityInfo.isCurrentRaidActivity then
-					typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
-				elseif activityInfo.isMythicActivity then
-					typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
-				end
-				return typeStr and _G[typeStr .. tostring(playstyle)] or nil
-			else
-				return nil
-			end
-		end
+		-- The taint fix is only applied if the user has Two-Factor Authentication (2FA) applied to their account.
+		-- This is checked using a sample dungeon.  If the player does not have 2FA, an alert button is shown in
+		-- the configuration panel.
 
-		-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
-		C_LFGList.SetEntryTitle = function() end
+		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
+
+			-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+			C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
+				if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
+					local typeStr
+					if activityInfo.isMythicPlusActivity then
+						typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
+					elseif activityInfo.isRatedPvpActivity then
+						typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
+					elseif activityInfo.isCurrentRaidActivity then
+						typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
+					elseif activityInfo.isMythicActivity then
+						typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+					end
+					return typeStr and _G[typeStr .. tostring(playstyle)] or nil
+				else
+					return nil
+				end
+			end
+
+			-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+			C_LFGList.SetEntryTitle = function() end
+
+		else
+
+			-- Add 2FA advisory button
+			local PageFAlertButton = LeaMapsLC:CreateButton("PageFAlertButton", LeaMapsLC["PageF"], "You should use 2FA!", "BOTTOMLEFT", 16, 10, 25, "Your account does not have Two-Factor Authentication (2FA).|n|nIf you use premade group finder for a dungeon and you have a Mythic+ key in your bag, you may see a taint error when the game tries to set the activity title.  To clear this error, reload your UI.|n|nTo avoid seeing this error, enable Two-Factor Authentication (2FA) on your game account.", true)
+			PageFAlertButton:SetPushedTextOffset(0, 0)
+
+		end
 
 		-- This is used so that remember zoom level and center map on player work together for stubborn maps
 		LeaMapsLC.ShouldZoomInstantly = 0
@@ -2306,7 +2320,7 @@
 	end
 
 	-- Create a standard button
-	function LeaMapsLC:CreateButton(name, frame, label, anchor, x, y, height, tip)
+	function LeaMapsLC:CreateButton(name, frame, label, anchor, x, y, height, tip, naked)
 		local mbtn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 		LeaMapsCB[name] = mbtn
 		mbtn:SetHeight(height)
@@ -2325,8 +2339,10 @@
 		mbtn:SetScript("OnLeave", GameTooltip_Hide)
 
 		-- Set skinned button textures
-		mbtn:SetNormalTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-		mbtn:GetNormalTexture():SetTexCoord(0.5, 1, 0, 1)
+		if not naked then
+			mbtn:SetNormalTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
+			mbtn:GetNormalTexture():SetTexCoord(0.5, 1, 0, 1)
+		end
 		mbtn:SetHighlightTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
 		mbtn:GetHighlightTexture():SetTexCoord(0, 0.5, 0, 1)
 
