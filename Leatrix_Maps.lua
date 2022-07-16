@@ -87,7 +87,7 @@
 		else
 
 			-- Add 2FA advisory button
-			local PageFAlertButton = LeaMapsLC:CreateButton("PageFAlertButton", LeaMapsLC["PageF"], "You should use 2FA!", "BOTTOMLEFT", 16, 10, 25, "Your account does not have Two-Factor Authentication (2FA).|n|nIf you use premade group finder for a dungeon and you have a Mythic+ key in your bag, you may see a taint error when the game tries to set the activity title.  To clear this error, reload your UI.|n|nTo avoid seeing this error, enable Two-Factor Authentication (2FA) on your game account.", true)
+			local PageFAlertButton = LeaMapsLC:CreateButton("PageFAlertButton", LeaMapsLC["PageF"], "You should enable 2FA!", "BOTTOMLEFT", 16, 10, 25, "Your game account does not have Two-Factor Authentication (2FA) enabled.|n|nIf you use premade group finder to make a Mythic+ dungeon group for your own key, you may see a stop error when the game tries to set the activity title to your key level.  To clear this error, reload your UI.|n|nTo avoid seeing this error, enable Two-Factor Authentication (2FA) on your game account.", true)
 			PageFAlertButton:SetPushedTextOffset(0, 0)
 
 		end
@@ -2796,7 +2796,8 @@
 	eFrame:RegisterEvent("PLAYER_LOGIN")
 	eFrame:RegisterEvent("PLAYER_LOGOUT")
 	eFrame:RegisterEvent("ADDON_ACTION_FORBIDDEN")
-	eFrame:SetScript("OnEvent", function(self, event, arg1)
+	eFrame:RegisterEvent("ADDON_ACTION_BLOCKED")
+	eFrame:SetScript("OnEvent", function(self, event, arg1, arg2)
 
 		if event == "ADDON_LOADED" and arg1 == "Leatrix_Maps" then
 			-- Load settings or set defaults
@@ -2930,6 +2931,11 @@
 		elseif event == "ADDON_ACTION_FORBIDDEN" and arg1 == "Leatrix_Maps" then
 			-- Stop error has occured
 			StaticPopup_Hide("ADDON_ACTION_FORBIDDEN")
+			stopFrame:Show()
+
+		elseif event == "ADDON_ACTION_BLOCKED" and arg1 == "Leatrix_Maps" and arg2 and arg2 == "SetEntryTitle()" then
+			-- Addon blocked error due to SetEntryTitle taint
+			ScriptErrorsFrame:Hide()
 			stopFrame:Show()
 
 		end
