@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.20.alpha.1 (16th July 2022)
+	-- 	Leatrix Maps 9.2.20.alpha.2 (16th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.20.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.2.20.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -973,13 +973,6 @@
 
 		if LeaMapsLC["UnlockMap"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
-			-- Replace function to account for frame scale
-			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
-				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
-				local s = WorldMapFrame:GetScale()
-				return x/s, y/s
-			end
-
 			-- Create configuration panel
 			local scaleFrame = LeaMapsLC:CreatePanel("Unlock map frame", "scaleFrame")
 
@@ -987,9 +980,6 @@
 			LeaMapsLC:MakeTx(scaleFrame, "Settings", 16, -72)
 			LeaMapsLC:MakeCB(scaleFrame, "EnableMovement", "Allow frame movement", 16, -92, false, "If checked, you will be able to move the frame by dragging the border.")
 			LeaMapsLC:MakeCB(scaleFrame, "StickyMapFrame", "Sticky map frame", 16, -112, false, "If checked, the map frame will remain open until you close it.")
-			LeaMapsLC:MakeTx(scaleFrame, "Scale", 16, -152)
-			LeaMapsLC:MakeSL(scaleFrame, "MapScale", "Windowed", "Drag to set the scale for the windowed map.", 0.5, 2, 0.05, 36, -192, "%.1f")
-			LeaMapsLC:MakeSL(scaleFrame, "MaxMapScale", "Maximised", "Drag to set the scale for the maximised map.", 0.5, 2, 0.05, 206, -192, "%.1f")
 
 			----------------------------------------------------------------------
 			-- Allow map frame movement
@@ -1038,29 +1028,6 @@
 			end
 
 			----------------------------------------------------------------------
-			-- Map scale
-			----------------------------------------------------------------------
-
-			-- Function to set map frame scale
-			local function SetMapScale()
-				LeaMapsCB["MapScale"].f:SetFormattedText("%.0f%%", LeaMapsLC["MapScale"] * 100)
-				LeaMapsCB["MaxMapScale"].f:SetFormattedText("%.0f%%", LeaMapsLC["MaxMapScale"] * 100)
-				if not WorldMapFrame:IsMaximized() then
-					WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
-				else
-					WorldMapFrame:SetScale(LeaMapsLC["MaxMapScale"])
-				end
-			end
-
-			-- Set scale properties when controls are changed and on startup
-			LeaMapsCB["MapScale"]:HookScript("OnValueChanged", SetMapScale)
-			LeaMapsCB["MaxMapScale"]:HookScript("OnValueChanged", SetMapScale)
-			SetMapScale()
-
-			-- Set scale when map size is toggled
-			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", SetMapScale)
-
-			----------------------------------------------------------------------
 			-- Sticky map frame
 			----------------------------------------------------------------------
 
@@ -1105,10 +1072,6 @@
 				else
 					WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
 				end
-				-- Reset map scale
-				LeaMapsLC["MapScale"] = 1.0
-				LeaMapsLC["MaxMapScale"] = 0.9
-				SetMapScale()
 				-- Reset sticky map frame
 				LeaMapsLC["StickyMapFrame"] = "Off"
 				StickyMapFunc()
@@ -1124,9 +1087,6 @@
 				if IsShiftKeyDown() and IsControlKeyDown() then
 					-- Preset profile
 					LeaMapsLC["EnableMovement"] = "On"
-					LeaMapsLC["MapScale"] = 1.0
-					LeaMapsLC["MaxMapScale"] = 0.9
-					SetMapScale()
 					LeaMapsLC["StickyMapFrame"] = "Off"
 					StickyMapFunc()
 					if scaleFrame:IsShown() then scaleFrame:Hide(); scaleFrame:Show(); end
@@ -2703,8 +2663,6 @@
 				LeaMapsDB["NoMapBorder"] = "On"
 				LeaMapsDB["UnlockMap"] = "On"
 				LeaMapsDB["EnableMovement"] = "On"
-				LeaMapsDB["MapScale"] = 1.0
-				LeaMapsDB["MaxMapScale"] = 0.9
 				LeaMapsDB["UseDefaultMap"] = "Off"
 				LeaMapsDB["StickyMapFrame"] = "Off"
 				LeaMapsDB["RememberZoom"] = "On"
@@ -2810,8 +2768,6 @@
 			LeaMapsLC:LoadVarChk("NoMapBorder", "Off")					-- Remove map border
 			LeaMapsLC:LoadVarChk("UnlockMap", "Off")					-- Unlock map frame
 			LeaMapsLC:LoadVarChk("EnableMovement", "On")				-- Enable frame movement
-			LeaMapsLC:LoadVarNum("MapScale", 1.0, 0.5, 2)				-- Map scale
-			LeaMapsLC:LoadVarNum("MaxMapScale", 0.9, 0.5, 2)			-- Maximised map scale
 			LeaMapsLC:LoadVarChk("UseDefaultMap", "Off")				-- Use default map
 			LeaMapsLC:LoadVarChk("StickyMapFrame", "Off")				-- Sticky map frame
 			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
@@ -2880,8 +2836,6 @@
 			LeaMapsDB["NoMapBorder"] = LeaMapsLC["NoMapBorder"]
 			LeaMapsDB["UnlockMap"] = LeaMapsLC["UnlockMap"]
 			LeaMapsDB["EnableMovement"] = LeaMapsLC["EnableMovement"]
-			LeaMapsDB["MapScale"] = LeaMapsLC["MapScale"]
-			LeaMapsDB["MaxMapScale"] = LeaMapsLC["MaxMapScale"]
 			LeaMapsDB["UseDefaultMap"] = LeaMapsLC["UseDefaultMap"]
 			LeaMapsDB["StickyMapFrame"] = LeaMapsLC["StickyMapFrame"]
 			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
