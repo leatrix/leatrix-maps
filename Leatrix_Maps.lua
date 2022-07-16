@@ -2994,7 +2994,7 @@
 	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -192, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 16, -232)
-	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move and scale the map.|n|nThe map position and scale will be saved separately for the maximised and windowed maps.")
+	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move the map.|n|nThe map position will be saved separately for the maximised and windowed maps.")
 	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -272, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
