@@ -49,6 +49,10 @@
 		-- Report player taint:
 		-- Same as group finder taint but use report player.
 
+		-- Editing mode taint:
+		-- Same as group finder taint but edit the group after listing it and toggle the opposite faction checkbox.
+		-- This is mitigated below by locking the checkbox in editing mode.
+
 		-- Taints:
 		-- WorldMapFrame.ScrollContainer.GetCursorPosition (used by Unlock map frame but also without it)
 		-- Remember zoom level (globals)
@@ -83,6 +87,17 @@
 
 			-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
 			C_LFGList.SetEntryTitle = function() end
+
+			-- Toggling the opposite faction only checkbox during editing mode also taints
+			LFGListFrame.EntryCreation:HookScript("OnShow", function()
+				if LFGListFrame.EntryCreation.ListGroupButton:GetText() == DONE_EDITING then
+					LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, true)
+					LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(0.3)
+				else
+					LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, false)
+					LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(1)
+				end
+			end)
 
 		else
 
