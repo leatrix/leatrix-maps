@@ -2952,4 +2952,4 @@
 	LeaMapsCB["ZoomInfoBtn"].t:SetVertexColor(0.9, 0.8, 0.0)
 	LeaMapsCB["ZoomInfoBtn"]:SetHighlightTexture("Interface\\COMMON\\help-i.blp")
 	LeaMapsCB["ZoomInfoBtn"]:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
-	LeaMapsCB["ZoomInfoBtn"].tiptext = "Enabling any of the zoom settings below will taint the map."
+	LeaMapsCB["ZoomInfoBtn"].tiptext = "Enabling any of the zoom settings below will taint the map until you reload or logout."
