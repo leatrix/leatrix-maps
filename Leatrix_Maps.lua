@@ -2952,4 +2952,4 @@
 	LeaMapsCB["ZoomInfoBtn"].t:SetVertexColor(0.9, 0.8, 0.0)
 	LeaMapsCB["ZoomInfoBtn"]:SetHighlightTexture("Interface\\COMMON\\help-i.blp")
 	LeaMapsCB["ZoomInfoBtn"]:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
-	LeaMapsCB["ZoomInfoBtn"].tiptext = "The zoom settings below are here in the addon because many people find them very useful.|n|nHowever, you should be aware that enabling any one of them will taint the map which means that you may see errors reported from time to time.|n|nThe errors are harmless.  If an error stops something from working, reload your UI to resolve it."
+	LeaMapsCB["ZoomInfoBtn"].tiptext = "Enabling any of the zoom settings below will taint the map."
