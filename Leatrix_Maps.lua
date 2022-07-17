@@ -2915,14 +2915,14 @@
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
 	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
 
-	LeaMapsLC:MakeTx(PageF, "Zoom (these taint)", 16, -132)
-	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -152, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -172, false, "If checked, you will be able to zoom further into the world map.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -192, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
+	LeaMapsLC:MakeTx(PageF, "System", 16, -132)
+	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -152, true, "If checked, you will be able to move the map.|n|nThe map position will be saved separately for the maximised and windowed maps.")
+	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -172, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
 
-	LeaMapsLC:MakeTx(PageF, "System", 16, -232)
-	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -252, true, "If checked, you will be able to move the map.|n|nThe map position will be saved separately for the maximised and windowed maps.")
-	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -272, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
+	local ZoomHeading = LeaMapsLC:MakeTx(PageF, "Zoom (these taint)", 16, -212)
+	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -232, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
+	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -252, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -272, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
@@ -2941,3 +2941,15 @@
 	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
 	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
 	LeaMapsLC:CfgBtn("EnhanceBattleMapBtn", LeaMapsCB["EnhanceBattleMap"])
+
+	-- Show help button for Zoom heading
+	LeaMapsLC:CfgBtn("ZoomInfoBtn", LeaMapsLC["PageF"])
+	LeaMapsCB["ZoomInfoBtn"]:ClearAllPoints()
+	LeaMapsCB["ZoomInfoBtn"]:SetPoint("LEFT", ZoomHeading, "RIGHT", 0, 0)
+	LeaMapsCB["ZoomInfoBtn"]:SetSize(24, 24)
+	LeaMapsCB["ZoomInfoBtn"].t:SetTexture("Interface\\COMMON\\help-i.blp")
+	LeaMapsCB["ZoomInfoBtn"].t:SetTexCoord(0, 1, 0, 1)
+	LeaMapsCB["ZoomInfoBtn"].t:SetVertexColor(0.9, 0.8, 0.0)
+	LeaMapsCB["ZoomInfoBtn"]:SetHighlightTexture("Interface\\COMMON\\help-i.blp")
+	LeaMapsCB["ZoomInfoBtn"]:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
+	LeaMapsCB["ZoomInfoBtn"].tiptext = "The zoom settings below are here in the addon because many people find them very useful.|n|nHowever, you should be aware that enabling any one of them will taint the map which means that you may see errors reported from time to time.|n|nThe frequency of errors varies but errors are more likely to be reported if you click items in the objective tracker during combat.|n|nThe errors are harmless.  If an error stops something from working, reload your UI to resolve it."

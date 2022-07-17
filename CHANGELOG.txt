@@ -1,7 +1,8 @@
 9.2.20.alpha.3 - 17th July 2022
 - The 'Unlock map frame' setting no longer allows you to change the scale of the map frame.
 - If you use premade group finder to make a Mythic+ dungeon group for your own key and your game account does not have Two-Factor Authentication (2FA) enabled, you may sometimes see a stop error when the game tries to set the activity title to your key level.  Click the reload button to clear the error.  Enable Two-Factor-Authentication (2FA) on your game account to avoid seeing this error.  If you don't have Two-Factor-Authentication (2FA) enabled on your game account, an advisory alert button will be shown in the configuration panel.
-- Various taint fixes.  The 3 zoom settings still taint so the zoom category heading states this.
+- If you use premade group finder, you can no longer change the same faction only setting after you have listed the group.  You need to delist the group to change the same faction only setting.
+- Various taint fixes.  Added a help button to the zoom heading to notify that enabling any of the zoom settings will taint the map.
 
 9.2.18 - 6th July 2022
 - If 'Remove map border' is enabled, the map close and maximise/minimise buttons will now be shown on the right-side of the map.
