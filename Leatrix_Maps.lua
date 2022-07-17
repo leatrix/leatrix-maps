@@ -54,7 +54,6 @@
 		-- This is mitigated below by locking the checkbox in editing mode.
 
 		-- Taints:
-		-- Unlock map frame (WorldMapFrame.ScrollContainer.GetCursorPosition)
 		-- Remember zoom level (globals)
 		-- Increase zoom level (globals)
 		-- Center map on player (globals)
