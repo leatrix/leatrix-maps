@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.20.alpha.2 (16th July 2022)
+	-- 	Leatrix Maps 9.2.20.alpha.3 (17th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.20.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.2.20.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1972,51 +1972,6 @@
 		----------------------------------------------------------------------
 		-- Final code
 		----------------------------------------------------------------------
-
-		-- Prevent tracked objectives, quest map button and boss buttons from being clicked during combat
-		do
-
-			-- Quests
-			local questHeaderClick = QUEST_TRACKER_MODULE.OnBlockHeaderClick
-			function QUEST_TRACKER_MODULE:OnBlockHeaderClick(block, mouseButton)
-				if not LeaMapsLC:PlayerInCombat() then
-					questHeaderClick(self, block, mouseButton)
-				end
-			end
-
-			-- Achievements
-			local achieveHeaderClick = ACHIEVEMENT_TRACKER_MODULE.OnBlockHeaderClick
-			function ACHIEVEMENT_TRACKER_MODULE:OnBlockHeaderClick(block, mouseButton)
-				if not LeaMapsLC:PlayerInCombat() then
-					achieveHeaderClick(self, block, mouseButton)
-				end
-			end
-
-			-- Default
-			local defaultHeaderClick = DEFAULT_OBJECTIVE_TRACKER_MODULE.OnBlockHeaderClick
-			function DEFAULT_OBJECTIVE_TRACKER_MODULE:OnBlockHeaderClick(block, mouseButton)
-				if not LeaMapsLC:PlayerInCombat() then
-					defaultHeaderClick(self, block, mouseButton)
-				end
-			end
-
-			-- Quest map button (shown in quest detail pane)
-			local questMapButton = QuestLogPopupDetailFrame.ShowMapButton:GetScript("OnClick")
-			QuestLogPopupDetailFrame.ShowMapButton:SetScript("OnClick", function(self)
-				if not LeaMapsLC:PlayerInCombat() then
-					questMapButton(self)
-				end
-			end)
-
-			-- Boss buttons
-			local ejPinClick = EncounterJournalPinMixin.OnClick
-			function EncounterJournalPinMixin:OnClick()
-				if not LeaMapsLC:PlayerInCombat() then
-					ejPinClick(self)
-				end
-			end
-
-		end
 
 		-- Hide the battlefield map tab because it's shown even when enhance battlefield map is disabled
 		BattlefieldMapTab:Hide()
