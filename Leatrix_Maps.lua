@@ -2946,7 +2946,7 @@
 	LeaMapsLC:CfgBtn("ZoomInfoBtn", LeaMapsLC["PageF"])
 	LeaMapsCB["ZoomInfoBtn"]:ClearAllPoints()
 	LeaMapsCB["ZoomInfoBtn"]:SetPoint("LEFT", ZoomHeading, "RIGHT", 0, 0)
-	LeaMapsCB["ZoomInfoBtn"]:SetSize(24, 24)
+	LeaMapsCB["ZoomInfoBtn"]:SetSize(25, 25)
 	LeaMapsCB["ZoomInfoBtn"].t:SetTexture("Interface\\COMMON\\help-i.blp")
 	LeaMapsCB["ZoomInfoBtn"].t:SetTexCoord(0, 1, 0, 1)
 	LeaMapsCB["ZoomInfoBtn"].t:SetVertexColor(0.9, 0.8, 0.0)
