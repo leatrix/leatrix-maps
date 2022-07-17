@@ -40,28 +40,25 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		-- Group finder taint:
+		-- Base taint:
 		-- Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
-		-- (such as Zereth Mortis), shift-click on the world boss icon to toggle quest tracking off and on, click
-		-- the objective tracker icon for the world quest to open group finder, click back, click dungeons and
-		-- click start group.
+		-- (such as Zereth Mortis), shift-click on the world boss icon 4 times to toggle quest tracking off 
+		-- and on twice, click the objective tracker icon for the world quest to open group finder.  The 3 zoom
+		-- settings cause base taint due to setting global values (remember zoom, increase zoom and center map
+		-- on player).
+
+		-- Group finder dungeon title taint:
+		-- Follow base taint then click back, click dungeons and click start group.  This taint happens because
+		-- the dungeon title is protected.  This is mitigated by preventing Wow from setting the dungeon title
+		-- but only if the user has 2FA enabled.  Without 2FA, users cannot set the dungeon title so Wow has to
+		-- do it for them which means the taint fix cannot be applied.
 
 		-- Report player taint:
-		-- Same as group finder taint but use report player.
+		-- Follow base taint and group finder taint then use report player.
 
 		-- Editing mode taint:
-		-- Same as group finder taint but edit the group after listing it and toggle the opposite faction checkbox.
-		-- This is mitigated below by locking the checkbox in editing mode.
-
-		-- Taints:
-		-- Remember zoom level (globals)
-		-- Increase zoom level (globals)
-		-- Center map on player (globals)
-		-- The equivalent settings in Enhance battlefield map
-
-		-- The taint fix is only applied if the user has Two-Factor Authentication (2FA) applied to their account.
-		-- This is checked using a sample dungeon.  If the player does not have 2FA, an alert button is shown in
-		-- the configuration panel.
+		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite 
+		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 
 		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
 
