@@ -2915,7 +2915,7 @@
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
 	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
 
-	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -132)
+	LeaMapsLC:MakeTx(PageF, "Zoom (these taint)", 16, -132)
 	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -152, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
 	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -172, false, "If checked, you will be able to zoom further into the world map.")
 	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -192, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
