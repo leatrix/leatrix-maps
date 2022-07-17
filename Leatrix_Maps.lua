@@ -1134,7 +1134,6 @@
 		if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			-- Hide border frame elements
-			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:Hide()
 			WorldMapFrame.BorderFrame.NineSlice:Hide()
 			WorldMapFrame.BorderFrame.TitleBg:Hide()
 			WorldMapFrame.BorderFrame.InsetBorderTop:Hide()
@@ -1147,6 +1146,10 @@
 			-- Reposition close button
 			WorldMapFrameCloseButton:ClearAllPoints()
 			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", 2, -41)
+
+			-- Reposition maximise button
+			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:ClearAllPoints()
+			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:SetPoint("BOTTOM", WorldMapFrameCloseButton, "BOTTOM", 0, -34)
 
 			-- Create border for world map frame
 			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND"); border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground"); border:SetPoint("TOPLEFT", -5, 5); border:SetPoint("BOTTOMRIGHT", 5, -5); border:SetVertexColor(0, 0, 0, 0.7)
@@ -1223,33 +1226,6 @@
 			QuestNPCModelBg:ClearAllPoints()
 			QuestNPCModelBg:SetPoint("TOPLEFT", QuestModelScene, "TOPLEFT", 0, 16)
 			QuestNPCModelBg:SetHeight(246)
-
-			-- Add map maximise and minimise toggle button
-			local maxBtn = CreateFrame("BUTTON", nil, WorldMapFrame)
-			maxBtn:ClearAllPoints()
-			maxBtn:SetPoint("BOTTOM", WorldMapFrameCloseButton, "BOTTOM", 0, -34)
-			maxBtn:SetSize(30, 30)
-			maxBtn:SetFrameStrata("HIGH")
-			maxBtn:HookScript("OnClick", function(self, btn)
-				if WorldMapFrame.isMaximized then
-					WorldMapFrame:HandleUserActionMinimizeSelf()
-				else
-					WorldMapFrame:HandleUserActionMaximizeSelf()
-				end
-				WorldMapFrame:OnMapChanged()
-				LeaMapsLC:SaveZoomLevel()
-			end)
-
-			-- Set maximise minimise toggle button texture
-			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if WorldMapFrame.isMaximized then
-					maxBtn:SetNormalTexture("Interface\\BUTTONS\\UI-Panel-SmallerButton-Up")
-					maxBtn:SetHighlightTexture("Interface\\BUTTONS\\UI-Panel-SmallerButton-Up")
-				else
-					maxBtn:SetNormalTexture("Interface\\BUTTONS\\UI-Panel-BiggerButton-Up")
-					maxBtn:SetHighlightTexture("Interface\\BUTTONS\\UI-Panel-BiggerButton-Up")
-				end
-			end)
 
 			-- Function to set map border clickable area
 			local function SetMapHitRect()
