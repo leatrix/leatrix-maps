@@ -1,3 +1,6 @@
+9.2.21 - 20th July 2022
+- Added the scale map setting back as a separate setting.  Note that enabling this setting will taint the map and this is highlighted in the configuration panel help button.
+
 9.2.20 - 20th July 2022
 - The 'Unlock map frame' setting no longer allows you to change the scale of the map frame.
 - If you use premade group finder to make a Mythic+ dungeon group for your own key and your game account does not have Two-Factor Authentication (2FA) enabled, you may sometimes see a stop error when the game tries to set the activity title to your key level.  Click the reload button to clear the error.  Enable Two-Factor-Authentication (2FA) on your game account to avoid seeing this error.  If you don't have Two-Factor-Authentication (2FA) enabled on your game account, an advisory alert button will be shown in the configuration panel.

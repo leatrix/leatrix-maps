@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.20 (20th July 2022)
+	-- 	Leatrix Maps 9.2.21 (20th July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.20"
+	LeaMapsLC["AddonVer"] = "9.2.21"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -59,6 +59,9 @@
 		-- Editing mode taint:
 		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
+
+		-- Scale map taint:
+		-- Caused by replacing WorldMapFrame.ScrollContainer.GetCursorPosition and setting map scale.
 
 		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
 
@@ -123,6 +126,87 @@
 		-- Hide the world map tutorial button
 		WorldMapFrame.BorderFrame.Tutorial:HookScript("OnShow", WorldMapFrame.BorderFrame.Tutorial.Hide)
 		SetCVarBitfield("closedInfoFrames", LE_FRAME_TUTORIAL_WORLD_MAP_FRAME, true)
+
+		----------------------------------------------------------------------
+		-- Scale the map
+		----------------------------------------------------------------------
+
+		if LeaMapsLC["ScaleWorldMap"] == "On" then
+
+			-- Replace function to account for frame scale
+			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
+				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
+				local s = WorldMapFrame:GetScale()
+				return x/s, y/s
+			end
+
+			-- Create configuration panel
+			local scalePanel = LeaMapsLC:CreatePanel("Scale the map", "scalePanel")
+
+			-- Add controls
+			LeaMapsLC:MakeTx(scalePanel, "Scale", 16, -72)
+			LeaMapsLC:MakeSL(scalePanel, "MapScale", "Windowed", "Drag to set the scale for the windowed map.", 0.5, 2, 0.05, 36, -112, "%.1f")
+			LeaMapsLC:MakeSL(scalePanel, "MaxMapScale", "Maximised", "Drag to set the scale for the maximised map.", 0.5, 2, 0.05, 206, -112, "%.1f")
+
+			-- Lock the maximised map scale if default map is enabled
+			if LeaMapsLC["UseDefaultMap"] == "On" then
+				LeaMapsLC:LockItem(LeaMapsCB["MaxMapScale"], true)
+			end
+
+			-- Function to set map frame scale
+			local function SetMapScale()
+				LeaMapsCB["MapScale"].f:SetFormattedText("%.0f%%", LeaMapsLC["MapScale"] * 100)
+				LeaMapsCB["MaxMapScale"].f:SetFormattedText("%.0f%%", LeaMapsLC["MaxMapScale"] * 100)
+				if not WorldMapFrame:IsMaximized() then
+					WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
+				else
+					if LeaMapsLC["UseDefaultMap"] == "Off" then
+						WorldMapFrame:SetScale(LeaMapsLC["MaxMapScale"])
+					else
+						WorldMapFrame:SetScale(1)
+					end
+				end
+			end
+
+			-- Set scale properties when controls are changed and on startup
+			LeaMapsCB["MapScale"]:HookScript("OnValueChanged", SetMapScale)
+			LeaMapsCB["MaxMapScale"]:HookScript("OnValueChanged", SetMapScale)
+			SetMapScale()
+
+			-- Set scale when map size is toggled
+			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", SetMapScale)
+
+			-- Back to Main Menu button click
+			scalePanel.b:HookScript("OnClick", function()
+				scalePanel:Hide()
+				LeaMapsLC["PageF"]:Show()
+			end)
+
+			-- Reset button click
+			scalePanel.r:HookScript("OnClick", function()
+				-- Reset map scale
+				LeaMapsLC["MapScale"] = 1.0
+				LeaMapsLC["MaxMapScale"] = 1.0
+				SetMapScale()
+				-- Refresh panel
+				scalePanel:Hide(); scalePanel:Show()
+			end)
+
+			-- Show scale panel when configuration button is clicked
+			LeaMapsCB["ScaleWorldMapBtn"]:HookScript("OnClick", function()
+				if IsShiftKeyDown() and IsControlKeyDown() then
+					-- Preset profile
+					LeaMapsLC["MapScale"] = 1.0
+					LeaMapsLC["MaxMapScale"] = 0.9
+					SetMapScale()
+					if scalePanel:IsShown() then scalePanel:Hide(); scalePanel:Show(); end
+				else
+					scalePanel:Show()
+					LeaMapsLC["PageF"]:Hide()
+				end
+			end)
+
+		end
 
 		----------------------------------------------------------------------
 		-- Enhance battlefield map
@@ -2206,6 +2290,7 @@
 	-- Set lock state for configuration buttons
 	function LeaMapsLC:SetDim()
 		LeaMapsLC:LockOption("IncreaseZoom", "IncreaseZoomBtn", false) 			-- Increase zoom level
+		LeaMapsLC:LockOption("ScaleWorldMap", "ScaleWorldMapBtn", true) 		-- Scale the map
 		LeaMapsLC:LockOption("RevealMap", "RevTintBtn", true)					-- Shiw unexplored areas
 		LeaMapsLC:LockOption("UnlockMap", "UnlockMapBtn", true)					-- Unlock map frame
 		LeaMapsLC:LockOption("ShowCoords", "ShowCoordsBtn", false)				-- Show coordinates
@@ -2254,6 +2339,7 @@
 		if	(LeaMapsLC["NoMapBorder"] ~= LeaMapsDB["NoMapBorder"])				-- Remove map border
 		or	(LeaMapsLC["UnlockMap"] ~= LeaMapsDB["UnlockMap"])					-- Unlock map
 		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
+		or	(LeaMapsLC["ScaleWorldMap"] ~= LeaMapsDB["ScaleWorldMap"])			-- Scale the map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
 		or	(LeaMapsLC["ShowIcons"] ~= LeaMapsDB["ShowIcons"])					-- Show dungeons and raids
 		or	(LeaMapsLC["HideTownCity"] ~= LeaMapsDB["HideTownCity"])			-- Hide town and city icons
@@ -2595,6 +2681,9 @@
 				LeaMapsDB["RememberZoom"] = "On"
 				LeaMapsDB["IncreaseZoom"] = "On"
 				LeaMapsDB["CenterMapOnPlayer"] = "On"
+				LeaMapsDB["ScaleWorldMap"] = "Off"
+				LeaMapsDB["MapScale"] = 1.0
+				LeaMapsDB["MaxMapScale"] = 0.9
 				LeaMapsDB["NoMapFade"] = "On"
 				LeaMapsDB["NoMapEmote"] = "On"
 				LeaMapsDB["MapPosA"] = "TOPLEFT"
@@ -2697,10 +2786,13 @@
 			LeaMapsLC:LoadVarChk("EnableMovement", "On")				-- Enable frame movement
 			LeaMapsLC:LoadVarChk("UseDefaultMap", "Off")				-- Use default map
 			LeaMapsLC:LoadVarChk("StickyMapFrame", "Off")				-- Sticky map frame
-			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
+			LeaMapsLC:LoadVarChk("RememberZoom", "Off")					-- Remember zoom level
 			LeaMapsLC:LoadVarChk("IncreaseZoom", "Off")					-- Increase zoom level
 			LeaMapsLC:LoadVarNum("IncreaseZoomMax", 2, 1, 6)			-- Increase zoom level maximum
 			LeaMapsLC:LoadVarChk("CenterMapOnPlayer", "Off")			-- Center map on player
+			LeaMapsLC:LoadVarChk("ScaleWorldMap", "Off")				-- Scale the map
+			LeaMapsLC:LoadVarNum("MapScale", 1.0, 0.5, 2)				-- Map scale
+			LeaMapsLC:LoadVarNum("MaxMapScale", 1.0, 0.5, 2)			-- Maximised map scale
 			LeaMapsLC:LoadVarChk("NoMapFade", "On")						-- Disable map fade
 			LeaMapsLC:LoadVarChk("NoMapEmote", "On")					-- Disable map emote
 			LeaMapsLC:LoadVarAnc("MapPosA", "TOPLEFT")					-- Windowed map anchor
@@ -2769,6 +2861,9 @@
 			LeaMapsDB["IncreaseZoom"] = LeaMapsLC["IncreaseZoom"]
 			LeaMapsDB["IncreaseZoomMax"] = LeaMapsLC["IncreaseZoomMax"]
 			LeaMapsDB["CenterMapOnPlayer"] = LeaMapsLC["CenterMapOnPlayer"]
+			LeaMapsDB["ScaleWorldMap"] = LeaMapsLC["ScaleWorldMap"]
+			LeaMapsDB["MapScale"] = LeaMapsLC["MapScale"]
+			LeaMapsDB["MaxMapScale"] = LeaMapsLC["MaxMapScale"]
 			LeaMapsDB["NoMapFade"] = LeaMapsLC["NoMapFade"]
 			LeaMapsDB["NoMapEmote"] = LeaMapsLC["NoMapEmote"]
 			LeaMapsDB["MapPosA"] = LeaMapsLC["MapPosA"]
@@ -2923,6 +3018,7 @@
 	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -232, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
 	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -252, false, "If checked, you will be able to zoom further into the world map.")
 	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -272, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
+	LeaMapsLC:MakeCB(PageF, "ScaleWorldMap", "Scale the map", 16, -292, true, "If checked, you will be able to scale the map.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
@@ -2937,6 +3033,7 @@
 	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
 
 	LeaMapsLC:CfgBtn("IncreaseZoomBtn", LeaMapsCB["IncreaseZoom"])
+	LeaMapsLC:CfgBtn("ScaleWorldMapBtn", LeaMapsCB["ScaleWorldMap"])
 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
 	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
 	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
