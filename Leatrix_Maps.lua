@@ -42,7 +42,7 @@
 
 		-- Base taint:
 		-- Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
-		-- (such as Zereth Mortis), shift-click on the world boss icon 4 times to toggle quest tracking off 
+		-- (such as Zereth Mortis), shift-click on the world boss icon 4 times to toggle quest tracking off
 		-- and on twice, click the objective tracker icon for the world quest to open group finder.  The 3 zoom
 		-- settings cause base taint due to setting global values (remember zoom, increase zoom and center map
 		-- on player).
@@ -57,7 +57,7 @@
 		-- Follow base taint and group finder taint then use report player.
 
 		-- Editing mode taint:
-		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite 
+		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 
 		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
