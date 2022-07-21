@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.21 (20th July 2022)
+	-- 	Leatrix Maps 9.2.22.alpha.1 (21st July 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.21"
+	LeaMapsLC["AddonVer"] = "9.2.22.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -62,6 +62,9 @@
 
 		-- Scale map taint:
 		-- Caused by replacing WorldMapFrame.ScrollContainer.GetCursorPosition and setting map scale.
+
+		-- Command taint:
+		-- Enter /ltm map 150 during combat and click a boss button.
 
 		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
 
