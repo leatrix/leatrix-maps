@@ -1,3 +1,6 @@
+9.2.23 - 3rd August 2022
+- Maintenance update.
+
 9.2.22 - 27th July 2022
 - For 'Unlock map frame', added a fix for Demodal preventing the map frame from being moved to the top edge of the screen.
 
