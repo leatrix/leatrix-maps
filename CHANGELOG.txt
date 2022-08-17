@@ -1,5 +1,5 @@
-9.2.24 - 10th August 2022
-- If you want to see Leatrix Plus for Dragonflight, send an email to CommunityEMEA@blizzard.com and ask Blizzard to give me access to Dragonflight.
+9.2.25 - 17th August 2022
+- Updated for game version 9.2.7.
 
 9.2.22 - 27th July 2022
 - For 'Unlock map frame', added a fix for Demodal preventing the map frame from being moved to the top edge of the screen.
