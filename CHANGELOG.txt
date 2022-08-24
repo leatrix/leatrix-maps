@@ -1,3 +1,6 @@
+9.2.26 - 24th August 2022
+-- Maintenance update.
+
 9.2.25 - 17th August 2022
 - Updated for game version 9.2.7.
 
