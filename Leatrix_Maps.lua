@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.27 (31st August 2022)
+	-- 	Leatrix Maps 9.2.28.alpha.1 (2nd September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.27"
+	LeaMapsLC["AddonVer"] = "9.2.28.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -28,10 +28,15 @@
 			end)
 			return
 		end
+		if gametocversion and gametocversion == 100000 then
+			LeaMapsLC.DF = true
+		end
 	end
 
 	-- Set bindings translations
-	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
+	if not LeaMapsLC.DF then -- Block taint when closing options panel
+		_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
+	end
 
 	----------------------------------------------------------------------
 	-- L00: Leatrix Maps
@@ -1906,7 +1911,9 @@
 			-- Minimap button click function
 			local function MiniBtnClickFunc(arg1)
 				-- Prevent options panel from showing if Blizzard options panel is showing
-				if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
+				if not LeaPlusLC.DF then
+					if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
+				end
 				-- No modifier key toggles the options panel
 				if LeaMapsLC:IsMapsShowing() then
 					LeaMapsLC["PageF"]:Hide()
@@ -2044,7 +2051,9 @@
 			pTex:SetAlpha(0.2)
 			pTex:SetTexCoord(0, 1, 1, 0)
 
-			InterfaceOptions_AddCategory(interPanel)
+			if not LeaMapsLC.DF then -- Block taint when closing options panel
+				InterfaceOptions_AddCategory(interPanel)
+			end
 
 		end
 
@@ -2764,7 +2773,9 @@
 			end
 		else
 			-- Prevent options panel from showing if a game options panel is showing
-			if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
+			if not LeaMapsLC.DF then
+				if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
+			end
 			-- Prevent options panel from showing if Blizzard Store is showing
 			if StoreFrame and StoreFrame:GetAttribute("isshown") then return end
 			-- Toggle the options panel if game options panel is not showing
