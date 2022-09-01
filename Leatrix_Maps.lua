@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.28.alpha.1 (2nd September 2022)
+	-- 	Leatrix Maps 9.2.28.alpha.2 (2nd September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.28.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.2.28.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1911,7 +1911,7 @@
 			-- Minimap button click function
 			local function MiniBtnClickFunc(arg1)
 				-- Prevent options panel from showing if Blizzard options panel is showing
-				if not LeaPlusLC.DF then
+				if not LeaMapsLC.DF then
 					if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
 				end
 				-- No modifier key toggles the options panel
