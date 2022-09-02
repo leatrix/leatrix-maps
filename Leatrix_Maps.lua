@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.28.alpha.2 (2nd September 2022)
+	-- 	Leatrix Maps 9.2.28.alpha.3 (2nd September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.28.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.2.28.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2051,7 +2051,12 @@
 			pTex:SetAlpha(0.2)
 			pTex:SetTexCoord(0, 1, 1, 0)
 
-			if not LeaMapsLC.DF then -- Block taint when closing options panel
+			if LeaMapsLC.DF then
+				-- Causes block taint in DF
+				-- expTitle:SetText("Dragonflight")
+				-- local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
+				-- Settings.RegisterAddOnCategory(category)
+			else
 				InterfaceOptions_AddCategory(interPanel)
 			end
 
