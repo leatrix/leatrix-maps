@@ -20,6 +20,7 @@
 
 		[15] =  --[[Badlands]] {
 			{"Dungeon", 41.7, 11.6, L["Uldaman"], L["Dungeon"], 239},
+			{"Dungeon", 41.0, 10.3, L["Uldaman: Legacy of Tyr"], L["Dungeon"], 1197},
 		},
 
 		[16] =  --[[Uldaman]] {
@@ -728,6 +729,30 @@
 			{"TaxiN", 34.9, 45.7, L["Exile's Hollow"], L["Sanctuary"]},
 			{"TaxiN", 61.9, 58.9, L["Synthesis Forge"], L["Pet Crafting"]},
 			{"TaxiN", 68.5, 30.2, L["Protoform Repository"], L["Mount Crafting"]},
+		},
+
+		----------------------------------------------------------------------
+		--	Dragonflight
+		----------------------------------------------------------------------
+
+		[2022] =  --[[The Waking Shores]] {
+			{"Dungeon", 25.9, 56.3, L["Neltharus"], L["Dungeon"], 1199},
+			{"Dungeon", 60.0, 75.5, L["Ruby Life Pools"], L["Dungeon"], 1202},
+		},
+
+		[2023] =  --[[Ohn'ahran Plains]] {
+			{"Dungeon", 61.5, 42.6, L["The Nokhud Offensive"], L["Dungeon"], 1198},
+		},
+
+		[2024] =  --[[The Azure Span]] {
+			{"Dungeon", 38.7, 64.9, L["The Azure Vault"], L["Dungeon"], 1203},
+			{"Dungeon", 11.0, 48.1, L["Brackenhide Hollow"], L["Dungeon"], 1196},
+		},
+
+		[2025] =  --[[Thaldraszus]] {
+			{"Dungeon", 58.0, 42.3, L["Algeth'ar Academy"], L["Dungeon"], 1201},
+			{"Dungeon", 38.7, 64.9, L["Halls of Infusion"], L["Dungeon"], 1204},
+			{"Raid", 74.7, 55.3, L["Vault of the Incarnates"], L["Raid"], 1200},
 		},
 
 	}
