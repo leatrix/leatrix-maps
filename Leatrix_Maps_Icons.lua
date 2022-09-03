@@ -736,23 +736,23 @@
 		----------------------------------------------------------------------
 
 		[2022] =  --[[The Waking Shores]] {
-			{"Dungeon", 25.9, 56.3, L["Neltharus"], L["Dungeon"], 1199},
-			{"Dungeon", 60.0, 75.5, L["Ruby Life Pools"], L["Dungeon"], 1202},
+			{"Dungeon", 25.5, 56.9, L["Neltharus"], L["Dungeon"], 1199},
+			{"Dungeon", 60.2, 75.6, L["Ruby Life Pools"], L["Dungeon"], 1202},
 		},
 
 		[2023] =  --[[Ohn'ahran Plains]] {
-			{"Dungeon", 61.5, 42.6, L["The Nokhud Offensive"], L["Dungeon"], 1198},
+			{"Dungeon", 61.5, 42.6, L["The Nokhud Offensive"], L["Dungeon"], 1198}, -- Unconfirmed
 		},
 
 		[2024] =  --[[The Azure Span]] {
-			{"Dungeon", 38.7, 64.9, L["The Azure Vault"], L["Dungeon"], 1203},
-			{"Dungeon", 11.0, 48.1, L["Brackenhide Hollow"], L["Dungeon"], 1196},
+			{"Dungeon", 38.9, 64.8, L["The Azure Vault"], L["Dungeon"], 1203},
+			{"Dungeon", 11.5, 48.9, L["Brackenhide Hollow"], L["Dungeon"], 1196},
 		},
 
 		[2025] =  --[[Thaldraszus]] {
-			{"Dungeon", 58.0, 42.3, L["Algeth'ar Academy"], L["Dungeon"], 1201},
-			{"Dungeon", 38.7, 64.9, L["Halls of Infusion"], L["Dungeon"], 1204},
-			{"Raid", 74.7, 55.3, L["Vault of the Incarnates"], L["Raid"], 1200},
+			{"Dungeon", 58.3, 42.3, L["Algeth'ar Academy"], L["Dungeon"], 1201},
+			{"Dungeon", 38.7, 64.9, L["Halls of Infusion"], L["Dungeon"], 1204}, -- Unconfirmed
+			{"Raid", 73.0, 55.7, L["Vault of the Incarnates"], L["Raid"], 1200},
 		},
 
 	}
