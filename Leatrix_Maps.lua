@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.28 (7th September 2022)
+	-- 	Leatrix Maps 9.2.29 (8th September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.28"
+	LeaMapsLC["AddonVer"] = "9.2.29"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -28,7 +28,7 @@
 			end)
 			return
 		end
-		if gametocversion and gametocversion == 100000 then
+		if gametocversion and gametocversion >= 100000 then
 			LeaMapsLC.DF = true
 		end
 	end
