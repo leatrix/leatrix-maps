@@ -1,5 +1,6 @@
 9.2.30.alpha.1 - 8th September 2022
-- Added The Waking Shore map reveal data.
+- Dragonflight: Added The Waking Shore map reveal data.
+- Dragonflight: Fixed Halls of Infusion dungeon location.
 
 9.2.29 - 8th September 2022
 - Updated for Dragonflight 10.0.2.45480 (PTR).

@@ -751,7 +751,7 @@
 
 		[2025] =  --[[Thaldraszus]] {
 			{"Dungeon", 58.3, 42.3, L["Algeth'ar Academy"], L["Dungeon"], 1201},
-			{"Dungeon", 38.7, 64.9, L["Halls of Infusion"], L["Dungeon"], 1204}, -- Unconfirmed
+			{"Dungeon", 59.4, 60.8, L["Halls of Infusion"], L["Dungeon"], 1204},
 			{"Raid", 73.0, 55.7, L["Vault of the Incarnates"], L["Raid"], 1200},
 		},
 
