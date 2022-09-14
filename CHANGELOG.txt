@@ -1,4 +1,4 @@
-9.2.30.alpha.1 - 8th September 2022
+9.2.34 - 14th September 2022
 - Dragonflight: Added The Waking Shore map reveal data.
 - Dragonflight: Fixed Halls of Infusion dungeon location.
 
