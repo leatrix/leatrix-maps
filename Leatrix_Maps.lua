@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.34 (14th September 2022)
+	-- 	Leatrix Maps 9.2.35.alpha.1 (16th September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.34"
+	LeaMapsLC["AddonVer"] = "9.2.35.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -119,7 +119,7 @@
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
-			RunScript('UIParentLoadAddOn("Blizzard_BattlefieldMap")')
+			UIParentLoadAddOn("Blizzard_BattlefieldMap")
 		end
 
 		-- Get player faction
@@ -223,7 +223,7 @@
 		if LeaMapsLC["EnhanceBattleMap"] == "On" then
 
 			-- Show teammates
-			RunScript('BattlefieldMapOptions.showPlayers = true')
+			BattlefieldMapOptions.showPlayers = true
 
 			-- Create configuraton panel
 			local battleFrame = LeaMapsLC:CreatePanel("Enhance battlefield map", "battleFrame")
@@ -302,10 +302,10 @@
 			-- Toggle battlefield map frame with configuration panel
 			battleFrame:HookScript("OnShow", function()
 				if BattlefieldMapFrame:IsShown() then LeaMapsLC.BFMapWasShown = true else LeaMapsLC.BFMapWasShown = false end
-				RunScript('BattlefieldMapFrame:Show()')
+				BattlefieldMapFrame:Show()
 			end)
 			battleFrame:HookScript("OnHide", function()
-				if not LeaMapsLC.BFMapWasShown then RunScript('BattlefieldMapFrame:Hide()') end
+				if not LeaMapsLC.BFMapWasShown then BattlefieldMapFrame:Hide() end
 			end)
 
 			----------------------------------------------------------------------
@@ -549,7 +549,7 @@
 			local function DoMapOpacity()
 				LeaMapsCB["BattleMapOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["BattleMapOpacity"] * 100)
 				BattlefieldMapOptions.opacity = 1 - LeaMapsLC["BattleMapOpacity"]
-				RunScript('BattlefieldMapFrame:RefreshAlpha()')
+				BattlefieldMapFrame:RefreshAlpha()
 			end
 
 			-- Set opacity when slider is changed and on startup
@@ -2799,9 +2799,6 @@
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
 		SlashFunc(self)
-		-- Redirect tainted variables
-		RunScript('ACTIVE_CHAT_EDIT_BOX = ACTIVE_CHAT_EDIT_BOX')
-		RunScript('LAST_ACTIVE_CHAT_EDIT_BOX = LAST_ACTIVE_CHAT_EDIT_BOX')
 	end
 
 	----------------------------------------------------------------------
