@@ -1,4 +1,4 @@
-9.2.35.alpha.1 - 16th September 2022
+9.2.35.alpha.2 - 19th September 2022
 - Dragonflight: Updates.
 
 9.2.34 - 14th September 2022

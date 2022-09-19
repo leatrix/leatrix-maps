@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.35.alpha.1 (16th September 2022)
+	-- 	Leatrix Maps 9.2.35.alpha.2 (19th September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.35.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.2.35.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2124,7 +2124,11 @@
 		Side.t:SetColorTexture(0.05, 0.05, 0.05, 0.9)
 
 		-- Add a close Button
-		Side.c = CreateFrame("Button", nil, Side, "UIPanelCloseButton")
+		if LeaMapsLC.DF then
+			Side.c = CreateFrame("Button", nil, Side, "LeaMapsUIPanelCloseButtonNoScripts")
+		else
+			Side.c = CreateFrame("Button", nil, Side, "UIPanelCloseButton")
+		end
 		Side.c:SetSize(30, 30)
 		Side.c:SetPoint("TOPRIGHT", 0, 0)
 		Side.c:SetScript("OnClick", function() Side:Hide() end)
@@ -2615,7 +2619,12 @@
 	stopRelBtn:Hide(); stopRelBtn:Show()
 
 	-- Add close Button
-	local stopFrameClose = CreateFrame("Button", nil, stopFrame, "UIPanelCloseButton")
+	local stopFrameClose
+	if LeaMapsLC.DF then
+		stopFrameClose = CreateFrame("Button", nil, stopFrame, "LeaMapsUIPanelCloseButtonNoScripts")
+	else
+		stopFrameClose = CreateFrame("Button", nil, stopFrame, "UIPanelCloseButton")
+	end
 	stopFrameClose:SetSize(30, 30)
 	stopFrameClose:SetPoint("TOPRIGHT", 0, 0)
 
@@ -3038,7 +3047,12 @@
 	reloadb.f:Hide()
 
 	-- Add close Button
-	local CloseB = CreateFrame("Button", nil, PageF, "UIPanelCloseButton")
+	local CloseB
+	if LeaMapsLC.DF then
+		CloseB = CreateFrame("Button", nil, PageF, "LeaMapsUIPanelCloseButtonNoScripts")
+	else
+		CloseB = CreateFrame("Button", nil, PageF, "UIPanelCloseButton")
+	end
 	CloseB:SetSize(30, 30)
 	CloseB:SetPoint("TOPRIGHT", 0, 0)
 
