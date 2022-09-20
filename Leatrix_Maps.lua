@@ -65,7 +65,7 @@
 		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 
-		-- Scale map taint (fixed in Dragonflight as below function no longer needs to be replaced):
+		-- Scale map taint:
 		-- Caused by replacing WorldMapFrame.ScrollContainer.GetCursorPosition and setting map scale.
 
 		-- Command taint:
@@ -142,12 +142,10 @@
 		if LeaMapsLC["ScaleWorldMap"] == "On" then
 
 			-- Replace function to account for frame scale
-			if not LeaMapsLC.DF then
-				WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
-					local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
-					local s = WorldMapFrame:GetScale()
-					return x/s, y/s
-				end
+			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
+				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
+				local s = WorldMapFrame:GetScale()
+				return x/s, y/s
 			end
 
 			-- Create configuration panel
