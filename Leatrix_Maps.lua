@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.35.alpha.3 (20th September 2022)
+	-- 	Leatrix Maps 9.2.35.alpha.4 (20th September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.35.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.2.35.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1956,6 +1956,17 @@
 			LeaMapsCB["ShowMinimapIcon"]:HookScript("OnClick", SetLibDBIconFunc)
 			SetLibDBIconFunc()
 
+			-- Add Leatrix Maps to addon compartment frame
+			if LeaMapsLC.DF then
+				AddonCompartmentFrame:RegisterAddon({
+					text = L["Leatrix Maps"],
+					icon = "Interface\\HELPFRAME\\HelpIcon-Bug",
+					func = function(self, void, void, void, btn)
+						MiniBtnClickFunc(btn)
+					end,
+				})
+			end
+
 		end
 
 		----------------------------------------------------------------------
@@ -2052,10 +2063,9 @@
 			pTex:SetTexCoord(0, 1, 1, 0)
 
 			if LeaMapsLC.DF then
-				-- Causes block taint in DF
-				-- expTitle:SetText("Dragonflight")
-				-- local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
-				-- Settings.RegisterAddOnCategory(category)
+				expTitle:SetText("Dragonflight")
+				local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
+				Settings.RegisterAddOnCategory(category)
 			else
 				InterfaceOptions_AddCategory(interPanel)
 			end
@@ -2627,6 +2637,9 @@
 	end
 	stopFrameClose:SetSize(30, 30)
 	stopFrameClose:SetPoint("TOPRIGHT", 0, 0)
+	if LeaMapsLC.DF then
+		stopFrameClose:SetScript("OnClick", function() stopFrame:Hide() end)
+	end
 
 	----------------------------------------------------------------------
 	-- L20: Commands
@@ -3055,6 +3068,9 @@
 	end
 	CloseB:SetSize(30, 30)
 	CloseB:SetPoint("TOPRIGHT", 0, 0)
+	if LeaMapsLC.DF then
+		CloseB:SetScript("OnClick", function() PageF:Hide() end)
+	end
 
 	-- Add content
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
