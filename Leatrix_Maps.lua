@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.35.alpha.2 (19th September 2022)
+	-- 	Leatrix Maps 9.2.35.alpha.3 (20th September 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.35.alpha.2"
+	LeaMapsLC["AddonVer"] = "9.2.35.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -65,7 +65,7 @@
 		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 
-		-- Scale map taint:
+		-- Scale map taint (fixed in Dragonflight as below function no longer needs to be replaced):
 		-- Caused by replacing WorldMapFrame.ScrollContainer.GetCursorPosition and setting map scale.
 
 		-- Command taint:
@@ -142,10 +142,12 @@
 		if LeaMapsLC["ScaleWorldMap"] == "On" then
 
 			-- Replace function to account for frame scale
-			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
-				local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
-				local s = WorldMapFrame:GetScale()
-				return x/s, y/s
+			if not LeaMapsLC.DF then
+				WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
+					local x,y = MapCanvasScrollControllerMixin.GetCursorPosition(f)
+					local s = WorldMapFrame:GetScale()
+					return x/s, y/s
+				end
 			end
 
 			-- Create configuration panel
