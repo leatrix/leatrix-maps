@@ -1,5 +1,5 @@
-9.2.35.alpha.4 - 20th September 2022
-- Dragonflight: Leatrix Maps is now listed in the minimap addon menu (for now).
+9.2.35 - 21st September 2022
+- Dragonflight: Leatrix Maps is now listed in the minimap addon menu and the game options panel.
 - Dragonflight: Updates.
 
 9.2.34 - 14th September 2022
