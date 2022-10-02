@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.37 (28th September 2022)
+	-- 	Leatrix Maps 9.2.38 (2nd October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.37"
+	LeaMapsLC["AddonVer"] = "9.2.38"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1247,13 +1247,16 @@
 
 			-- Hide border frame elements
 			WorldMapFrame.BorderFrame.NineSlice:Hide()
-			WorldMapFrame.BorderFrame.TitleBg:Hide()
 			WorldMapFrame.BorderFrame.InsetBorderTop:Hide()
 			WorldMapFrame.NavBar:Hide()
 			WorldMapFrame.TitleCanvasSpacerFrame:Hide()
 			WorldMapFramePortrait:SetTexture("")
 			WorldMapFrameBg:Hide()
 			WorldMapFrameTitleText:Hide()
+
+			if WorldMapFrame.BorderFrame.TitleBg then -- it does not exist in Dragonflight (LeaMapsLC.DF)
+				WorldMapFrame.BorderFrame.TitleBg:Hide()
+			end
 
 			-- Reposition close button
 			WorldMapFrameCloseButton:ClearAllPoints()
