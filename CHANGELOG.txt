@@ -1,3 +1,6 @@
+9.2.39.alpha.1 - 2nd October 2022
+- Maintenance update.
+
 9.2.38 - 2nd October 2022
 - Dragonflight: Fixed the Lua error when removing the map border.
 

@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.38 (2nd October 2022)
+	-- 	Leatrix Maps 9.2.39.alpha.1 (2nd October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.38"
+	LeaMapsLC["AddonVer"] = "9.2.39.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2026,6 +2026,7 @@
 				-- Lock some incompatible options
 				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
+				LeaMapsLC:LockItem(LeaMapsCB["UnlockMapBtn"], true)
 			end
 
 		end
@@ -2265,7 +2266,6 @@
 
 	-- Show tooltips for checkboxes
 	function LeaMapsLC:TipSee()
-		if not self:IsEnabled() then return end
 		GameTooltip:SetOwner(self, "ANCHOR_NONE")
 		local parent = self:GetParent()
 		local pscale = parent:GetEffectiveScale()
@@ -2282,7 +2282,6 @@
 
 	-- Show tooltips for configuration buttons and dropdown menus
 	function LeaMapsLC:ShowTooltip()
-		if not self:IsEnabled() then return end
 		GameTooltip:SetOwner(self, "ANCHOR_NONE")
 		local parent = LeaMapsLC["PageF"]
 		local pscale = parent:GetEffectiveScale()
@@ -2905,6 +2904,20 @@
 			-- Set initial minimum button position
 			if not LeaMapsDB["minimapPos"] then
 				LeaMapsDB["minimapPos"] = 204
+			end
+
+			-- Lock options currently not compatible with Dragonflight (LeaMapsLC.DF)
+			local function LockDF(option, reason)
+				LeaMapsLC[option] = "Off"
+				LeaMapsDB[option] = "Off"
+				LeaMapsLC:LockItem(LeaMapsCB[option], true)
+				if reason then
+					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "|n|n|cff00AAFF" .. L[reason]
+				end
+			end
+
+			if LeaMapsLC.DF then
+				-- LockDF("IncreaseZoom", "Cannot use this in Dragonflight.") -- Increase zoom level (block taint: open map with M, close map with M, open edit mode, close edit mode)
 			end
 
 		elseif event == "PLAYER_LOGIN" then
