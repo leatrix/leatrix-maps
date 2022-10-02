@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.39.alpha.1 (2nd October 2022)
+	-- 	Leatrix Maps 9.2.39.alpha.2 (2nd October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -2027,6 +2027,9 @@
 				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMapBtn"], true)
+				LeaMapsCB["UseDefaultMap"]:HookScript("OnClick", function()
+					LeaMapsLC:LockItem(LeaMapsCB["UnlockMapBtn"], true)
+				end)
 			end
 
 		end
