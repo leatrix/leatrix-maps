@@ -1,5 +1,5 @@
-9.2.39.alpha.2 - 2nd October 2022
-- Maintenance update.
+9.2.39.alpha.3 - 4th October 2022
+- Fixed a minor issue with 'Use default map' which may have caused the map to be scaled.
 
 9.2.38 - 2nd October 2022
 - Dragonflight: Fixed the Lua error when removing the map border.

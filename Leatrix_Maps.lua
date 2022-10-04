@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.39.alpha.2 (2nd October 2022)
+	-- 	Leatrix Maps 9.2.39.alpha.3 (4th October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.39.alpha.1"
+	LeaMapsLC["AddonVer"] = "9.2.39.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -139,7 +139,7 @@
 		-- Scale the map
 		----------------------------------------------------------------------
 
-		if LeaMapsLC["ScaleWorldMap"] == "On" then
+		if LeaMapsLC["ScaleWorldMap"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			-- Replace function to account for frame scale
 			WorldMapFrame.ScrollContainer.GetCursorPosition = function(f)
@@ -2026,10 +2026,6 @@
 				-- Lock some incompatible options
 				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
-				LeaMapsLC:LockItem(LeaMapsCB["UnlockMapBtn"], true)
-				LeaMapsCB["UseDefaultMap"]:HookScript("OnClick", function()
-					LeaMapsLC:LockItem(LeaMapsCB["UnlockMapBtn"], true)
-				end)
 			end
 
 		end
@@ -2351,6 +2347,10 @@
 		LeaMapsLC:LockOption("UnlockMap", "UnlockMapBtn", true)					-- Unlock map frame
 		LeaMapsLC:LockOption("ShowCoords", "ShowCoordsBtn", false)				-- Show coordinates
 		LeaMapsLC:LockOption("EnhanceBattleMap", "EnhanceBattleMapBtn", true) 	-- Enhance battlefield map
+		-- Ensure locked but enabled options remain locked
+		if LeaMapsLC["UseDefaultMap"] == "On" then
+			LeaMapsCB["UnlockMapBtn"]:Disable()
+		end
 	end
 
 	-- Create a standard button
