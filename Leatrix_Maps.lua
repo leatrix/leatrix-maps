@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.39.alpha.3 (4th October 2022)
+	-- 	Leatrix Maps 9.2.41 (5th October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.39.alpha.3"
+	LeaMapsLC["AddonVer"] = "9.2.41"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2066,9 +2066,10 @@
 			pTex:SetTexCoord(0, 1, 1, 0)
 
 			if LeaMapsLC.DF then
-				expTitle:SetText("Dragonflight")
-				local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
-				Settings.RegisterAddOnCategory(category)
+				-- Block taint - open options panel keybindings page then close
+				-- expTitle:SetText("Dragonflight")
+				-- local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
+				-- Settings.RegisterAddOnCategory(category)
 			else
 				InterfaceOptions_AddCategory(interPanel)
 			end
