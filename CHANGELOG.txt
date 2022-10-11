@@ -1,3 +1,6 @@
+9.2.42.alpha.1 - 11th October 2022
+- Added the turtle boat dock locations in Borean Tundra, Dragonflight and Howling Fjord.
+
 9.2.41 - 5th October 2022
 - Fixed a minor issue with 'Use default map' which may have caused the map to be scaled.
 
