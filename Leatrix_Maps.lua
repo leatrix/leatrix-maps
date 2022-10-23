@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 9.2.42 (19th October 2022)
+	-- 	Leatrix Maps 10.0.00.alpha.1 (23rd October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "9.2.42"
+	LeaMapsLC["AddonVer"] = "10.0.00.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -21,22 +21,17 @@
 	-- Check Wow version is valid
 	do
 		local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-		if gametocversion and gametocversion < 90000 then
+		if gametocversion and gametocversion < 100000 then
 			-- Game client is Wow Classic
 			C_Timer.After(2, function()
 				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
 			end)
 			return
 		end
-		if gametocversion and gametocversion >= 100000 then
-			LeaMapsLC.DF = true
-		end
 	end
 
-	-- Set bindings translations
-	if not LeaMapsLC.DF then -- Block taint when closing options panel
-		_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
-	end
+	-- Set bindings translations (block taint in 10.0.2 when closing keybindings panel)
+	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
 
 	----------------------------------------------------------------------
 	-- L00: Leatrix Maps
@@ -1254,10 +1249,6 @@
 			WorldMapFrameBg:Hide()
 			WorldMapFrameTitleText:Hide()
 
-			if WorldMapFrame.BorderFrame.TitleBg then -- it does not exist in Dragonflight (LeaMapsLC.DF)
-				WorldMapFrame.BorderFrame.TitleBg:Hide()
-			end
-
 			-- Reposition close button
 			WorldMapFrameCloseButton:ClearAllPoints()
 			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", 2, -41)
@@ -1913,10 +1904,6 @@
 
 			-- Minimap button click function
 			local function MiniBtnClickFunc(arg1)
-				-- Prevent options panel from showing if Blizzard options panel is showing
-				if not LeaMapsLC.DF then
-					if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
-				end
 				-- No modifier key toggles the options panel
 				if LeaMapsLC:IsMapsShowing() then
 					LeaMapsLC["PageF"]:Hide()
@@ -1960,15 +1947,13 @@
 			SetLibDBIconFunc()
 
 			-- Add Leatrix Maps to addon compartment frame
-			if LeaMapsLC.DF then
-				AddonCompartmentFrame:RegisterAddon({
-					text = L["Leatrix Maps"],
-					icon = "Interface\\HELPFRAME\\HelpIcon-Bug",
-					func = function(self, void, void, void, btn)
-						MiniBtnClickFunc(btn)
-					end,
-				})
-			end
+			AddonCompartmentFrame:RegisterAddon({
+				text = L["Leatrix Maps"],
+				icon = "Interface\\HELPFRAME\\HelpIcon-Bug",
+				func = function(self, void, void, void, btn)
+					MiniBtnClickFunc(btn)
+				end,
+			})
 
 		end
 
@@ -2065,14 +2050,10 @@
 			pTex:SetAlpha(0.2)
 			pTex:SetTexCoord(0, 1, 1, 0)
 
-			if LeaMapsLC.DF then
-				-- Block taint - open options panel keybindings page then close
-				-- expTitle:SetText("Dragonflight")
-				-- local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
-				-- Settings.RegisterAddOnCategory(category)
-			else
-				InterfaceOptions_AddCategory(interPanel)
-			end
+			-- LeaMapsLC.DF: Block taint in 10.0.02 when closing keybindings panel
+			expTitle:SetText("Dragonflight")
+			local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
+			Settings.RegisterAddOnCategory(category)
 
 		end
 
@@ -2137,12 +2118,8 @@
 		Side.t:SetAllPoints()
 		Side.t:SetColorTexture(0.05, 0.05, 0.05, 0.9)
 
-		-- Add a close Button
-		if LeaMapsLC.DF then
-			Side.c = CreateFrame("Button", nil, Side, "LeaMapsUIPanelCloseButtonNoScripts")
-		else
-			Side.c = CreateFrame("Button", nil, Side, "UIPanelCloseButton")
-		end
+		-- Add a close Button (LeaMapsLC: Custom template)
+		Side.c = CreateFrame("Button", nil, Side, "LeaMapsUIPanelCloseButtonNoScripts")
 		Side.c:SetSize(30, 30)
 		Side.c:SetPoint("TOPRIGHT", 0, 0)
 		Side.c:SetScript("OnClick", function() Side:Hide() end)
@@ -2634,18 +2611,11 @@
 	stopRelBtn.f:SetText(L["Your UI needs to be reloaded."])
 	stopRelBtn:Hide(); stopRelBtn:Show()
 
-	-- Add close Button
-	local stopFrameClose
-	if LeaMapsLC.DF then
-		stopFrameClose = CreateFrame("Button", nil, stopFrame, "LeaMapsUIPanelCloseButtonNoScripts")
-	else
-		stopFrameClose = CreateFrame("Button", nil, stopFrame, "UIPanelCloseButton")
-	end
+	-- Add close Button (LeaMapsLC:Custom template)
+	local stopFrameClose = CreateFrame("Button", nil, stopFrame, "LeaMapsUIPanelCloseButtonNoScripts")
 	stopFrameClose:SetSize(30, 30)
 	stopFrameClose:SetPoint("TOPRIGHT", 0, 0)
-	if LeaMapsLC.DF then
-		stopFrameClose:SetScript("OnClick", function() stopFrame:Hide() end)
-	end
+	stopFrameClose:SetScript("OnClick", function() stopFrame:Hide() end)
 
 	----------------------------------------------------------------------
 	-- L20: Commands
@@ -2805,10 +2775,6 @@
 				return
 			end
 		else
-			-- Prevent options panel from showing if a game options panel is showing
-			if not LeaMapsLC.DF then
-				if InterfaceOptionsFrame:IsShown() or VideoOptionsFrame:IsShown() or ChatConfigFrame:IsShown() then return end
-			end
 			-- Prevent options panel from showing if Blizzard Store is showing
 			if StoreFrame and StoreFrame:GetAttribute("isshown") then return end
 			-- Toggle the options panel if game options panel is not showing
@@ -2920,9 +2886,7 @@
 				end
 			end
 
-			if LeaMapsLC.DF then
-				-- LockDF("IncreaseZoom", "Cannot use this in Dragonflight.") -- Increase zoom level (block taint: open map with M, close map with M, open edit mode, close edit mode)
-			end
+			-- LockDF("IncreaseZoom", "Cannot use this in Dragonflight.") -- Increase zoom level (block taint: open map with M, close map with M, open edit mode, close edit mode)
 
 		elseif event == "PLAYER_LOGIN" then
 			-- Run main function
@@ -3079,18 +3043,11 @@
 	reloadb.f:SetText(L["Your UI needs to be reloaded."])
 	reloadb.f:Hide()
 
-	-- Add close Button
-	local CloseB
-	if LeaMapsLC.DF then
-		CloseB = CreateFrame("Button", nil, PageF, "LeaMapsUIPanelCloseButtonNoScripts")
-	else
-		CloseB = CreateFrame("Button", nil, PageF, "UIPanelCloseButton")
-	end
+	-- Add close Button (LeaMapsLC: Custom template)
+	local CloseB = CreateFrame("Button", nil, PageF, "LeaMapsUIPanelCloseButtonNoScripts")
 	CloseB:SetSize(30, 30)
 	CloseB:SetPoint("TOPRIGHT", 0, 0)
-	if LeaMapsLC.DF then
-		CloseB:SetScript("OnClick", function() PageF:Hide() end)
-	end
+	CloseB:SetScript("OnClick", function() PageF:Hide() end)
 
 	-- Add content
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
