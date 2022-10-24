@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.00.alpha.1 (23rd October 2022)
+	-- 	Leatrix Maps 10.0.00 (24th October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.00.alpha.1"
+	LeaMapsLC["AddonVer"] = "10.0.00"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -24,7 +24,7 @@
 		if gametocversion and gametocversion < 100000 then
 			-- Game client is Wow Classic
 			C_Timer.After(2, function()
-				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
+				print(L["LEATRIX MAPS: THIS RELEASE IS FOR DRAGONFLIGHT ONLY!"])
 			end)
 			return
 		end

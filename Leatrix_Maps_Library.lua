@@ -10,9 +10,6 @@
 
 local LeaMapsLC = {}
 local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-if gametocversion and gametocversion == 100000 then
-	LeaMapsLC.DF = true
-end
 
 ----------------------------------------------------------------------
 -- L11: LibDBIcon: LibStub
@@ -895,7 +892,7 @@ LeaLibDBIcon()
 -- L15: Dropdown menu taint fixes
 ----------------------------------------------------------------------
 
-if not LeaMapsLC.DF then
+if LeaMapsNotUsingThisRightNowInDragonflight then
 
 	-- UIDropDownMenu displayMode taints dropdown initialization
 	-- https://www.townlong-yak.com/bugs/Kjq4hm-DisplayModeTaint

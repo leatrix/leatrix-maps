@@ -1,4 +1,4 @@
-10.0.00.alpha.1 - 23rd October 2022
+10.0.00 - 24th October 2022
 - Welcome to Dragonflight!
 - Removed Shadowlands specific code.
 
