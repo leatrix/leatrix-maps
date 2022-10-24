@@ -1,6 +1,6 @@
 10.0.00 - 24th October 2022
 - Welcome to Dragonflight!
-- Removed Shadowlands specific code.
+- Removed Shadowlands specific code.  This release is not compatible with Shadowlands.
 
 9.2.42 - 19th October 2022
 - Added the turtle boat dock locations in Borean Tundra, Dragonflight and Howling Fjord.
