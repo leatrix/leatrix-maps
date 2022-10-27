@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.00 (24th October 2022)
+	-- 	Leatrix Maps 10.0.01 (27th October 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.00"
+	LeaMapsLC["AddonVer"] = "10.0.01"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1946,14 +1946,14 @@
 			LeaMapsCB["ShowMinimapIcon"]:HookScript("OnClick", SetLibDBIconFunc)
 			SetLibDBIconFunc()
 
-			-- Add Leatrix Maps to addon compartment frame
-			AddonCompartmentFrame:RegisterAddon({
+			-- Add Leatrix Maps to addon compartment frame (not used for the time being)
+			--[[AddonCompartmentFrame:RegisterAddon({
 				text = L["Leatrix Maps"],
 				icon = "Interface\\HELPFRAME\\HelpIcon-Bug",
 				func = function(self, void, void, void, btn)
 					MiniBtnClickFunc(btn)
 				end,
-			})
+			})]]
 
 		end
 

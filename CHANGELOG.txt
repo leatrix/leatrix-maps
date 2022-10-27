@@ -1,3 +1,6 @@
+10.0.01 - 27th October 2022
+- For the time being, the addon will not register with the minimap compartment menu.
+
 10.0.00 - 24th October 2022
 - Welcome to Dragonflight!
 - Removed Shadowlands specific code.  This release is not compatible with Shadowlands.
