@@ -1,3 +1,6 @@
+10.0.02.alpha.1 - 31st October 2022
+- Added French translations.
+
 10.0.01 - 27th October 2022
 - For the time being, the addon will not register with the minimap compartment menu.
 
