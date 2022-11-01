@@ -1,5 +1,6 @@
-10.0.02.alpha.1 - 31st October 2022
+10.0.02.alpha.2 - 1st November 2022
 - Added French translations.
+- Due to issues with the game code in Dragonflight, the zoom settings are currently unavailable.
 
 10.0.01 - 27th October 2022
 - For the time being, the addon will not register with the minimap compartment menu.
