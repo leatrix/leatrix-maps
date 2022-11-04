@@ -30,7 +30,7 @@
 		end
 	end
 
-	-- Set bindings translations (block taint in 10.0.2 when closing keybindings panel)
+	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
 
 	----------------------------------------------------------------------
