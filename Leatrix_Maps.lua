@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.06 (2nd November 2022)
+	-- 	Leatrix Maps 10.0.07.alpha.1 (5th November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.06"
+	LeaMapsLC["AddonVer"] = "10.0.07.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -40,72 +40,77 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		-- Base taint:
+		-- Base taint: No longer an issue and zoom settings are removed now anyway
 		-- Have a keystone in your bag, open the world map, navigate to a zone with a world boss quest
 		-- (such as Zereth Mortis), shift-click on the world boss icon 4 times to toggle quest tracking off
 		-- and on twice, click the objective tracker icon for the world quest to open group finder.  The 3 zoom
 		-- settings cause base taint due to setting global values (remember zoom, increase zoom and center map
 		-- on player).
 
-		-- Group finder dungeon title taint:
+		-- Group finder dungeon title taint: No longer an issue
 		-- Follow base taint then click back, click dungeons and click start group.  This taint happens because
 		-- the dungeon title is protected.  This is mitigated by preventing Wow from setting the dungeon title
 		-- but only if the user has 2FA enabled.  Without 2FA, users cannot set the dungeon title so Wow has to
 		-- do it for them which means the taint fix cannot be applied.
 
-		-- Report player taint:
+		-- Report player taint: Still an issue
 		-- Follow base taint and group finder taint then use report player.
 
-		-- Editing mode taint:
+		-- Editing mode taint: No longer an issue
 		-- Follow base taint and group finder taint but edit the group after listing it and toggle the opposite
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 
-		-- Scale map taint:
+		-- Scale map taint: Still an issue but scale map is removed now anyway
 		-- Caused by replacing WorldMapFrame.ScrollContainer.GetCursorPosition and setting map scale.
 
-		-- Command taint:
+		-- Command taint: Still an issue
 		-- Enter /ltm map 150 during combat and click a boss button.
 
-		if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
+		-- In Dragonflight, this is not needed (at the moment anyway)
+		if LeaMapsLC.ThisIsNotNeededAnymore then
 
-			-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
-			C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
-				if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
-					local typeStr
-					if activityInfo.isMythicPlusActivity then
-						typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
-					elseif activityInfo.isRatedPvpActivity then
-						typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
-					elseif activityInfo.isCurrentRaidActivity then
-						typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
-					elseif activityInfo.isMythicActivity then
-						typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+			if C_LFGList.IsPlayerAuthenticatedForLFG(180) then -- Iron Docks (https://wow.tools/dbc/?dbc=groupfinderactivity)
+
+				-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+				C_LFGList.GetPlaystyleString = function(playstyle, activityInfo)
+					if activityInfo and playstyle ~= (0 or nil) and C_LFGList.GetLfgCategoryInfo(activityInfo.categoryID).showPlaystyleDropdown then
+						local typeStr
+						if activityInfo.isMythicPlusActivity then
+							typeStr = "GROUP_FINDER_PVE_PLAYSTYLE"
+						elseif activityInfo.isRatedPvpActivity then
+							typeStr = "GROUP_FINDER_PVP_PLAYSTYLE"
+						elseif activityInfo.isCurrentRaidActivity then
+							typeStr = "GROUP_FINDER_PVE_RAID_PLAYSTYLE"
+						elseif activityInfo.isMythicActivity then
+							typeStr = "GROUP_FINDER_PVE_MYTHICZERO_PLAYSTYLE"
+						end
+						return typeStr and _G[typeStr .. tostring(playstyle)] or nil
+					else
+						return nil
 					end
-					return typeStr and _G[typeStr .. tostring(playstyle)] or nil
-				else
-					return nil
 				end
+
+				-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
+				C_LFGList.SetEntryTitle = function() end
+
+				-- Toggling the opposite faction only checkbox during editing mode also taints
+				LFGListFrame.EntryCreation:HookScript("OnShow", function()
+					if LFGListFrame.EntryCreation.ListGroupButton:GetText() == DONE_EDITING then
+						LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, true)
+						LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(0.3)
+					else
+						LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, false)
+						LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(1)
+					end
+				end)
+
+			else
+
+				-- Add 2FA advisory button
+				local PageFAlertButton = LeaMapsLC:CreateButton("PageFAlertButton", LeaMapsLC["PageF"], "You should enable 2FA!", "BOTTOMLEFT", 16, 10, 25, "Your game account does not have Two-Factor Authentication (2FA) enabled.|n|nIf you use premade group finder to make a Mythic+ dungeon group for your own key, you may see a stop error when the game tries to set the activity title to your key level.  To clear this error, reload your UI.|n|nTo avoid seeing this error, enable Two-Factor Authentication (2FA) on your game account.", true)
+				PageFAlertButton:SetPushedTextOffset(0, 0)
+
 			end
-
-			-- Replace C_LFGList.SetEntryTitle to prevent premade dungeon keystone taint
-			C_LFGList.SetEntryTitle = function() end
-
-			-- Toggling the opposite faction only checkbox during editing mode also taints
-			LFGListFrame.EntryCreation:HookScript("OnShow", function()
-				if LFGListFrame.EntryCreation.ListGroupButton:GetText() == DONE_EDITING then
-					LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, true)
-					LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(0.3)
-				else
-					LeaMapsLC:LockItem(LFGListFrame.EntryCreation.CrossFactionGroup.CheckButton, false)
-					LFGListFrame.EntryCreation.CrossFactionGroup.Label:SetAlpha(1)
-				end
-			end)
-
-		else
-
-			-- Add 2FA advisory button
-			local PageFAlertButton = LeaMapsLC:CreateButton("PageFAlertButton", LeaMapsLC["PageF"], "You should enable 2FA!", "BOTTOMLEFT", 16, 10, 25, "Your game account does not have Two-Factor Authentication (2FA) enabled.|n|nIf you use premade group finder to make a Mythic+ dungeon group for your own key, you may see a stop error when the game tries to set the activity title to your key level.  To clear this error, reload your UI.|n|nTo avoid seeing this error, enable Two-Factor Authentication (2FA) on your game account.", true)
-			PageFAlertButton:SetPushedTextOffset(0, 0)
 
 		end
 
