@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.07.alpha.3 (5th November 2022)
+	-- 	Leatrix Maps 10.0.07.alpha.4 (5th November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.07.alpha.3"
+	LeaMapsLC["AddonVer"] = "10.0.07.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1593,6 +1593,9 @@
 		----------------------------------------------------------------------
 		-- Final code
 		----------------------------------------------------------------------
+
+		-- Hide the battlefield map tab because it's shown even when enhance battlefield map is disabled
+		BattlefieldMapTab:Hide()
 
 		-- Show first run message
 		if not LeaMapsDB["FirstRunMessageSeen"] then
