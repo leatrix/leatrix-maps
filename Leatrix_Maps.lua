@@ -1594,9 +1594,6 @@
 		-- Final code
 		----------------------------------------------------------------------
 
-		-- Hide the battlefield map tab because it's shown even when enhance battlefield map is disabled
-		BattlefieldMapTab:Hide()
-
 		-- Show first run message
 		if not LeaMapsDB["FirstRunMessageSeen"] then
 			C_Timer.After(1, function()
