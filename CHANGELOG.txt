@@ -1,5 +1,5 @@
-10.0.10 - 9th November 2022
-- Maintenance update.
+10.0.11.alpha.1 - 15th November 2022
+- Updated LibDBIcon.
 
 10.0.08 - 8th November 2022
 - Due to problems with Blizzard's code in Dragonflight, the '/ltm' slash command has been removed for the time being.  As a workaround, you can enter '/run leamaps()' to open Leatrix Maps.  If you want to pass a parameter, enter it in quotes between the brackets.  Example: /run leamaps("wipe").  This (hopefully temporary) change is necessary because of a bug in the game code with the slash command system.  Entering any addon related slash command will taint the UI and cause errors to show at some point.  Blizzard are aware of the bug.  When they fix it, the /ltm slash command will return.  You can assign a hotkey to open Leatrix Maps in the game keybindings panel and you can open Leatrix Maps using the minimap button if it's enabled in the Leatrix Maps configuration panel so there are plenty of options.
