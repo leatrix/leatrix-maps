@@ -1,4 +1,5 @@
-10.0.11.alpha.1 - 15th November 2022
+10.0.11 - 16th November 2022
+- Updated for game version 10.0.2.46658.
 - Updated LibDBIcon.
 
 10.0.08 - 8th November 2022
