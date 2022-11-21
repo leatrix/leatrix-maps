@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.11 (16th November 2022)
+	-- 	Leatrix Maps 10.0.12.alpha.1 (21st November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.11"
+	LeaMapsLC["AddonVer"] = "10.0.12.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1662,7 +1662,7 @@
 		Side.b = LeaMapsLC:CreateButton("BackButton", Side, "Back to Main Menu", "BOTTOMRIGHT", -16, 60, 25, "Click to return to the main menu.")
 
 		-- Add a reload button and synchronise it with the main panel reload button
-		local reloadb = LeaMapsLC:CreateButton("ConfigReload", Side, "Reload", "BOTTOMRIGHT", -16, 10, 25)
+		local reloadb = LeaMapsLC:CreateButton("ConfigReload", Side, "Reload", "BOTTOMRIGHT", -16, 10, 25, LeaMapsCB["ReloadUIButton"].tiptext)
 		LeaMapsLC:LockItem(reloadb, true)
 		reloadb:SetScript("OnClick", ReloadUI)
 
