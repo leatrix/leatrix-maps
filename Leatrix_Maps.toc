@@ -3,11 +3,11 @@
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 10.0.14.alpha.2
+## Version: 10.0.14.alpha.3
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
-## OptionalDeps: Leatrix_English
+## OptionalDeps: Leatrix_enUS
 
 ## X-Curse-Project-ID: 298842
 
