@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.14.alpha.3 (29th November 2022)
+	-- 	Leatrix Maps 10.0.16 (30th November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.14.alpha.3"
+	LeaMapsLC["AddonVer"] = "10.0.16"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2312,6 +2312,9 @@
 	-- Add slash commands
 	--_G.SLASH_Leatrix_Maps1 = "/ltm"
 	--_G.SLASH_Leatrix_Maps2 = "/leamaps"
+
+	_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
+
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
 		SlashFunc(self)
