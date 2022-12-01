@@ -745,7 +745,7 @@
 		},
 
 		[2023] =  --[[Ohn'ahran Plains]] {
-			{"Dungeon", 61.5, 42.6, L["The Nokhud Offensive"], L["Dungeon"], 1198}, -- Unconfirmed
+			{"Dungeon", 60.9, 39.0, L["The Nokhud Offensive"], L["Dungeon"], 1198}, -- Unconfirmed
 		},
 
 		[2024] =  --[[The Azure Span]] {
