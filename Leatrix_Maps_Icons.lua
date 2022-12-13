@@ -759,6 +759,12 @@
 			{"Raid", 73.0, 55.7, L["Vault of the Incarnates"], L["Raid"], 1200},
 		},
 
+		[2112] =  --[[Valdrakken]] {
+			{"PortalN", 53.9, 55.0, L["Valdrakken Portals"] .. "|n" .. L["Dalaran"] .. ", " .. L["Shadowmoon Valley"] .. ",|n" .. L["Jade Forest"]},
+			{"PortalH", 56.6, 38.4, L["Orgrimmar"], L["Portal"]},
+			{"PortalA", 59.7, 41.8, L["Stormwind"], L["Portal"]},
+		},
+
 	}
 
 	-- Function to check if dungeon is on a specific map ID (used for moving dungeons such as Ny'alotha)

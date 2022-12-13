@@ -1,5 +1,5 @@
-10.0.17.alpha.1 - 1st December 2022
-- Maintenance update.
+10.0.17.alpha.2 - 13th December 2022
+- For 'Enhance dungeon icons', added portal icons to the Valdrakken map.
 
 10.0.13 - 21st November 2022
 - Fixed a situational (harmless) Lua error with the configuration panel reload button.
