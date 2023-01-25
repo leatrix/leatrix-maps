@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.30 (17th January 2023)
+	-- 	Leatrix Maps 10.0.33 (25th January 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.30"
+	LeaMapsLC["AddonVer"] = "10.0.33"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1572,7 +1572,7 @@
 			subTitle:ClearAllPoints()
 			subTitle:SetPoint("BOTTOM", 0, 72)
 
-			local slashTitle = LeaMapsLC:MakeTx(interPanel, "/run leamaps()", 0, 0)
+			local slashTitle = LeaMapsLC:MakeTx(interPanel, "/ltm", 0, 0)
 			slashTitle:SetFont(slashTitle:GetFont(), 72)
 			slashTitle:ClearAllPoints()
 			slashTitle:SetPoint("BOTTOM", subTitle, "TOP", 0, 40)
@@ -1600,7 +1600,7 @@
 		-- Show first run message
 		if not LeaMapsDB["FirstRunMessageSeen"] then
 			C_Timer.After(1, function()
-				LeaMapsLC:Print(L["Enter"] .. " |cff00ff00" .. "/run leamaps()" .. "|r " .. L["or click the minimap button to open Leatrix Maps."])
+				LeaMapsLC:Print(L["Enter"] .. " |cff00ff00" .. "/ltm" .. "|r " .. L["or click the minimap button to open Leatrix Maps."])
 				LeaMapsDB["FirstRunMessageSeen"] = true
 			end)
 		end
@@ -2310,19 +2310,12 @@
 	end
 
 	-- Add slash commands
-	--_G.SLASH_Leatrix_Maps1 = "/ltm"
-	--_G.SLASH_Leatrix_Maps2 = "/leamaps"
-
-	_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
+	_G.SLASH_Leatrix_Maps1 = "/ltm"
+	_G.SLASH_Leatrix_Maps2 = "/leamaps"
 
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
 		SlashFunc(self)
-	end
-
-	-- Replacement for broken slash command system
-	function leamaps(self)
-		SlashFunc(self or "")
 	end
 
 	----------------------------------------------------------------------
