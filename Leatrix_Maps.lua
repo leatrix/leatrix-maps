@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.0.34.alpha.1 (30th January 2023)
+	-- 	Leatrix Maps 10.0.34.alpha.2 (30th January 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.0.34.alpha.1"
+	LeaMapsLC["AddonVer"] = "10.0.34.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1676,9 +1676,7 @@
 		Side.t:SetColorTexture(0.05, 0.05, 0.05, 0.9)
 
 		-- Add a close Button (LeaMapsLC: Custom template)
-		Side.c = CreateFrame("Button", nil, Side, "LeaMapsUIPanelCloseButtonNoScripts")
-		Side.c:SetSize(30, 30)
-		Side.c:SetPoint("TOPRIGHT", 0, 0)
+		Side.c = LeaMapsLC:CreateCloseButton(Side, 30, 30, "TOPRIGHT", 0, 0)
 		Side.c:SetScript("OnClick", function() Side:Hide() end)
 
 		-- Add reset, help and back buttons
@@ -1756,6 +1754,18 @@
 		for k, v in pairs(LeaConfigList) do
 			v:Hide()
 		end
+	end
+
+	-- Create a close button without using a template
+	function LeaMapsLC:CreateCloseButton(parent, w, h, anchor, x, y)
+		local btn = CreateFrame("BUTTON", nil, parent)
+		btn:SetSize(w, h)
+		btn:SetPoint(anchor, x, y)
+		btn:SetNormalTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
+		btn:SetHighlightTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Highlight")
+		btn:SetPushedTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Down")
+		btn:SetDisabledTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Disabled")
+		return btn
 	end
 
 	-- Find out if Leatrix Maps is showing (main panel or config panel)
@@ -2116,64 +2126,6 @@
 	end
 
 	----------------------------------------------------------------------
-	-- Stop error frame
-	----------------------------------------------------------------------
-
-	-- Create stop error frame
-	local stopFrame = CreateFrame("FRAME", nil, UIParent)
-	stopFrame:ClearAllPoints()
-	stopFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	stopFrame:SetSize(370, 150)
-	stopFrame:SetFrameStrata("FULLSCREEN_DIALOG")
-	stopFrame:SetFrameLevel(500)
-	stopFrame:SetClampedToScreen(true)
-	stopFrame:EnableMouse(true)
-	stopFrame:SetMovable(true)
-	stopFrame:Hide()
-	stopFrame:RegisterForDrag("LeftButton")
-	stopFrame:SetScript("OnDragStart", stopFrame.StartMoving)
-	stopFrame:SetScript("OnDragStop", function()
-		stopFrame:StopMovingOrSizing()
-		stopFrame:SetUserPlaced(false)
-	end)
-
-	-- Add background color
-	stopFrame.t = stopFrame:CreateTexture(nil, "BACKGROUND")
-	stopFrame.t:SetAllPoints()
-	stopFrame.t:SetColorTexture(0.05, 0.05, 0.05, 0.9)
-
-	-- Add textures
-	stopFrame.mt = stopFrame:CreateTexture(nil, "BORDER")
-	stopFrame.mt:SetTexture("Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
-	stopFrame.mt:SetSize(370, 103)
-	stopFrame.mt:SetPoint("TOPRIGHT")
-	stopFrame.mt:SetVertexColor(0.5, 0.5, 0.5, 1.0)
-
-	stopFrame.ft = stopFrame:CreateTexture(nil, "BORDER")
-	stopFrame.ft:SetTexture("Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
-	stopFrame.ft:SetSize(370, 48)
-	stopFrame.ft:SetPoint("BOTTOM")
-	stopFrame.ft:SetVertexColor(0.5, 0.5, 0.5, 1.0)
-
-	LeaMapsLC:MakeTx(stopFrame, "Leatrix Maps", 16, -12)
-	LeaMapsLC:MakeWD(stopFrame, "A stop error has occurred but no need to worry.  It can happen from time to time.  Click the reload button to resolve it.", 16, -32, 338)
-
-	-- Add reload UI Button
-	local stopRelBtn = LeaMapsLC:CreateButton("StopReloadButton", stopFrame, "Reload", "BOTTOMRIGHT", -16, 10, 25, "")
-	stopRelBtn:SetScript("OnClick", ReloadUI)
-	stopRelBtn.f = stopRelBtn:CreateFontString(nil, 'ARTWORK', 'GameFontNormalSmall')
-	stopRelBtn.f:SetHeight(32)
-	stopRelBtn.f:SetPoint('RIGHT', stopRelBtn, 'LEFT', -10, 0)
-	stopRelBtn.f:SetText(L["Your UI needs to be reloaded."])
-	stopRelBtn:Hide(); stopRelBtn:Show()
-
-	-- Add close Button (LeaMapsLC:Custom template)
-	local stopFrameClose = CreateFrame("Button", nil, stopFrame, "LeaMapsUIPanelCloseButtonNoScripts")
-	stopFrameClose:SetSize(30, 30)
-	stopFrameClose:SetPoint("TOPRIGHT", 0, 0)
-	stopFrameClose:SetScript("OnClick", function() stopFrame:Hide() end)
-
-	----------------------------------------------------------------------
 	-- L20: Commands
 	----------------------------------------------------------------------
 
@@ -2490,16 +2442,6 @@
 			LeaMapsDB["MainPanelX"] = LeaMapsLC["MainPanelX"]
 			LeaMapsDB["MainPanelY"] = LeaMapsLC["MainPanelY"]
 
-		elseif event == "ADDON_ACTION_FORBIDDEN" and arg1 == "Leatrix_Maps" then
-			-- Stop error has occured
-			StaticPopup_Hide("ADDON_ACTION_FORBIDDEN")
-			stopFrame:Show()
-
-		elseif event == "ADDON_ACTION_BLOCKED" and arg1 == "Leatrix_Maps" and arg2 and arg2 == "SetEntryTitle()" then
-			-- Addon blocked error due to SetEntryTitle taint
-			ScriptErrorsFrame:Hide()
-			stopFrame:Show()
-
 		end
 	end)
 
@@ -2582,9 +2524,7 @@
 	reloadb.f:Hide()
 
 	-- Add close Button (LeaMapsLC: Custom template)
-	local CloseB = CreateFrame("Button", nil, PageF, "LeaMapsUIPanelCloseButtonNoScripts")
-	CloseB:SetSize(30, 30)
-	CloseB:SetPoint("TOPRIGHT", 0, 0)
+	local CloseB = LeaMapsLC:CreateCloseButton(PageF, 30, 30, "TOPRIGHT", 0, 0)
 	CloseB:SetScript("OnClick", function() PageF:Hide() end)
 
 	-- Add content

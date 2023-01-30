@@ -1,5 +1,7 @@
-10.0.34.alpha.1 - 30th January 2023
+10.0.34.alpha.2 - 30th January 2023
 - The 'Scale the map' option has returned.  As before, you can set the scale of the windowed and maximised maps independently.
+- Updated close button code.
+- Updated LibDBIcon.
 
 10.0.33 - 25th January 2023
 - Updated for game patch 10.0.5.
