@@ -1,5 +1,6 @@
-10.0.51 - 18th March 2023
-- Maintenance update.
+10.0.52 - 23rd March 2023
+- Updated for game version 10.0.7.
+- Added map reveal data for The Forbidden Reach.
 
 10.0.34 - 1st February 2023
 - The 'Scale the map' option has returned.  As before, you can set the scale of the windowed and maximised maps independently.
