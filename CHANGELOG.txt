@@ -1,6 +1,3 @@
-10.0.54 - 27th March 2023
-- Maintenance update.
-
 10.0.52 - 23rd March 2023
 - Updated for game version 10.0.7.
 - Added map reveal data for The Forbidden Reach.
