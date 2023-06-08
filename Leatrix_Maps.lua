@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.1.05 (4th June 2023)
+	-- 	Leatrix Maps 10.1.06.alpha.1 (8th June 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.1.05"
+	LeaMapsLC["AddonVer"] = "10.1.06.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -975,22 +975,10 @@
 		end)
 
 		----------------------------------------------------------------------
-		-- Show dungeons and raids (/ltp pos)
+		-- Show additional icons
 		----------------------------------------------------------------------
 
 		if LeaMapsLC["ShowIcons"] == "On" then
-
-			-- Disable integrated dungeon icons
-			SetCVar("showDungeonEntrancesOnMap", "0")
-			local cFrame = CreateFrame("FRAME")
-			cFrame:RegisterEvent("CVAR_UPDATE")
-			cFrame:SetScript("OnEvent", function(self, event, cset)
-				if cset == "SHOW_DUNGEON_ENTRANCES" and GetCVar("showDungeonEntrancesOnMap") ~= "0" then
-					if not LeaMapsLC["DebugMode"] then
-						SetCVar("showDungeonEntrancesOnMap", "0")
-					end
-				end
-			end)
 
 			-- Get table from file
 			local PinData = Leatrix_Maps["Icons"]
@@ -999,13 +987,6 @@
 			local LeaMix = CreateFromMixins(MapCanvasDataProviderMixin)
 
 			function LeaMix:RefreshAllData()
-
-				-- Disable integrated dungeon icons
-				if GetCVar("showDungeonEntrancesOnMap") ~= "0" then
-					if not LeaMapsLC["DebugMode"] then
-						SetCVar("showDungeonEntrancesOnMap", "0")
-					end
-				end
 
 				-- Remove all pins created by Leatrix Maps
 				self:GetMap():RemoveAllPinsByTemplate("LeaMapsGlobalPinTemplate")
@@ -1025,38 +1006,8 @@
 
 							local myPOI = {}
 
-							-- Dungeon - Horde
-							if pinInfo[1] == "DungeonH" and playerFaction == "Horde" then
-								myPOI["atlasName"] = "Dungeon"
-								myPOI["journalID"] = pinInfo[6]
-
-							-- Dungeon - Alliance
-							elseif pinInfo[1] == "DungeonA" and playerFaction == "Alliance" then
-								myPOI["atlasName"] = "Dungeon"
-								myPOI["journalID"] = pinInfo[6]
-
-							-- Dungeon - Neutral
-							elseif pinInfo[1] == "Dungeon" then
-								myPOI["atlasName"] = "Dungeon"
-								myPOI["journalID"] = pinInfo[6]
-
-							-- Raid - Horde
-							elseif pinInfo[1] == "RaidH" and playerFaction == "Horde" then
-								myPOI["atlasName"] = "Raid"
-								myPOI["journalID"] = pinInfo[6]
-
-							-- Raid - Alliance
-							elseif pinInfo[1] == "RaidA" and playerFaction == "Alliance" then
-								myPOI["atlasName"] = "Raid"
-								myPOI["journalID"] = pinInfo[6]
-
-							-- Raid - Neutral
-							elseif pinInfo[1] == "Raid" then
-								myPOI["atlasName"] = "Raid"
-								myPOI["journalID"] = pinInfo[6]
-
 							-- Portal - Horde
-							elseif pinInfo[1] == "PortalH" and playerFaction == "Horde" then
+							if pinInfo[1] == "PortalH" and playerFaction == "Horde" then
 								myPOI["atlasName"] = "TaxiNode_Continent_Horde"
 								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
 								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
@@ -1941,7 +1892,7 @@
 		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
 		or	(LeaMapsLC["ScaleWorldMap"] ~= LeaMapsDB["ScaleWorldMap"])			-- Scale the map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
-		or	(LeaMapsLC["ShowIcons"] ~= LeaMapsDB["ShowIcons"])					-- Show dungeons and raids
+		or	(LeaMapsLC["ShowIcons"] ~= LeaMapsDB["ShowIcons"])					-- Show additional icons
 		or	(LeaMapsLC["HideTownCity"] ~= LeaMapsDB["HideTownCity"])			-- Hide town and city icons
 		or	(LeaMapsLC["EnhanceBattleMap"] ~= LeaMapsDB["EnhanceBattleMap"])	-- Enhance battlefield map
 		then
@@ -2341,7 +2292,7 @@
 			LeaMapsLC:LoadVarNum("tintGreen", 0.6, 0, 1)				-- Tint green
 			LeaMapsLC:LoadVarNum("tintBlue", 1, 0, 1)					-- Tint blue
 			LeaMapsLC:LoadVarNum("tintAlpha", 1, 0, 1)					-- Tint transparency
-			LeaMapsLC:LoadVarChk("ShowIcons", "On")						-- Location icons
+			LeaMapsLC:LoadVarChk("ShowIcons", "On")						-- Show additional icons
 			LeaMapsLC:LoadVarChk("ShowCoords", "On")					-- Show coordinates
 			LeaMapsLC:LoadVarChk("CoordsLargeFont", "Off")				-- Coordinates large font
 			LeaMapsLC:LoadVarChk("CoordsBackground", "On")				-- Coordinates background
@@ -2539,7 +2490,7 @@
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
 	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -112, false, "If checked, coordinates will be shown.")
-	LeaMapsLC:MakeCB(PageF, "ShowIcons", "Enhance dungeon icons", 225, -132, true, "If checked, dungeon, raid and portal icons will be positioned more accurately and there will be more of them.")
+	LeaMapsLC:MakeCB(PageF, "ShowIcons", "Show additional icons", 225, -132, true, "If checked, additional icons (such as portals) will be shown.")
 	LeaMapsLC:MakeCB(PageF, "HideTownCity", "Hide town and city icons", 225, -152, true, "If checked, town and city icons will not be shown on the continent maps.")
 
 	LeaMapsLC:MakeTx(PageF, "More", 225, -192)

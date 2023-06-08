@@ -1,3 +1,6 @@
+10.1.06.alpha.1 - 8th May 2023
+- The 'Enhance dungeon icons' option has been renamed 'Show additional icons'.  Dungeon and raid icons are now handled by the default UI and can be toggled in the map dropdown menu.
+
 10.1.00 - 3rd May 2023
 - Updated for game version 10.1.
 - Added an icon for the in-game addon listing.
