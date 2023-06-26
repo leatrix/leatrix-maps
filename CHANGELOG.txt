@@ -1,3 +1,6 @@
+10.1.08.alpha.1 - 19th June 2023
+- Updated LibDBIcon.
+
 10.1.06 - 11th May 2023
 - The 'Enhance dungeon icons' option has been renamed 'Show additional icons'.  Dungeon and raid icons are now handled by the default UI and can be toggled in the map dropdown menu.
 
