@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.1.10 (12th July 2023)
+	-- 	Leatrix Maps 10.1.11 (12th July 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.1.10"
+	LeaMapsLC["AddonVer"] = "10.1.11"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -975,121 +975,6 @@
 		end)
 
 		----------------------------------------------------------------------
-		-- Show additional icons
-		----------------------------------------------------------------------
-
-		if LeaMapsLC["ShowIcons"] == "On" then
-
-			-- Get table from file
-			local PinData = Leatrix_Maps["Icons"]
-
-			-- Create table
-			local LeaMix = CreateFromMixins(MapCanvasDataProviderMixin)
-
-			function LeaMix:RefreshAllData()
-
-				-- Remove all pins created by Leatrix Maps
-				self:GetMap():RemoveAllPinsByTemplate("LeaMapsGlobalPinTemplate")
-
-				-- Show new pins if option is enabled
-				do
-
-					-- Make new pins
-					local pMapID = WorldMapFrame.mapID
-					if PinData[pMapID] then
-						local count = #PinData[pMapID]
-						for i = 1, count do
-
-							-- Do nothing if pinInfo has no entry for zone we are looking at
-							local pinInfo = PinData[pMapID][i]
-							if not pinInfo then return nil end
-
-							local myPOI = {}
-
-							-- Portal - Horde
-							if pinInfo[1] == "PortalH" and playerFaction == "Horde" then
-								myPOI["atlasName"] = "TaxiNode_Continent_Horde"
-								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
-								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
-
-							-- Portal - Alliance
-							elseif pinInfo[1] == "PortalA" and playerFaction == "Alliance" then
-								myPOI["atlasName"] = "TaxiNode_Continent_Alliance"
-								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
-								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
-
-							-- Portal - Neutral
-							elseif pinInfo[1] == "PortalN" then
-								myPOI["atlasName"] = "TaxiNode_Continent_Neutral"
-								if pinInfo[7] and not C_QuestLog.IsQuestFlaggedCompleted(pinInfo[7]) then myPOI["atlasName"] = nil end -- Do nothing if first quest not completed
-								if pinInfo[8] and C_QuestLog.IsQuestFlaggedCompleted(pinInfo[8]) then myPOI["atlasName"] = nil end -- Do nothing if second quest is completed
-
-							-- Chest
-							elseif pinInfo[1] == "Chest" then
-								myPOI["atlasName"] = "ChallengeMode-icon-chest"
-
-							-- Arrow
-							elseif pinInfo[1] == "Arrow" then
-								myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
-								myPOI["journalID"] = pinInfo[7]
-
-							-- Taxi - Neutral (as used in Korthia for Flayedwing Transporter)
-							elseif pinInfo[1] == "TaxiN" then
-								myPOI["atlasName"] = "warfront-neutralhero-gold"
-
-							end
-
-							-- Mandatory fields
-							myPOI["position"] = CreateVector2D(pinInfo[2] / 100, pinInfo[3] / 100)
-							myPOI["name"] = pinInfo[4]
-							myPOI["description"] = pinInfo[5]
-
-							-- Acquire the pin if it has a texture
-							if myPOI["atlasName"] then
-								local pin = self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
-								pin.Texture:SetRotation(0)
-								pin.HighlightTexture:SetRotation(0)
-								if pinInfo[1] == "Arrow" then
-									pin.Texture:SetRotation(pinInfo[6])
-									pin.HighlightTexture:SetRotation(pinInfo[6])
-								elseif pinInfo[1] == "TaxiN" then
-									pin:SetSize(28, 28)
-									pin.Texture:SetSize(28, 28)
-									pin.HighlightTexture:SetSize(28, 28)
-								end
-							end
-
-						end
-					end
-
-				end
-
-			end
-
-			_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
-
-			function LeaMapsGlobalPinMixin:OnAcquired(myInfo)
-				BaseMapPoiPinMixin.OnAcquired(self, myInfo)
-				self.journalID = myInfo.journalID
-			end
-
-			function LeaMapsGlobalPinMixin:OnMouseUp(btn)
-				if IsControlKeyDown() and btn == "LeftButton" then return end -- Do nothing if placing map pin
-				if LeaMapsLC["UnlockMap"] == "On" or not WorldMapFrame:IsMaximized() then
-					if not LeaMapsLC:PlayerInCombat() and self.journalID and self.journalID ~= 0 then
-						if not IsAddOnLoaded("Blizzard_EncounterJournal") then
-							EncounterJournal_LoadUI()
-						end
-						EncounterJournal_OpenJournal(nil, self.journalID)
-					end
-				end
-			end
-
-			WorldMapFrame:AddDataProvider(LeaMix)
-
-		end
-
-		----------------------------------------------------------------------
 		-- Show unexplored areas
 		----------------------------------------------------------------------
 
@@ -1892,7 +1777,6 @@
 		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
 		or	(LeaMapsLC["ScaleWorldMap"] ~= LeaMapsDB["ScaleWorldMap"])			-- Scale the map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
-		or	(LeaMapsLC["ShowIcons"] ~= LeaMapsDB["ShowIcons"])					-- Show additional icons
 		or	(LeaMapsLC["HideTownCity"] ~= LeaMapsDB["HideTownCity"])			-- Hide town and city icons
 		or	(LeaMapsLC["EnhanceBattleMap"] ~= LeaMapsDB["EnhanceBattleMap"])	-- Enhance battlefield map
 		then
@@ -2193,7 +2077,6 @@
 				LeaMapsDB["tintGreen"] = 0.6
 				LeaMapsDB["tintBlue"] = 1.0
 				LeaMapsDB["tintAlpha"] = 1.0
-				LeaMapsDB["ShowIcons"] = "On"
 				LeaMapsDB["ShowCoords"] = "On"
 				LeaMapsDB["CoordsLargeFont"] = "On"
 				LeaMapsDB["CoordsBackground"] = "On"
@@ -2292,7 +2175,6 @@
 			LeaMapsLC:LoadVarNum("tintGreen", 0.6, 0, 1)				-- Tint green
 			LeaMapsLC:LoadVarNum("tintBlue", 1, 0, 1)					-- Tint blue
 			LeaMapsLC:LoadVarNum("tintAlpha", 1, 0, 1)					-- Tint transparency
-			LeaMapsLC:LoadVarChk("ShowIcons", "On")						-- Show additional icons
 			LeaMapsLC:LoadVarChk("ShowCoords", "On")					-- Show coordinates
 			LeaMapsLC:LoadVarChk("CoordsLargeFont", "Off")				-- Coordinates large font
 			LeaMapsLC:LoadVarChk("CoordsBackground", "On")				-- Coordinates background
@@ -2367,7 +2249,6 @@
 			LeaMapsDB["tintGreen"] = LeaMapsLC["tintGreen"]
 			LeaMapsDB["tintBlue"] = LeaMapsLC["tintBlue"]
 			LeaMapsDB["tintAlpha"] = LeaMapsLC["tintAlpha"]
-			LeaMapsDB["ShowIcons"] = LeaMapsLC["ShowIcons"]
 			LeaMapsDB["ShowCoords"] = LeaMapsLC["ShowCoords"]
 			LeaMapsDB["CoordsLargeFont"] = LeaMapsLC["CoordsLargeFont"]
 			LeaMapsDB["CoordsBackground"] = LeaMapsLC["CoordsBackground"]
@@ -2490,14 +2371,13 @@
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
 	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -112, false, "If checked, coordinates will be shown.")
-	LeaMapsLC:MakeCB(PageF, "ShowIcons", "Show additional icons", 225, -132, true, "If checked, additional icons (such as portals) will be shown.")
-	LeaMapsLC:MakeCB(PageF, "HideTownCity", "Hide town and city icons", 225, -152, true, "If checked, town and city icons will not be shown on the continent maps.")
+	LeaMapsLC:MakeCB(PageF, "HideTownCity", "Hide town and city icons", 225, -132, true, "If checked, town and city icons will not be shown on the continent maps.")
 
-	LeaMapsLC:MakeTx(PageF, "More", 225, -192)
-	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -212, true, "If checked, you will be able to customise the battlefield map.")
-	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 225, -232, false, "If checked, the map will not fade while your character is moving.")
-	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -252, false, "If checked, your character will not perform the reading emote when you open the map.")
-	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
+	LeaMapsLC:MakeTx(PageF, "More", 225, -172)
+	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -192, true, "If checked, you will be able to customise the battlefield map.")
+	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 225, -212, false, "If checked, the map will not fade while your character is moving.")
+	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -232, false, "If checked, your character will not perform the reading emote when you open the map.")
+	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -252, false, "If checked, the minimap button will be shown.")
 
 	LeaMapsLC:CfgBtn("ScaleWorldMapBtn", LeaMapsCB["ScaleWorldMap"])
 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
