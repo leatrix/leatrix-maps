@@ -280,7 +280,7 @@
 		----------------------------------------------------------------------
 
 		[2112] =  --[[Valdrakken]] {
-			{"PortalN", 53.9, 55.0, L["Valdrakken Portals"] .. "|n" .. L["Dalaran"] .. ", " .. L["Shadowmoon Valley"] .. ",|n" .. L["Jade Forest"]},
+			{"PortalN", 53.9, 55.0, L["Valdrakken Portals"]},
 			{"PortalH", 56.6, 38.4, L["Orgrimmar"], L["Portal"]},
 			{"PortalA", 59.7, 41.8, L["Stormwind"], L["Portal"]},
 		},
