@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.1.26 (18th October 2023)
+	-- 	Leatrix Maps 10.1.27.alpha.1 (18th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.1.26"
+	LeaMapsLC["AddonVer"] = "10.1.27.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -29,6 +29,11 @@
 			return
 		end
 	end
+
+	-- Check for addons
+	if IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
+	if IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
+	if IsAddOnLoaded("WorldQuestTracker") then LeaMapsLC.WorldQuestTracker = true end
 
 	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
@@ -667,23 +672,10 @@
 			end
 
 			-- Fix for Demodal clamping the map frame to the screen
-			local function FixDemodal()
+			if LeaMapsLC.Demodal then
 				if WorldMapFrame:IsClampedToScreen() then
 					WorldMapFrame:SetClampedToScreen(false)
 				end
-			end
-
-			if IsAddOnLoaded("Demodal") then
-				FixDemodal()
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "Demodal" then
-						FixDemodal()
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
 			end
 
 			----------------------------------------------------------------------
@@ -755,23 +747,11 @@
 				end
 			end)
 
-			-- Function to set World Quest Tracker map window centralised to disabled
-			local function FixWorldQuestTrackerFunc()
+			-- Fix for World Quest Tracker to set map window centralised to disabled
+			if LeaMapsLC.WorldQuestTracker then
 				if WQTrackerDB and WQTrackerDB.profiles and WQTrackerDB.profiles.Default and WQTrackerDB.profiles.Default.map_frame_anchor and WQTrackerDB.profiles.Default.map_frame_anchor == "center" then
 					WQTrackerDB.profiles.Default.map_frame_anchor = "left"
 				end
-			end
-			if IsAddOnLoaded("WorldQuestTracker") then
-				FixWorldQuestTrackerFunc()
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "WorldQuestTracker" then
-						FixWorldQuestTrackerFunc()
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
 			end
 
 		else
@@ -916,31 +896,14 @@
 				WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
 			end
 
-			-- Function to fix third party addons
-			local function thirdPartyFunc(thirdPartyAddOn)
-				if thirdPartyAddOn == "ElvUI" then
-					-- ElvUI
-					if WorldMapFrame.backdrop then WorldMapFrame.backdrop:Hide() end
-					QuestMapFrame:ClearAllPoints()
-					QuestMapFrame:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -5, -70)
-					QuestMapFrame:SetHeight(458)
-					QuestMapFrame.DetailsFrame:ClearAllPoints()
-					QuestMapFrame.DetailsFrame:SetPoint("BOTTOMLEFT", QuestMapFrame, "BOTTOMLEFT", 2, -7)
-				end
-			end
-
-			-- Run function when third party addon has loaded
-			if IsAddOnLoaded("ElvUI") then
-				thirdPartyFunc("ElvUI")
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "ElvUI" then
-						thirdPartyFunc("ElvUI")
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
+			-- ElvUI fix
+			if LeaMapsLC.ElvUI then
+				if WorldMapFrame.backdrop then WorldMapFrame.backdrop:Hide() end
+				QuestMapFrame:ClearAllPoints()
+				QuestMapFrame:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -5, -70)
+				QuestMapFrame:SetHeight(458)
+				QuestMapFrame.DetailsFrame:ClearAllPoints()
+				QuestMapFrame.DetailsFrame:SetPoint("BOTTOMLEFT", QuestMapFrame, "BOTTOMLEFT", 2, -7)
 			end
 
 		end
@@ -1506,8 +1469,13 @@
 			if LeaMapsLC["UseDefaultMap"] == "On" then
 				-- Lock some incompatible options
 				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
+				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
+
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
+				LeaMapsCB["UnlockMap"].tiptext = LeaMapsCB["UnlockMap"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
+
 				LeaMapsLC:LockItem(LeaMapsCB["ScaleWorldMap"], true)
+				LeaMapsCB["ScaleWorldMap"].tiptext = LeaMapsCB["ScaleWorldMap"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
 			end
 
 		end
@@ -1834,6 +1802,7 @@
 		-- Ensure locked but enabled options remain locked
 		if LeaMapsLC["UseDefaultMap"] == "On" then
 			LeaMapsCB["UnlockMapBtn"]:Disable()
+			LeaMapsCB["ScaleWorldMapBtn"]:Disable()
 		end
 	end
 
@@ -2482,11 +2451,11 @@
 	LeaMapsLC:MakeCB(PageF, "ShowIcons", "Show additional icons", 225, -132, true, "If checked, additional icons (such as portals) will be shown.")
 	LeaMapsLC:MakeCB(PageF, "HideTownCity", "Hide town and city icons", 225, -152, true, "If checked, town and city icons will not be shown on the continent maps.")
 
-	LeaMapsLC:MakeTx(PageF, "More", 225, -172)
-	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -192, true, "If checked, you will be able to customise the battlefield map.")
-	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 225, -212, false, "If checked, the map will not fade while your character is moving.")
-	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -232, false, "If checked, your character will not perform the reading emote when you open the map.")
-	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -252, false, "If checked, the minimap button will be shown.")
+	LeaMapsLC:MakeTx(PageF, "More", 225, -192)
+	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -212, true, "If checked, you will be able to customise the battlefield map.")
+	LeaMapsLC:MakeCB(PageF, "NoMapFade", "Disable map fade", 225, -232, false, "If checked, the map will not fade while your character is moving.")
+	LeaMapsLC:MakeCB(PageF, "NoMapEmote", "Disable reading emote", 225, -252, false, "If checked, your character will not perform the reading emote when you open the map.")
+	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -272, false, "If checked, the minimap button will be shown.")
 
 	LeaMapsLC:CfgBtn("ScaleWorldMapBtn", LeaMapsCB["ScaleWorldMap"])
 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
