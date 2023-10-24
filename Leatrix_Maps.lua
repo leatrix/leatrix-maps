@@ -67,7 +67,7 @@
 		-- faction checkbox.  This is mitigated by locking the checkbox in editing mode.
 		-- Appears fixed as toggling the checkbox no longer causes taint.
 
-		-- Scale map taint: Still an issue but scale map is removed now anyway
+		-- Scale map taint: No longer an issue
 		-- Appears fixed as replacing WorldMapFrame.ScrollContainer.GetCursorPosition is no longer needed.
 
 		-- Command taint: Still an issue
