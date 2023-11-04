@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.1.28 (1st November 2023)
+	-- 	Leatrix Maps 10.1.29.alpha.1 (1st November 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.1.28"
+	LeaMapsLC["AddonVer"] = "10.1.29.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1370,8 +1370,10 @@
 				else
 					LeaMapsLC["PageF"]:Show()
 				end
-
 			end
+
+			-- Assign global scope for function (it's used in TOC)
+			_G.LeaMapsGlobalMiniBtnClickFunc = MiniBtnClickFunc
 
 			-- Create minimap button using LibDBIcon
 			local miniButton = LibStub("LibDataBroker-1.1"):NewDataObject("Leatrix_Maps", {

@@ -1,3 +1,6 @@
+10.1.29.alpha.1 - 1st November 2023
+- Added Leatrix Maps to the minimap addon compartment menu.
+
 10.1.28 - 1st November 2023
 - PTR (10.2.0): Added map reveal data for 'Emerald Dream'.
 

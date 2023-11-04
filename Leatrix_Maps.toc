@@ -3,13 +3,15 @@
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 10.1.28
+## Version: 10.1.29.alpha.1
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
 ## IconTexture: Interface\HELPFRAME\HelpIcon-Bug
 
 ## OptionalDeps: Leatrix_enUS, ElvUI, Demodal, WorldQuestTracker
+
+## AddonCompartmentFunc:LeaMapsGlobalMiniBtnClickFunc
 
 ## X-Curse-Project-ID: 298842
 
