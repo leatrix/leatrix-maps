@@ -1407,15 +1407,6 @@
 			LeaMapsCB["ShowMinimapIcon"]:HookScript("OnClick", SetLibDBIconFunc)
 			SetLibDBIconFunc()
 
-			-- Add Leatrix Maps to addon compartment frame (not used for the time being)
-			--[[AddonCompartmentFrame:RegisterAddon({
-				text = L["Leatrix Maps"],
-				icon = "Interface\\HELPFRAME\\HelpIcon-Bug",
-				func = function(self, void, void, void, btn)
-					MiniBtnClickFunc(btn)
-				end,
-			})]]
-
 		end
 
 		----------------------------------------------------------------------
