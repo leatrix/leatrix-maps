@@ -1,3 +1,6 @@
+10.2.10 - 16th January 2023
+- Preliminary update for game patch 10.2.5.
+
 10.2.00 - 7th November 2023
 - Preliminary update for game patch 10.2.0.
 - Added Leatrix Maps to the minimap addon compartment menu.
