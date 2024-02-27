@@ -279,11 +279,19 @@
 		--	Dragonflight
 		----------------------------------------------------------------------
 
+		[2023] =  --[[Ohn'ahran Plains]] {
+			{"PortalN", 18.5, 52.1, L["Emerald Dream"], L["Portal"]},
+		},
+
 		[2112] =  --[[Valdrakken]] {
 			{"PortalN", 53.9, 55.0, L["Valdrakken Portals"]},
 			{"PortalH", 56.6, 38.4, L["Orgrimmar"], L["Portal"]},
 			{"PortalA", 59.7, 41.8, L["Stormwind"], L["Portal"]},
 			{"PortalN", 62.6, 57.3, L["Emerald Dream"], L["Portal"]},
+		},
+
+		[2200] =  --[[Emerald Dream]] {
+			{"PortalN", 72.8, 52.9, L["Ohn'ahran Plains"], L["Portal"]},
 		},
 
 	}
