@@ -283,6 +283,7 @@
 			{"PortalN", 53.9, 55.0, L["Valdrakken Portals"]},
 			{"PortalH", 56.6, 38.4, L["Orgrimmar"], L["Portal"]},
 			{"PortalA", 59.7, 41.8, L["Stormwind"], L["Portal"]},
+			{"PortalN", 62.6, 57.3, L["Emerald Dream"], L["Portal"]},
 		},
 
 	}
