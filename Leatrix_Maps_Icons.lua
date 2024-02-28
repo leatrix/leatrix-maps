@@ -294,6 +294,10 @@
 			{"PortalN", 72.8, 52.9, L["Ohn'ahran Plains"], L["Portal"]},
 		},
 
+		[2239] =  --[[Amirdrassil]] {
+			{"PortalN", 89.3, 38.7, L["Emerald Dream"], L["Portal"]},
+		},
+
 	}
 
 	local frame = CreateFrame("FRAME")
