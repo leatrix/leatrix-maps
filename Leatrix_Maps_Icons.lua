@@ -288,6 +288,7 @@
 			{"PortalH", 56.6, 38.4, L["Orgrimmar"], L["Portal"]},
 			{"PortalA", 59.7, 41.8, L["Stormwind"], L["Portal"]},
 			{"PortalN", 62.6, 57.3, L["Emerald Dream"], L["Portal"]},
+			{"PortalN", 26.1, 40.9, L["Badlands"], L["Portal"]},
 		},
 
 		[2200] =  --[[Emerald Dream]] {
