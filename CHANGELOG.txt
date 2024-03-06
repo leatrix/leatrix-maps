@@ -1,4 +1,4 @@
-﻿10.2.18.alpha.1 - 28th February 2024
+﻿10.2.18 - 6th March 2024
 - For 'Show additional icons', added 'Badlands' portal icon to Valdrakken.
 
 10.2.17 - 28th February 2024
