@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.2.26 (8th May 2024)
+	-- 	Leatrix Maps 10.2.27.alpha.1 (8th May 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.2.26"
+	LeaMapsLC["AddonVer"] = "10.2.27.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -31,9 +31,9 @@
 	end
 
 	-- Check for addons
-	if IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
-	if IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
-	if IsAddOnLoaded("WorldQuestTracker") then LeaMapsLC.WorldQuestTracker = true end
+	if C_AddOns.IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
+	if C_AddOns.IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
+	if C_AddOns.IsAddOnLoaded("WorldQuestTracker") then LeaMapsLC.WorldQuestTracker = true end
 
 	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
@@ -74,7 +74,7 @@
 		-- Enter /ltm map 150 during combat and click a boss button.
 
 		-- Load Battlefield addon
-		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
+		if not C_AddOns.IsAddOnLoaded("Blizzard_BattlefieldMap") then
 			UIParentLoadAddOn("Blizzard_BattlefieldMap")
 		end
 
