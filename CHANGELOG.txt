@@ -1,4 +1,7 @@
-﻿10.2.27 - 15th May 2024
+﻿10.2.31 - 6th June 2024
+- Preliminary update for The War Within Beta.
+
+10.2.27 - 15th May 2024
 - Updated deprecated functions.
 
 10.2.26 - 8th May 2024

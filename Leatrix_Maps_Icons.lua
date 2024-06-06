@@ -6,6 +6,13 @@
 	local void, Leatrix_Maps = ...
 	local L = Leatrix_Maps.L
 
+	-- LeaMapsLC.NewPatch
+	local LeaMapsLC = {}
+	local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
+	if gametocversion and gametocversion == 110000 then -- 11.0.0
+		LeaMapsLC.NewPatch = true
+	end
+
 	Leatrix_Maps["Icons"] = {
 
 		----------------------------------------------------------------------
@@ -306,11 +313,22 @@
 	frame:SetScript("OnEvent", function()
 
 		-- Add Caverns of Time portal to Shattrath if reputation with Keepers of Time is revered or higher
-		local name, description, standingID = GetFactionInfoByID(989)
-		if standingID and standingID >= 7 then
-			Leatrix_Maps["Icons"][111] = Leatrix_Maps["Icons"][111] or {}; tinsert(Leatrix_Maps["Icons"][111],
-				{"PortalN", 74.7, 31.4, L["Caverns of Time"], L["Portal from Zephyr"]}
-			)
+		if LeaMapsLC.NewPatch then
+			local factionData = C_Reputation.GetFactionDataByID(989)
+			if factionData and factionData.reaction then
+				if factionData.reaction and factionData.reaction >= 7 then
+					Leatrix_Maps["Icons"][111] = Leatrix_Maps["Icons"][111] or {}; tinsert(Leatrix_Maps["Icons"][111],
+						{"PortalN", 74.7, 31.4, L["Caverns of Time"], L["Portal from Zephyr"]}
+					)
+				end
+			end
+		else
+			local name, description, standingID = GetFactionInfoByID(989)
+			if standingID and standingID >= 7 then
+				Leatrix_Maps["Icons"][111] = Leatrix_Maps["Icons"][111] or {}; tinsert(Leatrix_Maps["Icons"][111],
+					{"PortalN", 74.7, 31.4, L["Caverns of Time"], L["Portal from Zephyr"]}
+				)
+			end
 		end
 
 	end)

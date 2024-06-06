@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.2.30 (5th June 2024)
+	-- 	Leatrix Maps 10.2.31 (6th June 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.2.30"
+	LeaMapsLC["AddonVer"] = "10.2.31"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -27,6 +27,9 @@
 				print(L["LEATRIX MAPS: THIS RELEASE IS FOR DRAGONFLIGHT ONLY!"])
 			end)
 			return
+		end
+		if gametocversion and gametocversion == 110000 then -- 11.0.0
+			LeaMapsLC.NewPatch = true
 		end
 	end
 
@@ -2298,6 +2301,10 @@
 				if reason then
 					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "|n|n|cff00AAFF" .. L[reason]
 				end
+			end
+
+			if LeaMapsLC.NewPatch then
+				LockDF("NoMapBorder", "Not currently available.")
 			end
 
 		elseif event == "PLAYER_LOGIN" then
