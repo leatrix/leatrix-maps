@@ -1067,10 +1067,12 @@
 			-- Function to refresh overlays (Blizzard_SharedMapDataProviders\MapExplorationDataProvider)
 			local function MapExplorationPin_RefreshOverlays(pin, fullUpdate)
 
-				for k, v in pairs(tex) do
-					v:SetVertexColor(1, 1, 1, 1)
+				if LeaMapsLC.NewPatch then
+					for k, v in pairs(tex) do
+						v:SetVertexColor(1, 1, 1, 1)
+					end
+					wipe(tex)
 				end
-				wipe(tex)
 
 				overlayTextures = {}
 				local mapID = WorldMapFrame.mapID; if not mapID then return end
@@ -1123,7 +1125,9 @@
 							end
 							for k = 1, numTexturesWide do
 								local texture = pin.overlayTexturePool:Acquire()
-								tinsert(tex, texture)
+								if LeaMapsLC.NewPatch then
+									tinsert(tex, texture)
+								end
 								if ( k < numTexturesWide ) then
 									texturePixelWidth = TILE_SIZE_WIDTH
 									textureFileWidth = TILE_SIZE_WIDTH
@@ -1174,10 +1178,12 @@
 			-- Repeat refresh overlays function for Battlefield map
 			local function bfMapExplorationPin_RefreshOverlays(pin, fullUpdate)
 
-				for k, v in pairs(bftex) do
-					v:SetVertexColor(1, 1, 1, 1)
+				if LeaMapsLC.NewPatch then
+					for k, v in pairs(bftex) do
+						v:SetVertexColor(1, 1, 1, 1)
+					end
+					wipe(bftex)
 				end
-				wipe(bftex)
 
 				bfoverlayTextures = {}
 				local mapID = BattlefieldMapFrame.mapID; if not mapID then return end
@@ -1230,7 +1236,9 @@
 							end
 							for k = 1, numTexturesWide do
 								local texture = pin.overlayTexturePool:Acquire()
-								tinsert(bftex, texture)
+								if LeaMapsLC.NewPatch then
+									tinsert(bftex, texture)
+								end
 								if ( k < numTexturesWide ) then
 									texturePixelWidth = TILE_SIZE_WIDTH
 									textureFileWidth = TILE_SIZE_WIDTH
