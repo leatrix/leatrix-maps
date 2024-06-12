@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.2.33.alpha.1 (6th June 2024)
+	-- 	Leatrix Maps 10.2.33 (12th June 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.2.33.alpha.1"
+	LeaMapsLC["AddonVer"] = "10.2.33"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1551,7 +1551,7 @@
 			pTex:SetTexCoord(0, 1, 1, 0)
 
 			-- LeaMapsLC.DF: Block taint in 10.0.02 when closing keybindings panel
-			expTitle:SetText("Dragonflight")
+			expTitle:SetText("Dragonflight & The War Within")
 			local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
 			Settings.RegisterAddOnCategory(category)
 
