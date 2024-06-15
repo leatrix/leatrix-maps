@@ -1,5 +1,6 @@
 ﻿10.2.34.alpha.1 - 12th June 2024
 - The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available in the world map filter menu.
+- The War Within Beta: Added a new option 'Hide filter reset button'.  If enabled, the filter reset button will be hidden.  The filter reset button appears when you make changes to the map filter menu.
 
 10.2.33 - 12th June 2024
 - The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available once again.
