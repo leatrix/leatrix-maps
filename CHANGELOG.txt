@@ -1,4 +1,7 @@
-﻿10.2.33 - 12th June 2024
+﻿10.2.34.alpha.1 - 12th June 2024
+- The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available in the world map filter menu.
+
+10.2.33 - 12th June 2024
 - The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available once again.
 
 10.2.32 - 6th June 2024

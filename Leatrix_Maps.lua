@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.2.33 (12th June 2024)
+	-- 	Leatrix Maps 10.2.34.alpha.1 (12th June 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.2.33"
+	LeaMapsLC["AddonVer"] = "10.2.34.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1380,6 +1380,46 @@
 					LeaMapsLC["PageF"]:Hide()
 				end
 			end)
+
+			-- Add tint unexplored areas checkbox to world map filter menu
+			if LeaMapsLC.NewPatch then
+
+				do
+
+					-- Define essential functions
+					local function IsSelected()
+						return LeaMapsLC["RevTint"] == "On"
+					end
+
+					local function SetSelected()
+						if LeaMapsLC["RevTint"] == "On" then
+							LeaMapsLC["RevTint"] = "Off"
+						else
+							LeaMapsLC["RevTint"] = "On"
+						end
+						SetTintCol()
+						if LeaMapsCB["RevTint"]:IsShown() then LeaMapsCB["RevTint"]:Hide(); LeaMapsCB["RevTint"]:Show() end
+					end
+
+					-- Create checkbox entry
+					local button = MenuUtil.CreateCheckbox(L["Tint unexplored areas"], IsSelected, SetSelected)
+
+					-- Add tooltip
+					-- local function OnTooltipShow(tooltipFrame, elementDescription)
+					-- 	GameTooltip_SetTitle(tooltipFrame, L["If checked, unexplored areas will be tinted."])
+					-- end
+					-- button:SetTooltip(OnTooltipShow)
+
+					-- Insert button to menu
+					Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", function(ownerRegion, rootDescription, contextData)
+						rootDescription:CreateDivider()
+						rootDescription:CreateTitle(L["Leatrix Maps"])
+						rootDescription:Insert(button)
+					end)
+
+				end
+
+			end
 
 		end
 
