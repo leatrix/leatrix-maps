@@ -99,9 +99,13 @@
 		----------------------------------------------------------------------
 
 		if LeaMapsLC["NoFilterResetBtn"] == "On" then
+			-- Create hidden frame
+			local hiddenFrame = CreateFrame("FRAME")
+			hiddenFrame:Hide()
+			-- Parent reset button to hidden frame
 			for i, v in pairs({WorldMapFrame:GetChildren()}) do
 				if v.ResetButton then
-					v.ResetButton:HookScript("OnShow", v.Hide)
+					v.ResetButton:SetParent(hiddenFrame)
 				end
 			end
 		end
