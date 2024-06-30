@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 10.2.37 (26th June 2024)
+	-- 	Leatrix Maps 11.0.00.alpha.1 (26th June 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "10.2.37"
+	LeaMapsLC["AddonVer"] = "11.0.00.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -773,158 +773,6 @@
 				end
 			end
 
-		else
-
-			if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
-
-				-- Unlock map is disabled and remove map border is enabled so lower maximised map position on startup and when map size is toggled
-				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-					if WorldMapFrame:IsMaximized() then
-						WorldMapFrame:ClearAllPoints()
-						WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 34)
-					end
-				end)
-
-			end
-
-		end
-
-		----------------------------------------------------------------------
-		-- Remove map border (must be after Unlock map and Remember zoom)
-		----------------------------------------------------------------------
-
-		if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
-
-			-- Hide border frame elements
-			WorldMapFrame.BorderFrame.NineSlice:Hide()
-			WorldMapFrame.BorderFrame.InsetBorderTop:Hide()
-			WorldMapFrame.NavBar:Hide()
-			WorldMapFrame.TitleCanvasSpacerFrame:Hide()
-			WorldMapFramePortrait:SetTexture("")
-			WorldMapFrameBg:Hide()
-			WorldMapFrameTitleText:Hide()
-
-			-- Reposition close button
-			WorldMapFrameCloseButton:ClearAllPoints()
-			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", 2, -41)
-
-			-- Reposition maximise button
-			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:ClearAllPoints()
-			WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:SetPoint("BOTTOM", WorldMapFrameCloseButton, "BOTTOM", 0, -34)
-
-			-- Create border for world map frame
-			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND"); border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground"); border:SetPoint("TOPLEFT", -5, 5); border:SetPoint("BOTTOMRIGHT", 5, -5); border:SetVertexColor(0, 0, 0, 0.7)
-
-			-- Create border for quest map frame
-			local qborderTop = QuestMapFrame:CreateTexture(nil, "BACKGROUND")
-			qborderTop:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-			qborderTop:SetPoint("TOPLEFT", 1, 8)
-			qborderTop:SetPoint("TOPRIGHT", 6, 6)
-			qborderTop:SetVertexColor(0, 0, 0, 0.7)
-
-			local qborderBot = QuestMapFrame:CreateTexture(nil, "BACKGROUND")
-			qborderBot:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-			qborderBot:SetPoint("BOTTOMLEFT", 1, -6)
-			qborderBot:SetPoint("BOTTOMRIGHT", 6, -6)
-			qborderBot:SetVertexColor(0, 0, 0, 0.7)
-
-			local qborderRgt = QuestMapFrame:CreateTexture(nil, "BACKGROUND")
-			qborderRgt:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-			qborderRgt:SetPoint("TOPRIGHT", 6, -6)
-			qborderRgt:SetPoint("BOTTOMRIGHT", 6, -6)
-			qborderRgt:SetVertexColor(0, 0, 0, 0.7)
-
-			-- Position and size quest map frame
-			QuestMapFrame:ClearAllPoints()
-			QuestMapFrame:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -3, -70)
-			QuestMapFrame:SetHeight(461)
-
-			-- Position and size quest detail frame
-			QuestMapFrame.DetailsFrame:ClearAllPoints()
-			QuestMapFrame.DetailsFrame:SetPoint("BOTTOMLEFT", QuestMapFrame, "BOTTOMLEFT", 0, 2)
-
-			-- Hide quest map frame top overlay
-			local regions = {QuestMapFrame.DetailsFrame:GetRegions()}
-			regions[2]:Hide()
-
-			-- Hide quest map frame back button
-			QuestMapFrame.DetailsFrame.BackButton:Hide()
-
-			-- Set quest map frame background height
-			hooksecurefunc("QuestLogQuests_Update", function()
-				QuestMapFrame.Background:SetHeight(465)
-			end)
-
-			-- Lower quest model scene frame
-			hooksecurefunc(QuestModelScene, "Show", function()
-				if WorldMapFrame:IsShown() then
-					QuestModelScene:ClearAllPoints()
-					QuestModelScene:SetPoint("TOPLEFT", WorldMapFrame, "TOPRIGHT", -2, -81)
-				end
-			end)
-
-			-- Redesign quest model scene frame
-			QuestNPCCornerTopLeft:Hide()
-			QuestNPCCornerTopRight:SetVertexColor(0,0,0)
-			QuestNPCCornerTopRight:Hide()
-			QuestNPCCornerBottomLeft:Hide()
-			QuestNPCCornerBottomRight:Hide()
-			QuestNPCModelTopBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelRightBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelBottomBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelTextLeftBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelTextRightBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelTextBottomBorder:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelTextBotLeftCorner:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelTextBotRightCorner:SetVertexColor(0,0,0)
-			QuestNPCModelTopBorder:SetVertexColor(0,0,0)
-			QuestNPCModelNameplate:SetVertexColor(0,0,0)
-			QuestNPCModelTopBorder:SetVertexColor(0,0,0)
-			QuestNPCModelTopBg:ClearAllPoints()
-			QuestNPCModelTopBg:SetPoint("TOPLEFT", QuestModelScene, "TOPLEFT", -6, 16)
-			QuestNPCModelTopBg:SetWidth(205)
-			QuestNPCModelTopBg:SetVertexColor(0, 0, 0, 0.7)
-			QuestNPCModelBg:ClearAllPoints()
-			QuestNPCModelBg:SetPoint("TOPLEFT", QuestModelScene, "TOPLEFT", 0, 16)
-			QuestNPCModelBg:SetHeight(246)
-
-			-- Function to set map border clickable area
-			local function SetMapHitRect()
-				if LeaMapsLC["EnableMovement"] == "On" then
-					-- Map is unlocked so increase clickable area around map
-					WorldMapFrame:SetHitRectInsets(-20, -20, 38, -20)
-				else
-					-- Map is locked so remove clickable area around map
-					WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
-				end
-			end
-
-			-- Set clickable area around map
-			if LeaMapsLC["UnlockMap"] == "On" then
-				-- Map is unlocked so increase clickable area when movement is toggled and on startup
-				LeaMapsCB["EnableMovement"]:HookScript("OnClick", SetMapHitRect)
-				LeaMapsCB["UnlockMapPanelResetButton"]:HookScript("OnClick", SetMapHitRect)
-				LeaMapsCB["UnlockMapBtn"]:HookScript("OnClick", function()
-					if IsShiftKeyDown() and IsControlKeyDown() then
-						SetMapHitRect()
-					end
-				end)
-				SetMapHitRect()
-			else
-				-- Map is locked so reduce clickable area
-				WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
-			end
-
-			-- ElvUI fix
-			if LeaMapsLC.ElvUI then
-				if WorldMapFrame.backdrop then WorldMapFrame.backdrop:Hide() end
-				QuestMapFrame:ClearAllPoints()
-				QuestMapFrame:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -5, -70)
-				QuestMapFrame:SetHeight(458)
-				QuestMapFrame.DetailsFrame:ClearAllPoints()
-				QuestMapFrame.DetailsFrame:SetPoint("BOTTOMLEFT", QuestMapFrame, "BOTTOMLEFT", 2, -7)
-			end
-
 		end
 
 		----------------------------------------------------------------------
@@ -1083,12 +931,11 @@
 			-- Function to refresh overlays (Blizzard_SharedMapDataProviders\MapExplorationDataProvider)
 			local function MapExplorationPin_RefreshOverlays(pin, fullUpdate)
 
-				if LeaMapsLC.NewPatch then
-					for k, v in pairs(tex) do
-						v:SetVertexColor(1, 1, 1, 1)
-					end
-					wipe(tex)
+				-- Remove existing textures
+				for k, v in pairs(tex) do
+					v:SetVertexColor(1, 1, 1, 1)
 				end
+				wipe(tex)
 
 				overlayTextures = {}
 				local mapID = WorldMapFrame.mapID; if not mapID then return end
@@ -1141,9 +988,7 @@
 							end
 							for k = 1, numTexturesWide do
 								local texture = pin.overlayTexturePool:Acquire()
-								if LeaMapsLC.NewPatch then
-									tinsert(tex, texture)
-								end
+								tinsert(tex, texture)
 								if ( k < numTexturesWide ) then
 									texturePixelWidth = TILE_SIZE_WIDTH
 									textureFileWidth = TILE_SIZE_WIDTH
@@ -1194,12 +1039,11 @@
 			-- Repeat refresh overlays function for Battlefield map
 			local function bfMapExplorationPin_RefreshOverlays(pin, fullUpdate)
 
-				if LeaMapsLC.NewPatch then
-					for k, v in pairs(bftex) do
-						v:SetVertexColor(1, 1, 1, 1)
-					end
-					wipe(bftex)
+				-- Remove existing textures
+				for k, v in pairs(bftex) do
+					v:SetVertexColor(1, 1, 1, 1)
 				end
+				wipe(bftex)
 
 				bfoverlayTextures = {}
 				local mapID = BattlefieldMapFrame.mapID; if not mapID then return end
@@ -1252,9 +1096,7 @@
 							end
 							for k = 1, numTexturesWide do
 								local texture = pin.overlayTexturePool:Acquire()
-								if LeaMapsLC.NewPatch then
-									tinsert(bftex, texture)
-								end
+								tinsert(bftex, texture)
 								if ( k < numTexturesWide ) then
 									texturePixelWidth = TILE_SIZE_WIDTH
 									textureFileWidth = TILE_SIZE_WIDTH
@@ -1398,42 +1240,38 @@
 			end)
 
 			-- Add tint unexplored areas checkbox to world map filter menu
-			if LeaMapsLC.NewPatch then
+			do
 
-				do
-
-					-- Define essential functions
-					local function IsSelected()
-						return LeaMapsLC["RevTint"] == "On"
-					end
-
-					local function SetSelected()
-						if LeaMapsLC["RevTint"] == "On" then
-							LeaMapsLC["RevTint"] = "Off"
-						else
-							LeaMapsLC["RevTint"] = "On"
-						end
-						SetTintCol()
-						if LeaMapsCB["RevTint"]:IsShown() then LeaMapsCB["RevTint"]:Hide(); LeaMapsCB["RevTint"]:Show() end
-					end
-
-					-- Create checkbox entry
-					local button = MenuUtil.CreateCheckbox(L["Tint unexplored areas"], IsSelected, SetSelected)
-
-					-- Add tooltip
-					-- local function OnTooltipShow(tooltipFrame, elementDescription)
-					-- 	GameTooltip_SetTitle(tooltipFrame, L["If checked, unexplored areas will be tinted."])
-					-- end
-					-- button:SetTooltip(OnTooltipShow)
-
-					-- Insert button to menu
-					Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", function(ownerRegion, rootDescription, contextData)
-						rootDescription:CreateDivider()
-						rootDescription:CreateTitle(L["Leatrix Maps"])
-						rootDescription:Insert(button)
-					end)
-
+				-- Define essential functions
+				local function IsSelected()
+					return LeaMapsLC["RevTint"] == "On"
 				end
+
+				local function SetSelected()
+					if LeaMapsLC["RevTint"] == "On" then
+						LeaMapsLC["RevTint"] = "Off"
+					else
+						LeaMapsLC["RevTint"] = "On"
+					end
+					SetTintCol()
+					if LeaMapsCB["RevTint"]:IsShown() then LeaMapsCB["RevTint"]:Hide(); LeaMapsCB["RevTint"]:Show() end
+				end
+
+				-- Create checkbox entry
+				local button = MenuUtil.CreateCheckbox(L["Tint unexplored areas"], IsSelected, SetSelected)
+
+				-- Add tooltip
+				-- local function OnTooltipShow(tooltipFrame, elementDescription)
+				-- 	GameTooltip_SetTitle(tooltipFrame, L["If checked, unexplored areas will be tinted."])
+				-- end
+				-- button:SetTooltip(OnTooltipShow)
+
+				-- Insert button to menu
+				Menu.ModifyMenu("MENU_WORLD_MAP_TRACKING", function(ownerRegion, rootDescription, contextData)
+					rootDescription:CreateDivider()
+					rootDescription:CreateTitle(L["Leatrix Maps"])
+					rootDescription:Insert(button)
+				end)
 
 			end
 
@@ -1545,9 +1383,6 @@
 
 			if LeaMapsLC["UseDefaultMap"] == "On" then
 				-- Lock some incompatible options
-				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
-				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
-
 				LeaMapsLC:LockItem(LeaMapsCB["UnlockMap"], true)
 				LeaMapsCB["UnlockMap"].tiptext = LeaMapsCB["UnlockMap"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
 
@@ -1936,8 +1771,7 @@
 
 	-- Set reload button status
 	function LeaMapsLC:ReloadCheck()
-		if	(LeaMapsLC["NoMapBorder"] ~= LeaMapsDB["NoMapBorder"])				-- Remove map border
-		or	(LeaMapsLC["UnlockMap"] ~= LeaMapsDB["UnlockMap"])					-- Unlock map
+		if	(LeaMapsLC["UnlockMap"] ~= LeaMapsDB["UnlockMap"])					-- Unlock map
 		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
 		or	(LeaMapsLC["ScaleWorldMap"] ~= LeaMapsDB["ScaleWorldMap"])			-- Scale the map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
@@ -2217,7 +2051,6 @@
 				wipe(LeaMapsDB)
 
 				-- Mechanics
-				LeaMapsDB["NoMapBorder"] = "On"
 				LeaMapsDB["UnlockMap"] = "On"
 				LeaMapsDB["EnableMovement"] = "On"
 				LeaMapsDB["UseDefaultMap"] = "Off"
@@ -2318,7 +2151,6 @@
 
 		if event == "ADDON_LOADED" and arg1 == "Leatrix_Maps" then
 			-- Load settings or set defaults
-			LeaMapsLC:LoadVarChk("NoMapBorder", "Off")					-- Remove map border
 			LeaMapsLC:LoadVarChk("UnlockMap", "Off")					-- Unlock map frame
 			LeaMapsLC:LoadVarChk("EnableMovement", "On")				-- Enable frame movement
 			LeaMapsLC:LoadVarChk("UseDefaultMap", "Off")				-- Use default map
@@ -2389,7 +2221,6 @@
 			end
 
 			if LeaMapsLC.NewPatch then
-				LockDF("NoMapBorder", "Not currently available.")
 			else
 				LockDF("NoFilterResetBtn", "This is for The War Within.")
 			end
@@ -2400,7 +2231,6 @@
 
 		elseif event == "PLAYER_LOGOUT" and not LeaMapsLC["NoSaveSettings"] then
 			-- Mechanics
-			LeaMapsDB["NoMapBorder"] = LeaMapsLC["NoMapBorder"]
 			LeaMapsDB["UnlockMap"] = LeaMapsLC["UnlockMap"]
 			LeaMapsDB["EnableMovement"] = LeaMapsLC["EnableMovement"]
 			LeaMapsDB["UseDefaultMap"] = LeaMapsLC["UseDefaultMap"]
@@ -2539,13 +2369,10 @@
 	CloseB:SetScript("OnClick", function() PageF:Hide() end)
 
 	-- Add content
-	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
-	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
-
-	LeaMapsLC:MakeTx(PageF, "System", 16, -132)
-	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -152, true, "If checked, you will be able to move the map.|n|nThe map position will be saved separately for the maximised and windowed maps.")
-	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -172, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
-	LeaMapsLC:MakeCB(PageF, "ScaleWorldMap", "Scale the map", 16, -192, true, "If checked, you will be able to scale the map.")
+	LeaMapsLC:MakeTx(PageF, "System", 16, -72)
+	LeaMapsLC:MakeCB(PageF, "UnlockMap", "Unlock map frame", 16, -92, true, "If checked, you will be able to move the map.|n|nThe map position will be saved separately for the maximised and windowed maps.")
+	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 16, -112, true, "If checked, the default fullscreen map will be used for the maximised map.|n|nNote that enabling this option will lock out some of the other options.")
+	LeaMapsLC:MakeCB(PageF, "ScaleWorldMap", "Scale the map", 16, -132, true, "If checked, you will be able to scale the map.")
 
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -92, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
