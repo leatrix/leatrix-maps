@@ -1441,8 +1441,7 @@
 			pTex:SetAlpha(0.2)
 			pTex:SetTexCoord(0, 1, 1, 0)
 
-			-- LeaMapsLC.DF: Block taint in 10.0.02 when closing keybindings panel
-			expTitle:SetText("Dragonflight & The War Within")
+			expTitle:SetText(L["The War Within"])
 			local category = Settings.RegisterCanvasLayoutCategory(interPanel, "Leatrix Maps")
 			Settings.RegisterAddOnCategory(category)
 
