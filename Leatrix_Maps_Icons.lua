@@ -9,7 +9,7 @@
 	-- LeaMapsLC.NewPatch
 	local LeaMapsLC = {}
 	local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-	if gametocversion and gametocversion == 110000 then -- 11.0.0
+	if gametocversion and gametocversion > 110000 then -- 11.0.0
 		LeaMapsLC.NewPatch = true
 	end
 
