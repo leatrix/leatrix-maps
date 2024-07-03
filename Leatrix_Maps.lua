@@ -21,7 +21,7 @@
 	-- Check Wow version is valid
 	do
 		local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-		if gametocversion and gametocversion < 100000 then
+		if gametocversion and gametocversion < 110000 then
 			-- Game client is Wow Classic
 			C_Timer.After(2, function()
 				print(L["LEATRIX MAPS: THIS RELEASE IS FOR DRAGONFLIGHT ONLY!"])
