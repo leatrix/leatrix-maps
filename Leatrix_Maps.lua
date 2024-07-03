@@ -24,7 +24,7 @@
 		if gametocversion and gametocversion < 110000 then
 			-- Game client is Wow Classic
 			C_Timer.After(2, function()
-				print(L["LEATRIX MAPS: THIS RELEASE IS FOR DRAGONFLIGHT ONLY!"])
+				print(L["LEATRIX MAPS: THIS RELEASE IS FOR THE WAR WITHIN ONLY!"])
 			end)
 			return
 		end
