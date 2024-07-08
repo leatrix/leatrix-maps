@@ -1,6 +1,5 @@
 ﻿11.0.01.alpha.1 - 4th July 2024
 - Welcome to The War Within!
-- Updated for game version 11.0.2.55399 (Jun 28 2024) (110002).
 - Added map reveal data for the Khaz Algar zones.
 - Removed the 'Remove map border' option.
 - Removed Dragonflight transitional code.
