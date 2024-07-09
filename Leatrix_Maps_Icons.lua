@@ -323,7 +323,7 @@
 				end
 			end
 		else
-			local name, description, standingID = GetFactionInfoByID(989)
+			local name, description, standingID = C_Reputation.GetFactionDataByID(989)
 			if standingID and standingID >= 7 then
 				Leatrix_Maps["Icons"][111] = Leatrix_Maps["Icons"][111] or {}; tinsert(Leatrix_Maps["Icons"][111],
 					{"PortalN", 74.7, 31.4, L["Caverns of Time"], L["Portal from Zephyr"]}
