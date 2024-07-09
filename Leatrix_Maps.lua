@@ -28,7 +28,7 @@
 			end)
 			return
 		end
-		if gametocversion and gametocversion > 110000 then -- 11.0.0
+		if gametocversion and gametocversion >= 110000 then -- 11.0.0
 			LeaMapsLC.NewPatch = true
 		end
 	end
@@ -2221,7 +2221,7 @@
 
 			if LeaMapsLC.NewPatch then
 			else
-				LockDF("NoFilterResetBtn", "This is for The War Within.")
+				-- LockDF("NoFilterResetBtn", "This is for The War Within.")
 			end
 
 		elseif event == "PLAYER_LOGIN" then
