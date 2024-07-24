@@ -1,4 +1,4 @@
-﻿11.0.01.alpha.2 - 4th July 2024
+﻿11.0.01 - 24th July 2024
 - Welcome to The War Within!
 - Added map reveal data for the Khaz Algar zones.
 - Removed the 'Remove map border' option.
