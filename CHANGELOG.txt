@@ -1,4 +1,4 @@
-﻿11.0.03.alpha.1 - 24th July 2024
+﻿11.0.03 - 7th August 2024
 - For 'Show unexplored areas', fixed the data for 'The Ringing Deeps' and 'Azj-Kahet'.
 
 11.0.01 - 24th July 2024
