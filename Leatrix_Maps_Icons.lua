@@ -306,6 +306,15 @@
 			{"PortalN", 89.3, 38.7, L["Emerald Dream"], L["Portal"]},
 		},
 
+		----------------------------------------------------------------------
+		--	The War Within
+		----------------------------------------------------------------------
+
+		[2339] =  --[[Dornogal]] {
+			{"PortalA", 41.1, 22.7, L["Stormwind"], L["Portal"]},
+			{"PortalH", 38.2, 27.2, L["Orgrimmar"], L["Portal"]},
+		},
+
 	}
 
 	local frame = CreateFrame("FRAME")
