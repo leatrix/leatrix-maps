@@ -677,10 +677,10 @@
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 				WorldMapFrame:ClearAllPoints()
 				if not WorldMapFrame:IsMaximized() then
-					WorldMapFrame:SetClampRectInsets(600, -600, 0, 470)
+					WorldMapFrame:SetClampRectInsets(600, -600, -64, 470)
 					WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
 				else
-					WorldMapFrame:SetClampRectInsets(900, -900, 0, 700)
+					WorldMapFrame:SetClampRectInsets(900, -900, -64, 700)
 					WorldMapFrame:SetPoint(LeaMapsLC["MaxMapPosA"], UIParent, LeaMapsLC["MaxMapPosR"], LeaMapsLC["MaxMapPosX"], LeaMapsLC["MaxMapPosY"])
 				end
 			end)
