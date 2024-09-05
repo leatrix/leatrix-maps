@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 11.0.07 (4th September 2024)
+	-- 	Leatrix Maps 11.0.08.alpha.1 (4th September 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "11.0.07"
+	LeaMapsLC["AddonVer"] = "11.0.08.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1900,7 +1900,7 @@
 	function LeaMapsLC:MakeSL(frame, field, label, caption, low, high, step, x, y, form)
 
 		-- Create slider control
-		local Slider = CreateFrame("Slider", "LeaMapsGlobalSlider" .. field, frame, "OptionssliderTemplate")
+		local Slider = CreateFrame("Slider", nil, frame, "UISliderTemplate")
 		LeaMapsCB[field] = Slider
 		Slider:SetMinMaxValues(low, high)
 		Slider:SetValueStep(step)
@@ -1913,12 +1913,10 @@
 		Slider:SetScript("OnEnter", LeaMapsLC.TipSee)
 		Slider:SetScript("OnLeave", GameTooltip_Hide)
 
-		-- Remove slider text
-		_G[Slider:GetName().."Low"]:SetText('')
-		_G[Slider:GetName().."High"]:SetText('')
-
 		-- Set label
-		_G[Slider:GetName().."Text"]:SetText(L[label])
+		Slider.label = Slider:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+		Slider.label:SetPoint("TOP", Slider, "TOP", 0, 12)
+		Slider.label:SetText(L[label])
 
 		-- Create slider label
 		Slider.f = Slider:CreateFontString(nil, 'BACKGROUND')
