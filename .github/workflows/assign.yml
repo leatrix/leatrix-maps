@@ -1,0 +1,20 @@
+name: Auto Assign Issues
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign the issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              assignees: ['leatrix']
+            })
