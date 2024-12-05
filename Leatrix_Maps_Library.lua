@@ -8,9 +8,6 @@
 -- 13: LibDataBroker: (?s)-- DataBrokerStart\R?\K.*?(?=-- DataBrokerEnd)
 -- 14: LibDBIcon: (?s)-- LibDBIconStart\R?\K.*?(?=-- LibDBIconEnd)
 
-local LeaMapsLC = {}
-local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-
 ----------------------------------------------------------------------
 -- L11: LibDBIcon: LibStub
 ----------------------------------------------------------------------
@@ -972,5 +969,3 @@ end
 
 end
 LeaLibDBIcon()
-
--- L15: End

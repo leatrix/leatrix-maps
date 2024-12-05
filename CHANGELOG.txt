@@ -1,190 +1,245 @@
-﻿11.0.17 - 13th November 2024
+﻿4.0.34 - 13th November 2024
 - Game API updates.
 
-11.0.14 - 23rd October 2024
-- Updated for game patch 11.0.5.
+4.0.32 - 1st November 2024
+- Fixed the compatibility issue with ElvUI.
 
-11.0.08 - 11th September 2024
+4.0.31 - 30th October 2024
+- Updated for game version 4.4.1.
+
+4.0.30 - 23rd October 2024
+- For 'Show travel points', fixed the location of the boat to Booty Bay in The Barrens.
+
+4.0.27 - 2nd October 2024
+- PTR (4.4.1): Game API updates.
+- PTR (4.4.1): The 'Use default map' option is currently unavailable due to a bug in the game code which affects map movement.
+
+4.0.25 - 18th September 2024
+- PTR (4.4.1): Game API updates.
+
+4.0.24 - 11th September 2024
 - Game API updates.
+- PTR (4.4.1): Preliminary updates for game version 4.4.1.
 
-11.0.06 - 28th August 2024
-- For 'Show additional icons', added 'Stormwind' and 'Orgrimmar' portal icons to the 'Dornogal' map.
-- The world map frame can no longer be dragged completely off the screen.
+4.0.21 - 21st August 2024
+- Moved the Orb of Translocation icon to the correct location on the Tirisfal Glades map.
 
-11.0.04 - 14th August 2024
-- Updated for game patch 11.0.2.
+4.0.15 - 10th July 2024
+- Fixed an issue which caused the map to be movable even when 'Unlock map frame' is disabled.
+- Fixed a situational issue which could cause a Lua error while moving the map.
 
-11.0.03 - 7th August 2024
-- For 'Show unexplored areas', fixed the data for 'The Ringing Deeps' and 'Azj-Kahet'.
+4.0.12 - 19th June 2024
+- For 'Show zone levels', the zone levels have been updated.
 
-11.0.01 - 24th July 2024
-- Welcome to The War Within!
-- Added map reveal data for the Khaz Algar zones.
-- Removed the 'Remove map border' option.
-- Removed Dragonflight transitional code.
+4.0.09 - 29th May 2024
+- If 'Use default map' is enabled, map zoom will not be remembered when you close and open the map.
 
-10.2.40 - 4th July 2024
-- This is the last release that is compatible with both Dragonflight and The War Within.
-- Future releases will be for The War Within only.
-- Republished due to an issue with CurseForge.
+4.0.08 - 22nd May 2024
+- The 'Remember zoom level' functionality is now built into the addon (always enabled) so the option has been removed.
+- Fixed an issue which caused the zoom level to be reset following certain actions (such as accepting a quest).
 
-10.2.34 - 15th June 2024
-- The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available in the world map filter menu.
-- The War Within Beta: Added a new option 'Hide filter reset button'.  If enabled, the filter reset button will be hidden.  The filter reset button appears when you make changes to the map filter menu.
-
-10.2.33 - 12th June 2024
-- The War Within Beta: For 'Show unexplored areas', the 'Tint unexplored areas' setting is now available once again.
-
-10.2.32 - 6th June 2024
-- The War Within Beta: Update.
-
-10.2.31 - 6th June 2024
-- Preliminary update for The War Within Beta.
-
-10.2.27 - 15th May 2024
-- Updated deprecated functions.
-
-10.2.26 - 8th May 2024
-- Updated for game patch 10.2.7.
+4.0.05 - 8th May 2024
+- Updated dungeon icons.
 - Added ability to toggle the main panel by clicking the slash command logo in the interface options panel.
 
-10.2.20 - 20th March 2024
-- Updated for game patch 10.2.6.
+4.0.04 - 29th April 2024
+- Updated deprecated functions.
 
-10.2.18 - 6th March 2024
-- For 'Show additional icons', added 'Badlands' portal icon to Valdrakken.
+4.0.03 - 27th April 2024
+- Added a new 'Show digsites' option.
 
-10.2.17 - 28th February 2024
-- For 'Show additional icons', added 'Emerald Dream' portal icons to Valdrakken, Emerald Dream and Ohn'ahran Plains.
+4.0.02 - 26th April 2024
+- Cataclysm Classic Beta: Code updates.
 
-10.2.10 - 16th January 2024
-- Preliminary update for game patch 10.2.5.
+4.0.00 - 24th April 2024
+- Welcome to Cataclysm Classic.
+- Map reveal data, flight points, zone levels and dungeon levels have been updated.
+- Added 'The Maelstrom' to the map dropdown menu.
+- The 'Show zone crossings' and 'Show fishing skill levels' options have been removed.
+- This release and future releases will only work with Cataclysm Classic (not Wrath of the Lich King Classic).
 
-10.2.00 - 7th November 2023
-- Preliminary update for game patch 10.2.0.
-- Added Leatrix Maps to the minimap addon compartment menu.
+3.0.190 - 19th April 2024
+- Cataclysm Classic Beta: You can now enable 'Show points of interest' to see dungeons, raids and flight points.
+- Cataclysm Classic Beta: Added 'The Maelstrom' map dropdown menu.
+- Cataclysm Classic Beta: Updated map reveal data.
+- Cataclysm Classic Beta: The 'Show zone levels' and 'Show zone crossings' options are currently unavailable.
 
-10.1.28 - 1st November 2023
-- PTR (10.2.0): Added map reveal data for 'Emerald Dream'.
+3.0.189 - 16th April 2024
+- Updated for Cataclysm Classic Beta.
+- Cataclysm Classic Beta: Updated map reveal data for Cataclysm Classic.
+- Cataclysm Classic Beta: The 'Show points of interest' option is currently unavailable.
 
-10.1.27 -  25th September 2023
-- Some internal code changes.
+3.0.188 - 10th April 2024
+- The addon will no longer show 'Wrong version installed' when run on Cataclysm Classic.
 
-10.1.19 - 7th September 2023
-- Updated for game version 10.1.7.
+3.0.179 - 14th February 2024
+- Updated Hillsbrad Foothills to Arathi Highlands zone crossing.
 
-10.1.12 - 15th July 2023
-- Added the 'Show additional icons' option once again.
+3.0.162 - 1st November 2023
+- For 'Use default map', the map title will be shown if you are not using 'Show zone menus'.
 
-10.1.11 - 12th July 2023
-- Removed the 'Show additional icons' option.
+3.0.161 - 25th October 2023
+- For 'Set map opacity', toggling the option will now require a UI reload.  The option will be locked out if ElvUI is installed with the maps module enabled.
+- For 'Use default map', the blackout frame is now hidden when the map is maximised.  The 'Set map opacity' option will be locked out.
 
-10.1.10 - 12th July 2023
-- Updated for game version 10.1.5.
+3.0.160 - 19th October 2023
+- Updates for game version 3.4.3.
+- Fixed two issues with 'Set map opacity' (opacity not applied on login and opacity incorrectly applied to maximised map).
+- Fixed two issues with 'Use default map' (maximised map was movable and possibly non-interactive on login).
+- For 'Use default map', the smaller map frame will no longer align with other system frames.
 
-10.1.08 - 28th June 2023
+3.0.159 - 16th October 2023
+- Updates for game version 3.4.3.
+
+3.0.158 - 14th October 2023
+- Added new option 'Show objectives'.  If enabled, quest objectives will be shown on the map.  It's enabled by default.
+- The 'Remove map border' option has been removed.
+- The 'Show coordinates' option no longer requires a UI reload once again.
+- Removed 3.4.3 transitional code.
+
+3.0.157 - 12th October 2023
+- The world map frame is now sized as it was prior to game patch 3.4.3.  After installing this update, the map will appear larger at first.  You can resize it by enabling 'Unlock map frame' or you can click the 'Reset map layout' button in the Leatrix Maps panel.  The size change does not apply if 'Use default map' is enabled.
+- You can no longer disable 'Remove map border'.  It's now always enabled.  This does not apply if 'Use default map' is enabled.
+
+3.0.156 - 12th October 2023
+- Updates for game version 3.4.3.
+- If 'Unlock map frame' is enabled, you can drag the map by any of its borders once again.  You can always drag the map by the top border regardless of this setting.
+
+3.0.155 - 12th October 2023
+- Updates for game version 3.4.3.
+- The 'Use default map' option is now available once again.
+- Adjusted the scaling of points of interest icons (does not apply if 'Use default map' is enabled).
+
+3.0.154 - 11th October 2023
+- The 'Remove map border' option is now available once again.
+- You can move the map by dragging the top border.
+- You can scale the map by enabling 'Unlock map frame' and dragging the bottom-right corner of the map frame.
+
+3.0.153 - 10th October 2023
+- Preliminary update for game version 3.4.3.
+- The 'Show coordinates' option now requires a UI reload.
+- The 'Remove map border' and 'Use default map' options have been removed (at least for now).
+
+3.0.138 - 28th June 2023
 - Updated LibDBIcon.
 
-10.1.06 - 11th May 2023
-- The 'Enhance dungeon icons' option has been renamed 'Show additional icons'.  Dungeon and raid icons are now handled by the default UI and can be toggled in the map dropdown menu.
+3.0.137 - 24th June 2023
+- Updated for game version 3.4.2.
 
-10.1.00 - 3rd May 2023
-- Updated for game version 10.1.
-- Added an icon for the in-game addon listing.
+3.0.135 - 11th June 2023
+- The /ltm slash command has returned.  /run leamaps() has been removed.
 
-10.0.52 - 23rd March 2023
-- Updated for game version 10.0.7.
-- Added map reveal data for The Forbidden Reach.
+3.0.110 - 25th February 2023
+- Fix for Krowi Map Buttons library 1.4.4.
 
-10.0.34 - 1st February 2023
-- The 'Scale the map' option has returned.  As before, you can set the scale of the windowed and maximised maps independently.
-- Updated close button code.
+3.0.106 - 22nd February 2023
+- Fix for Krowi Map Buttons library 1.5.
+
+3.0.100 - 30th January 2023
 - Updated LibDBIcon.
 
-10.0.33 - 25th January 2023
-- Updated for game patch 10.0.5.
-- The /ltm slash command has returned.  The /run leamaps() command is no longer available.
+3.0.84 - 19th January 2023
+- For 'Show points of interest', clicking a travel icon or a portal icon will now show the destination map.  Clicking a dungeon or raid icon on a Northrend map will now show the dungeon map (as long as there is only one dungeon or raid assigned to the icon).  Added zeppelin and boat icons to the Borean Tundra and Howling Fjord maps.  Added a Dalaran teleport crystal icon and a zone crossing icon to the Dalaran and Crystalsong Forest maps.
 
-10.0.24 - 21st December 2022
-- For 'Enhance dungeon icons', added portal icons to the Valdrakken map.
+3.0.83 - 18th January 2023
+- Updated for game version 3.4.1.
+- Due to problems with Blizzard's slash command system in 3.4.1, the /ltm command has been replaced with /run leamaps().  If you wish to pass a parameter, enter it in quotes between the brackets.
 
-10.0.13 - 21st November 2022
-- Fixed a situational (harmless) Lua error with the configuration panel reload button.
+3.0.78 - 8th January 2023
+- PTR (3.4.1): The interface options panel now shows /run leamaps() instead of /ltm.
 
-10.0.11 - 16th November 2022
-- Updated for game version 10.0.2.46658.
+3.0.65 - 5th December 2022
+- Fixed frame border issue with 'Use default map'.
+
+3.0.64 - 5th December 2022
+- Adjusted world map frame strata.
+
+3.0.62 - 30th November 2022
+- Reformatted the texture file.
+
+3.0.60 - 23rd November 2022
+- In 3.4.1 (currently on the PTR), Blizzard's slash command system causes errors (just like retail) so /ltm has been replaced with /run leamaps() (just like retail).  When Blizzard fixes their slash command system, the /ltm slash command will return.
+
+3.0.56 - 22nd November 2022
+- For Krowi's Map Buttons users, fixed an issue which caused the borderless map close button to be hidden.
+- Fixed the levelling range for Borean Tundra and The Storm Peaks.
+
+3.0.53 - 15th November 2022
 - Updated LibDBIcon.
 
-10.0.08 - 8th November 2022
-- Due to problems with Blizzard's code in Dragonflight, the '/ltm' slash command has been removed for the time being.  As a workaround, you can enter '/run leamaps()' to open Leatrix Maps.  If you want to pass a parameter, enter it in quotes between the brackets.  Example: /run leamaps("wipe").  This (hopefully temporary) change is necessary because of a bug in the game code with the slash command system.  Entering any addon related slash command will taint the UI and cause errors to show at some point.  Blizzard are aware of the bug.  When they fix it, the /ltm slash command will return.  You can assign a hotkey to open Leatrix Maps in the game keybindings panel and you can open Leatrix Maps using the minimap button if it's enabled in the Leatrix Maps configuration panel so there are plenty of options.
+3.0.52 - 9th November 2022
+- Fixed an issue which may have caused other map addon buttons to not show on the world map.
 
-10.0.07 - 7th November 2022
-- Due to problems with Blizzard's code in Dragonflight, the zoom settings, scale setting and some enhanced battlefield map settings have been removed.
-
-10.0.06 - 2nd November 2022
-- Added French translations.
-- Due to problems with Blizzard's code in Dragonflight, the zoom settings are currently unavailable.
-
-10.0.01 - 27th October 2022
-- For the time being, the addon will not register with the minimap compartment menu.
-
-10.0.00 - 24th October 2022
-- Welcome to Dragonflight!
-- Removed Shadowlands specific code.  This release is not compatible with Shadowlands.
-
-9.2.42 - 19th October 2022
+3.0.29 - 12th October 2022
+- Updated summon levels for all dungeons and raids.
+- Added summon level ranges to all Outland dungeons and raids.
 - Added the turtle boat dock locations in Borean Tundra, Dragonflight and Howling Fjord.
+- Updated Korean translations.
 
-9.2.41 - 5th October 2022
-- Fixed a minor issue with 'Use default map' which may have caused the map to be scaled.
+3.0.08 - 21st September 2022
+- Updated dungeon and raid icon meeting stone requirements for Blackrock Mountain, Karazhan, Zul'Gurub, Zul'Aman, Onyxia's Lair, Caverns of Time and Ahn'Qiraj.
+- Added zone levels for Azuremyst Isle, Bloodmyst Isle, Eversong Woods, Ghostlands and Isle of Quel'Danas.
+- File structure updates.
 
-9.2.38 - 2nd October 2022
-- Dragonflight: Fixed the Lua error when removing the map border.
+3.0.07 - 14th September 2022
+- Locale updates.
 
-9.2.35 - 21st September 2022
-- Dragonflight: Leatrix Maps is now listed in the minimap addon menu and the game options panel.
-- Dragonflight: Updates.
+3.0.06 - 7th September 2022
+- Updated icon for Dire Maul East (side entrance).
 
-9.2.34 - 14th September 2022
-- Dragonflight: Added The Waking Shore map reveal data.
-- Dragonflight: Fixed Halls of Infusion dungeon location.
+3.0.05 - 1st September 2022
+- Added points of interest.
 
-9.2.29 - 8th September 2022
-- Updated for Dragonflight 10.0.2.45480 (PTR).
+3.0.04 - 31st August 2022
+- File layout fix and Eastern Plaguelands fix #2.
 
-9.2.28 - 7th September 2022
-- Updated for Dragonflight Beta.
+3.0.02 - 31st August 2022
+- Fixed an issue with Eastern Plaguelands explored map showing unexplored areas.
 
-9.2.25 - 17th August 2022
-- Updated for game version 9.2.7.
+3.0.01 - 31st August 2022
+- Added some points of interest icons.
+- Fixed an issue which caused a texture to be shown behind the map if the map border was enabled and map opacity was not 100%.
 
-9.2.22 - 27th July 2022
+3.0.00 - 29th August 2022
+- Welcome to Wrath of the Lich King!
+- Removed BCC transitional code.
+- Added Utgarde Keep icon.
+
+2.5.120 - 24th August 2022
+- Wrath: For 'Show dungeons and raids', the Northrend dungeon icons now show level information (recommended dungeon level, minimum level required to enter and meeting stone level, where known).
+
+2.5.119 - 17th August 2022
+- Wrath: Added new flight points in Tirisfal Glades and Western Plaguelands.
+- Wrath: The 'Show spirit healers' setting is disabled.
+
+2.5.118 - 10th August 2022
+- Updated for Wrath Classic.
+- Wrath: The Northrend zone menu is now available (when logged into BCC, the menu will be disabled).
+- Wrath: All the Northrend zones are revealed and show points of interest if the settings are enabled.
+- For Wrath, it's best to use alpha releases during Wrath Beta/prepatch so that you get the latest development updates.  To switch to alpha releases, open CurseForge App, right-click Leatrix Maps in your Wrath addon listing and change release type to Alpha.  You can change it back to Release once Wrath is live for everyone.
+
+2.5.117 - 3rd August 2022
+- Leatrix Maps will be updated for Wrath Beta during August 2022.
+
+2.5.116 - 27th July 2022
 - For 'Unlock map frame', added a fix for Demodal preventing the map frame from being moved to the top edge of the screen.
+- Leatrix Maps for BCC will now attempt to run on Wrath Beta but note that it hasn't been tested and there are no Wrath features yet.
 
-9.2.21 - 20th July 2022
-- Added the scale map setting back as a separate setting.  Note that enabling this setting will taint the map and this is highlighted in the configuration panel help button.
+2.5.115 - 20th July 2022
+- Fixed a minor cosmetic issue with 'Show zone menus' which may have sometimes caused menus to overlap.  Added skins for ElvUI.
 
-9.2.20 - 20th July 2022
-- The 'Unlock map frame' setting no longer allows you to change the scale of the map frame.
-- If you use premade group finder to make a Mythic+ dungeon group for your own key and your game account does not have Two-Factor Authentication (2FA) enabled, you may sometimes see a stop error when the game tries to set the activity title to your key level.  Click the reload button to clear the error.  Enable Two-Factor-Authentication (2FA) on your game account to avoid seeing this error.  If you don't have Two-Factor-Authentication (2FA) enabled on your game account, an advisory alert button will be shown in the configuration panel.
-- If you use premade group finder, you can no longer change the same faction only setting after you have listed the group.  You need to delist the group to change the same faction only setting.
-- Various taint fixes.  Added a help button to the zoom heading to notify that enabling any of the zoom settings will taint the map (if you use other map addons such as HandyNotes or TomTom, they will taint the map anyway regardless of the zoom settings).
+2.5.114 - 13th July 2022
+- Added a new setting 'Show zone menus'.  If enabled, continent and zone dropdown menus will be shown in the map frame allowing you to see the current map zone and change it as you wish.  It's enabled by default.
+- For 'Show zone crossings', Mulgore and Thunder Bluff maps now show north and south zone crossing arrows.
+- For 'Show dungeons and raids', Blackrock Mountain, Caverns of Time and Coilfang Reservoir icons will now show minimum levels for each of the dungeons and raids included.
 
-9.2.18 - 6th July 2022
-- If 'Remove map border' is enabled, the map close and maximise/minimise buttons will now be shown on the right-side of the map.
-- Fixed an issue with the game code which caused the premade group finder to show an error when opening the Dungeons section while you have a keystone.  As a result of this fix, the dungeon title will no longer be prefilled with the keystone level.
-- Fixed a compatibility issue with World Quest Tracker addon and the 'Unlock map frame' setting in Leatrix Maps.
-
-9.2.16 - 22nd June 2022
+2.5.111 - 22nd June 2022
 - In the game key bindings menu, you can now set a keybind to toggle Leatrix Maps.
 
-9.2.13 - 1st June 2022
-- Updated for game version 9.2.5.
+2.5.109 - 8th June 2022
+- Added 'Ravenholdt Manor' zone crossing to Hillsbrad Foothills and Alterac Mountains maps.
 
-9.2.06 - 13th April 2022
-- Added a new setting 'Use default map'.  If enabled, the full-screen map will be used for the maximised map.
-
-9.2.04 - 30th March 2022
+2.5.96 - 30th March 2022
 - For developers, you can now configure Leatrix Maps from your own addon or script using the following as a guide:
 
 -- Ensure Leatrix Maps does not replace LeaMapsDB on next reload
@@ -196,114 +251,106 @@ LeaMapsDB["NoMapBorder"] = "On"
 -- Reload the UI to apply the settings
 ReloadUI()
 
-9.2.03 - 23rd March 2022
-- For 'Enhance dungeon icons', added icons for 'Synthesis Forge', 'Protoform Repository' and 'Exile's Hollow' to the Zereth Mortis map.
+2.5.95 - 23rd March 2022
+- Updated for game version 2.5.4.
 
-9.2.00 - 23rd February 2022
-- Updated for game version 9.2.0.
-
-9.1.44 - 9th February 2022
+2.5.90 - 9th February 2022
 - For 'Center map on player', releasing shift (after holding it down to prevent the map from centering) will no longer cause the map to center.  Centering will only will start again when you do something that requires a map update without shift being held down.  This includes zooming, panning, clicking an area of the map that isn't a button, toggling the map, etc.  This applies to both the world map and battleground map.
 
-9.1.39 - 19th January 2022
-- The 'Show unexplored areas' option now applies to Torghast too.
-- Added a raid icon for Sepulcher of the First Ones (PTR).
+2.5.89 - 3rd February 2022
+- Added zone crossings for Eversong Woods and Silvermoon City.
+- Added Orb of Translocation for Silvermoon City and Undercity.
 
-9.1.36 - 29th December 2021
-- Added additional map reveal data for The Maw.  Many thanks to zeenk for reporting that it was missing.
-- For 'Enhance dungeon icons', the Flayedwing Transporter will now be shown on the Korthia map.
+2.5.86 - 19th January 2022
+- Updated for game version 2.5.3.
 
-9.1.31 - 16th December 2021
-- For 'Enhance dungeon icons', added Oribos portals to Stormwind and Orgrimmar.  Added map arrows for 'Court of Stars' dungeon map.
+2.5.76 - 22nd December 2021
+- Added missing Duskwood to Deadwind pass zone crossing.
 
-9.1.28 - 8th December 2021
-- Added map reveal data for Zereth Mortis (PTR).
+2.5.75 - 16th December 2021
+- Updated zone crossings for Exodar and Azuremyst Isle.
 
-9.1.25 - 1st December 2021
-- Player arrow and group icon maximum size (for battlefield map) and battlefield maximum size increased to 400%.
-- Updated the minimap icon.
+2.5.70 - 1st December 2021
+- Added a new setting under 'Show points of interest' called 'Show zone crossings'.  If enabled, zone crossings will be shown.  These are clickable arrows indicating zone exit pathways.
+- Player arrow and group icon maximum size (for both world map and battlefield map) and battlefield maximum size increased to 400%.
+- Changed the Leatrix Maps minimap icon.
 
-9.1.24 - 24th November 2021
-- Added 'Sanctum of Domination' ('The Maw') raid icon.
-- Added 'Oribos' ('Korthia') portal icon.
-- If 'Center map on player' is enabled (either world map or battlefield map), the map will center more quickly.  You can now hold shift while panning to temporarily prevent the map from centering.
-- Fixed an issue with 'Remember zoom level' which caused the zoom level to malfunction for certain maps (mostly scenarios such as Island Expeditions and Torghast).
-- Fixed an issue which caused the battlefield map frame tab to be clickable on startup even if the battlefield map isn't showing.  This is a bug in the game and not caused by addons.
+2.5.69 - 24th November 2021
+- If 'Center map on player' is enabled (either world map or battlefield map), the map will center more quickly after zooming, panning, etc.  You can now hold shift while panning to temporarily prevent the map from centering.
 
-9.1.23 - 17th November 2021
-- Added 'Tazavesh, the Veiled Market' ('Tazavesh, the Veiled Market') dungeon icon and 'Castle Nathria' ('Revendreth') raid icon.
+2.5.68 - 17th November 2021
+- Fixed a minor issue with 'Enhance battlefield map' where the battlefield map tab remained visible on startup until the battlefield map was shown.
 
-9.1.21 - 3rd November 2021
+2.5.66 - 4th November 2021
 - Added new option called 'Increase zoom level'.  If enabled, you will be able to zoom further into the world map (up to 600% increased zoom).  You can set the maximum zoom level in the configuration panel.
 - If 'Enhance battlefield map' is enabled, you can set the maximum zoom level for the battlefield map in the configuration panel.
 - Changes to configuration panel layout.
-- To minimise unavoidable taint with the addon, press M to close the map (don't use the close button), avoid clicking quests and items in the objective tracker especially during combat (use the quest log instead) and avoid clicking boss buttons and dungeon icons during combat.
 
-9.1.20 - 29th October 2021
-- Replaced packager to fix issue with CurseForge app.
+2.5.63 - 29th October 2021
+- Replaced packager to fix CurseForge App issue.
 
-9.1.18 - 28th October 2021
+2.5.62 - 28th October 2021
 - Fixed a few locale issues with invalid translations.
 
-9.1.16 - 21st October 2021
+2.5.61 - 21st October 2021
+- The 'Show flight points' and 'Show travel points' options (in the 'Show points of interest' configuration panel) are now combined into 'Show travel points for same faction' and 'Show travel points for opposing faction'.
 - Added a new setting to 'Enhance battlefield map' which lets you keep the battleifeld map centered on you.
-- Moving the battlefield map and setting the opacity is now configured using 'Unlock battlefield map' in the configuration panel (mirroring BCC).
+- The 'Show unexplored areas' option will now reveal unexplored areas on the battlefield map as well as the world map.  Toggling the option now requires a UI reload.
 - If 'Unlock battlefield map' is enabled, you can drag the bottom-right corner of the battlefield map to resize it (this is in addition to the 'Map Size' slider).
-- The 'Show unexplored areas' option will now reveal unexplored areas on the battlefield map as well as the world map.
-- The 'Group Icons' slider in the 'Enhance battlefield map' configuration panel now has a preview icon.
-- Updated for game version 9.1.5 (currently on the PTR).
+- If 'Unlock map frame' is enabled, you can now set the world map scale using a slider in the configuration panel (this is in addition to the world map scale handle).
 
-9.1.14 - 13th October 2021
+2.5.60 - 13th October 2021
 - Added a new option 'Center map on player'.  If enabled, the map will remain centered on you as long as you are not dragging the map or in a dungeon.  No reload required so you can enable it as and when you wish.
 
-9.1.01 - 7th July 2021
-- Added Korthia to 'Show unexplored areas'.
+2.5.58 - 29th September 2021
+- The zone map dropdown menu (normally shown in the map border) is now shown in the Leatrix Maps panel instead.
+- The zoom out button is now hidden.
 
-9.1.00 - 30th June 2021
-- Updated for game version 9.1.
+2.5.56 - 16th September 2021
+- Updated for World of Warcraft game version 2.5.2.
 
-9.0.33 - 16th June 2021
-- Added Stormwind and Orgrimmar portal icons to Caverns of Time.
+2.5.55 - 6th September 2021
+- Fixed a taint error when opening the guild frame.  As a result of this fix, the zone and continent map dropdown menus are now hidden.
 
-9.0.19 - 10th March 2021
-- Updated for World of Warcraft 9.0.5.
+2.5.50 - 19th August 2021
+- Fixed an issue with malformed translations.
 
-9.0.15 - 9th February 2021
-- Fixed a minor issue with 'Enhance dungeon icons' which caused the 'Castle Nathria' raid icon to be shown twice.  
-- Added German language translations.
+2.5.43 - 24th June 2021
+- If 'Enhance battlefield map' is enabled, battlefield map position and opacity are now both set from the configuration panel.
+- The 'Hide town and city icons' option now applies to the Outland map too.
+- Fixed location of the Altar of Sha'tar flight point (Shadowmoon Valley).
 
-9.0.12 - 16th January 2021
-- Fixed an issue with 'Remember zoom level' which caused the player arrow ring animation to not show when opening the map.
-- Fixed an issue with 'Remove map border' which caused the game to behave as if the map was still open after it had been closed with the close button.
+2.5.42 - 16th June 2021
+- Added 'Show spirit healers' to 'Show points of interest'.  It's enabled by default.
+- Added Shatter Point (Hellfire Peninsula), Magisters' Terrace (Isle of Quel'Danas), Sunwell Plateau (Isle of Quel'Danas), Zul'Aman (Ghostlands), Karazhan (Deadwind Pass), Caverns of Time (Tanaris) and Shattrath City (Terokkar Forest) points of interest.
 
-9.0.11 - 9th December 2020
-- Source code is now on GitHub (github.com/leatrix).
+2.5.41 - 9th June 2021
+- Updated the group icon for 'Class-colored icons' and 'Enhance battlefield map'.
+- Fixed a bug with 'Auto-change zones' which caused a Lua error when entering Outland dungeons.
 
-9.0.10 - 25th November 2020
-- If 'Remove map border' is enabled, the map window size toggle button and close button will no longer conflict with the HandyNotes Shadowlands map button.
+2.5.40 - 8th June 2021
+- If you are updating from 2.5.38 or earlier, you you need to restart your game client after installing this update.
+- Added the preview icon back to 'Class colored icons' and 'Enhance battlefield map'.
+- Note that the size range of the class colored icons has changed so you may wish to adjust it in the configuration panel.
 
-9.0.08 - 18th November 2020
-- Updated for World of Warcraft 9.0.02.
-- Updated minimap button code.
+2.5.39 - 8th June 2021
+- You need to restart your game client after installing this update.
+- Fixed an issue with 'Class colored icons' which caused the icons to be invisible.
+- Updated translations.
 
-9.0.07 - 14th November 2020
-- Fixed a situational issue with the Leatrix Maps minimap button which may have caused it to show or hide inconsistently.
+2.5.38 - 2nd June 2021
+- Added the missing boat harbors that link Auberdine, Darkshore with Valaar's Berth, Azuremyst Isle.
 
-9.0.06 - 11th November 2020
-- Updated LibDBIcon.
-- Updated dropdown menu taint fixes.
+2.5.37 - 26th May 2021
+- Revised the dungeon icon level ranges.
+- If 'Show zone levels' is enabled, dungeon icons will now show minimum level requried to enter (if known) and level range required to use meeting stones (if known).
+- Fixed an issue with 'Show unexplored areas' which caused the Alterac Valley map to always appear unexplored.
+- Added the missing flight points for Emerald Sanctuary, Felwood (neutral) and Forest Song, Ashenvale (Alliance).
 
-9.0.03 - 15th October 2020
-- Fixed an issue with 'Enhance dungeon icons' which prevented map pins from being placed over dungeon icons.
-
-9.0.02 - 15th October 2020
-- Fixed a Lua error with 'Enhance dungeon icons'.
-
-9.0.01 - 15th October 2020
-- Fixed compatibility issue with ElvUI and 'Remove map border'.
-- Removed 9.0 transitional code.
-
-9.0.00 - 12th October 2020
-- Updated for World of Warcraft patch 9.0 (Shadowlands).
-- This release will run on Battle for Azeroth too but you need to enable out of date addons.
-- Click here to return to the Leatrix Maps page.
+2.5.10 - 15th May 2021
+- Welcome to Burning Crusade Classic.
+- Leatrix Maps for Burning Crusade Classic is based on Leatrix Maps for World of Warcraft Classic with the changes listed below.
+- If 'Remove map border' is enabled, the zone map dropdown menu will now be hidden.
+- Added new flight point icons for Rebel Camp (Stranglethorn Vale), Azuremyst Isle, Bloodmyst Isle, Eversong Woods, Ghostlands, Mudsprocket (Dustwallow Marsh) and Shattrath City (Terokkar Forest).
+- Added new portal icons for Shattrath City.
+- Thanks to Blizzard for the day one beta access allowing me to bring Leatrix addons to the BCC community.
