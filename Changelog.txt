@@ -1,5 +1,5 @@
-﻿11.0.20 - 5th December 2024
-- All versions of Leatrix Maps (The War Within, Cataclysm and Classic) are now under the same CurseForge project.  If you use Leatrix Maps for Cataclysm Classic or Classic Era, you need to remove the addon, find it again on CurseForge and install it again as the project IDs have changed and there will be no more updates for the old project.  There is no change for The War Within.
+﻿11.0.21 - 5th December 2024
+- All versions of Leatrix Maps (The War Within, Cataclysm and Classic Era) are now under the same CurseForge project.  If you use Leatrix Maps for Cataclysm Classic or Classic Era, you need to remove the addon, find it again on CurseForge and install it again as the project IDs have changed and there will be no more updates for the old project.  There is no change for The War Within.
 
 11.0.17 - 13th November 2024
 - Game API updates.
