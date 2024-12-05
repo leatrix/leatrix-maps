@@ -3,13 +3,13 @@
 ## Title: Leatrix Maps
 ## Notes: Enhancements for your maps.
 
-## Version: 1.15.63
+## Version: 1.15.64.alpha.1
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
 ## OptionalDeps: Leatrix_enUS, ElvUI
 
-## X-Curse-Project-ID: 324034
+## X-Curse-Project-ID: 298842
 
 Leatrix_Maps_Library.lua
 Leatrix_Maps_Locale.lua
