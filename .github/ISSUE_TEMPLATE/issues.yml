@@ -1,5 +1,4 @@
 name: Leatrix Maps Issue Tracker
-title: "[retail]: "
 description: Use this form to file a bug report, suggest a feature or to say anything you like about Leatrix Maps.
 body:
   - type: textarea
