@@ -12,15 +12,21 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            // Log the raw issue body for debugging
+            console.log("Issue Body:", context.payload.issue.body);
+
             const issueBody = context.payload.issue.body;
             const issueTitle = context.payload.issue.title;
 
-            // Look for the 'Game version' value in the issue body
-            const gameVersionMatch = issueBody.match(/Game version:\r?\n- (.+?)(\r?\n|$)/);
+            // Extract the Game Version from the body
+            const gameVersionMatch = issueBody.match(/Game version:\s*\n\s*- (.+?)\s*$/m);
             const gameVersion = gameVersionMatch ? gameVersionMatch[1].trim() : null;
 
+            // Log the extracted game version for debugging
+            console.log("Extracted Game Version:", gameVersion);
+
             if (gameVersion && gameVersion !== "Choose a game version") {
-              // Append the game version to the title in brackets
+              // Append the game version in brackets to the issue title
               const updatedTitle = `${issueTitle} (${gameVersion})`;
 
               // Update the issue title
@@ -30,9 +36,13 @@ jobs:
                 issue_number: context.payload.issue.number,
                 title: updatedTitle
               });
+
+              console.log("Updated Title:", updatedTitle);
+            } else {
+              console.log("No valid game version selected or found.");
             }
 
-            // Assign the issue
+            // Assign the issue to the specified user
             await github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
