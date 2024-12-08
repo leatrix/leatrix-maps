@@ -20,7 +20,7 @@ jobs:
             console.log("Issue Body:", issueBody);
 
             // Extract the game version using a simple regex pattern
-            const gameVersionMatch = issueBody.match(/Game version:\s*\n\s*- ([^\n]+)/);
+            const gameVersionMatch = issueBody.match(/Game version:\s*\n\s*- (.+)/);
             const gameVersion = gameVersionMatch ? gameVersionMatch[1].trim() : null;
 
             // Debugging: Log the extracted game version
