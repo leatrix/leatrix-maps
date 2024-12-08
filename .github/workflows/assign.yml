@@ -1,20 +1,41 @@
-name: Auto Assign Issues
+name: Auto Assign and Update Issue Title
 on:
   issues:
     types:
       - opened
 
 jobs:
-  auto-assign:
+  auto-assign-and-update-title:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign the issue
+      - name: Assign the issue and update the title
         uses: actions/github-script@v6
         with:
           script: |
-            github.rest.issues.addAssignees({
+            const issueBody = context.payload.issue.body;
+            const issueTitle = context.payload.issue.title;
+
+            // Extract the game version from the issue body using regex
+            const gameVersionMatch = issueBody.match(/Game version:\\n.*?- (.*?)\\n/);
+            const gameVersion = gameVersionMatch ? gameVersionMatch[1] : null;
+
+            if (gameVersion && gameVersion !== "Choose a game version") {
+              // Append the game version to the title in brackets
+              const updatedTitle = `${issueTitle} (${gameVersion})`;
+
+              // Update the issue title
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.issue.number,
+                title: updatedTitle
+              });
+            }
+
+            // Assign the issue
+            await github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.issue.number,
               assignees: ['leatrix']
-            })
+            });
