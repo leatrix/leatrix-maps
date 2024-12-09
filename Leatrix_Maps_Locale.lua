@@ -1,5 +1,5 @@
 ﻿----------------------------------------------------------------------
--- 	Leatrix Maps Locale
+-- 	Leatrix Maps Locale for Cataclysm Classic
 ----------------------------------------------------------------------
 
 -- Create locale structure
