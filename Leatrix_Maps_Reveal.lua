@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- Leatrix Maps Reveal Data
+	-- Leatrix Maps Reveal Data for Classic Era
 	----------------------------------------------------------------------
 
 	local void, Leatrix_Maps = ...
