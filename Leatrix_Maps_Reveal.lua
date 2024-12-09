@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- Leatrix Maps Reveal Data
+	-- Leatrix Maps Reveal Data for The War Within
 	----------------------------------------------------------------------
 
 	local void, Leatrix_Maps = ...
