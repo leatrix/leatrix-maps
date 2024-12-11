@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 11.0.22.alpha.1 (5th December 2024)
+	-- 	Leatrix Maps 11.0.22.alpha.1 (12th December 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -2382,15 +2382,3 @@
 	LeaMapsLC:CfgBtn("UnlockMapBtn", LeaMapsCB["UnlockMap"])
 	LeaMapsLC:CfgBtn("ShowCoordsBtn", LeaMapsCB["ShowCoords"])
 	LeaMapsLC:CfgBtn("EnhanceBattleMapBtn", LeaMapsCB["EnhanceBattleMap"])
-
-	-- Show help button for Zoom heading
-	LeaMapsLC:CfgBtn("ZoomInfoBtn", LeaMapsLC["PageF"])
-	LeaMapsCB["ZoomInfoBtn"]:ClearAllPoints()
-	LeaMapsCB["ZoomInfoBtn"]:SetPoint("LEFT", ZoomHeading, "RIGHT", 0, 0)
-	LeaMapsCB["ZoomInfoBtn"]:SetSize(25, 25)
-	LeaMapsCB["ZoomInfoBtn"].t:SetTexture("Interface\\COMMON\\help-i.blp")
-	LeaMapsCB["ZoomInfoBtn"].t:SetTexCoord(0, 1, 0, 1)
-	LeaMapsCB["ZoomInfoBtn"].t:SetVertexColor(0.9, 0.8, 0.0)
-	LeaMapsCB["ZoomInfoBtn"]:SetHighlightTexture("Interface\\COMMON\\help-i.blp")
-	LeaMapsCB["ZoomInfoBtn"]:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
-	LeaMapsCB["ZoomInfoBtn"].tiptext = L["Enabling any of the zoom settings below will taint the map until you reload or logout."]
