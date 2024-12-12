@@ -1,4 +1,4 @@
-﻿1.15.65.alpha.1 - 12th December 2024
+﻿1.15.66 - 12th December 2024
 - Updated translations.
 
 1.15.64 - 5th December 2024
