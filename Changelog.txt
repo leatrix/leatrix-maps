@@ -1,4 +1,4 @@
-﻿11.0.22.alpha.1 - 12th December 2024
+﻿11.0.22 - 12th December 2024
 - Updated translations.
 
 11.0.21 - 5th December 2024
