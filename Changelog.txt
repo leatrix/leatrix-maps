@@ -1,4 +1,7 @@
-﻿4.0.38 - 12th December 2024
+﻿4.0.39 - 18th December 2024.
+- Updated translations.
+
+4.0.38 - 12th December 2024
 - Fixed the map reveal for Mount Hyjal.
 - Updated translations.
 
