@@ -1,4 +1,7 @@
-﻿11.0.23 - 18th December 2024
+﻿11.0.24 - 18th December 2024
+- Fixed the map reveal data for 'Isle of Dorn'.
+
+11.0.23 - 18th December 2024
 - Updated for game patch 11.0.7.
 - Updated translations.
 
