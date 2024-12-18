@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 11.0.22 (12th December 2024)
+	-- 	Leatrix Maps 11.0.23 (18th December 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaConfigList = {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "11.0.22"
+	LeaMapsLC["AddonVer"] = "11.0.23"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -647,9 +647,11 @@
 			----------------------------------------------------------------------
 
 			-- Remove frame management
-			WorldMapFrame:SetAttribute("UIPanelLayout-area", nil)
-			WorldMapFrame:SetAttribute("UIPanelLayout-enabled", false)
-			WorldMapFrame:SetAttribute("UIPanelLayout-allowOtherPanels", true)
+			C_Timer.After(0.1, function() -- Needed to apply settings properly (else game menu wont open with escape and opening map alongside character frame resets map position)
+				WorldMapFrame:SetAttribute("UIPanelLayout-area", nil)
+				WorldMapFrame:SetAttribute("UIPanelLayout-enabled", false)
+				WorldMapFrame:SetAttribute("UIPanelLayout-allowOtherPanels", true)
+			end)
 
 			-- Enable movement
 			WorldMapFrame:SetMovable(true)
